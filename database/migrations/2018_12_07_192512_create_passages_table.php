@@ -19,6 +19,8 @@ class CreatePassagesTable extends Migration
             $table->integer('seat_number');
             $table->char('seat_letter');
             $table->timestamps();
+            $table->integer('passenger_id')->unsigned()->index();
+            $table->foreign('passenger_id')->references('id')->on('passengers')->onDelete('cascade');
         });
     }
 
