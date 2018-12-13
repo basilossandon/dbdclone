@@ -19,6 +19,8 @@ class CreateAirportsTable extends Migration
             $table->string('airport_code');
             $table->string('airport_address');
             $table->timestamps();
+            $table->integer('city_id')->unsigned()->index();
+            $table->foreign('city_id')->references('id')->on('cities')->onDelete('cascade');
         });
     }
 

@@ -17,6 +17,8 @@ class CreateRoutesTable extends Migration
             $table->increments('id');
             $table->string('route_plane');
             $table->timestamps();
+            $table->integer('flight_id')->unsigned()->index();
+            $table->foreign('flight_id')->references('id')->on('flights')->onDelete('cascade');
         });
     }
 
