@@ -20,7 +20,7 @@ class CreateReceiptsTable extends Migration
             $table->integer('receipt_ammount');
             $table->timestamps();
             $table->unsignedInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
