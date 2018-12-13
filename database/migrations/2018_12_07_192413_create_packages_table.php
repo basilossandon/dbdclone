@@ -20,6 +20,8 @@ class CreatePackagesTable extends Migration
             $table->integer('package_price');
             $table->integer('package_stock');
             $table->timestamps();
+            $table->integer('vehicle_id')->unsigned()->index();
+            $table->foreign('vehicle_id')->references('id')->on('vehicles')->onDelete('cascade');
         });
     }
 
