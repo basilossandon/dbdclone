@@ -20,9 +20,9 @@ class CreateRoomsTable extends Migration
             $table->string('room_name');
             $table->timestamps();
             $table->unsignedInteger('package_id');
-            $table->foreign('package_id')->references->('id')->on('packages')->onDelete('cascade');
+            $table->foreign('package_id')->references('id')->on('packages')->onDelete('cascade');
             $table->unsignedInteger('hotel_id');
-            $table->foreign('hotel_id')->references->('id')->on('hotels')->onDelete('cascade');
+            $table->foreign('hotel_id')->references('id')->on('hotels')->onDelete('cascade');
         });
     }
 
