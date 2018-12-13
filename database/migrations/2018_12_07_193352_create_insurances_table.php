@@ -15,6 +15,8 @@ class CreateInsurancesTable extends Migration
     {
         Schema::create('insurances', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('insurance_type');
+            $table->integer('insurance_price');
             $table->timestamps();
         });
     }
@@ -22,7 +24,7 @@ class CreateInsurancesTable extends Migration
     /**
      * Reverse the migrations.
      *
-     * @return void
+     * @return void$table->
      */
     public function down()
     {

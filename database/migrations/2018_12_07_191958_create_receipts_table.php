@@ -17,7 +17,7 @@ class CreateReceiptsTable extends Migration
             $table->increments('id');
             $table->timestamp('receipt_date');
             $table->string('receipt_type');
-            $table->integer('ammount');
+            $table->integer('receipt_ammount');
             $table->timestamps();
         });
     }

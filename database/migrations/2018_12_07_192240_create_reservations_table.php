@@ -17,7 +17,6 @@ class CreateReservationsTable extends Migration
             $table->increments('id');
             $table->timestamp('reservation_date');
             $table->string('reservation_ip');
-            $table->string('reservation_detail');
             $table->timestamps();
         });
     }

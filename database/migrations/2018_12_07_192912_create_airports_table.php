@@ -17,7 +17,7 @@ class CreateAirportsTable extends Migration
             $table->increments('id');
             $table->string('airport_name');
             $table->string('airport_code');
-            
+            $table->string('airport_address');
             $table->timestamps();
         });
     }
