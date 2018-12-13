@@ -19,6 +19,8 @@ class CreateReceiptsTable extends Migration
             $table->string('receipt_type');
             $table->integer('receipt_ammount');
             $table->timestamps();
+            $table->unsignedInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
