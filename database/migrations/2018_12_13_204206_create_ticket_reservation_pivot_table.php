@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePassageReservationPivotTable extends Migration
+class CreateTicketReservationPivotTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,12 +12,12 @@ class CreatePassageReservationPivotTable extends Migration
      */
     public function up()
     {
-        Schema::create('passage_reservation', function (Blueprint $table) {
-            $table->integer('passage_id')->unsigned()->index();
-            $table->foreign('passage_id')->references('id')->on('passages')->onDelete('cascade');
+        Schema::create('ticket_reservation', function (Blueprint $table) {
+            $table->integer('ticket_id')->unsigned()->index();
+            $table->foreign('ticket_id')->references('id')->on('tickets')->onDelete('cascade');
             $table->integer('reservation_id')->unsigned()->index();
             $table->foreign('reservation_id')->references('id')->on('reservations')->onDelete('cascade');
-            $table->primary(['passage_id', 'reservation_id']);
+            $table->primary(['ticket_id', 'reservation_id']);
         });
     }
 
@@ -28,6 +28,6 @@ class CreatePassageReservationPivotTable extends Migration
      */
     public function down()
     {
-        Schema::drop('passage_reservation');
+        Schema::drop('ticket_reservation');
     }
 }
