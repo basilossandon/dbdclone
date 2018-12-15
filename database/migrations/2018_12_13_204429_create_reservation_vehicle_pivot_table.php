@@ -17,6 +17,8 @@ class CreateReservationVehiclePivotTable extends Migration
             $table->foreign('reservation_id')->references('id')->on('reservations')->onDelete('cascade');
             $table->integer('vehicle_id')->unsigned()->index();
             $table->foreign('vehicle_id')->references('id')->on('vehicles')->onDelete('cascade');
+            $table->date('vehicle_reservation_borrow');
+            $table->date('vehicle_reservation_return');
             $table->primary(['reservation_id', 'vehicle_id']);
         });
     }

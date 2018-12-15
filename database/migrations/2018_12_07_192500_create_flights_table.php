@@ -19,8 +19,8 @@ class CreateFlightsTable extends Migration
             $table->integer('flight_capacity');
             $table->integer('flight_distance');
             $table->string('flight_assigned_plane');
-            $table->timestamp('flight_departure');
-            $table->timestamp('flight_arrival');
+            $table->date('flight_departure');
+            $table->date('flight_arrival');
             $table->timestamps();
 
 
