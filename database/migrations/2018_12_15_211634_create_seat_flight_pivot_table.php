@@ -18,7 +18,7 @@ class CreateSeatFlightPivotTable extends Migration
             $table->foreign('seat_id')->references('id')->on('seats')->onDelete('cascade');
             $table->integer('flight_id')->unsigned()->index();
             $table->foreign('flight_id')->references('id')->on('flights')->onDelete('cascade');
-            $table->primary(['seat_id', 'flights_id']);
+            $table->primary(['seat_id', 'flight_id']);
         });
     }
 
