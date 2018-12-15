@@ -17,7 +17,7 @@ class CreateVehiclesTable extends Migration
             $table->increments('id');
             $table->integer('vehicle_price');
             $table->string('vehicle_type');
-            $table->string('vehicle_id');
+            $table->string('vehicle_licence_plate');
             $table->timestamps();
         });
     }

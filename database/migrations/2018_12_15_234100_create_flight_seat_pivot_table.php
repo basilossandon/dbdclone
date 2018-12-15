@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSeatFlightPivotTable extends Migration
+class CreateFlightSeatPivotTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateSeatFlightPivotTable extends Migration
      */
     public function up()
     {
-        Schema::create('seat_flight_pivot', function (Blueprint $table) {
+        Schema::create('flight_seat', function (Blueprint $table) {
             $table->integer('seat_id')->unsigned()->index();
             $table->foreign('seat_id')->references('id')->on('seats')->onDelete('cascade');
             $table->integer('flight_id')->unsigned()->index();
@@ -29,6 +29,6 @@ class CreateSeatFlightPivotTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('seat_flight_pivot');
+        Schema::dropIfExists('flight_seat');
     }
 }
