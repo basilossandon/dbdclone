@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSeatTable extends Migration
+class CreateSeatsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,10 @@ class CreateSeatTable extends Migration
      */
     public function up()
     {
-        Schema::create('seat', function (Blueprint $table) {
+        Schema::create('seats', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('seat_type');
+            $table->double('price_modifier');
             $table->timestamps();
         });
     }
@@ -26,6 +28,6 @@ class CreateSeatTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('seat');
+        Schema::dropIfExists('seats');
     }
 }
