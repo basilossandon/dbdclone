@@ -18,6 +18,6 @@ class Receipt extends Model
     }
 
     public function paymentMethods(){
-      return $this->belongsToMany(App\PaymentMethod::class);
+      return $this->hasOne(App\PaymentMethod::class);
     }
 }
