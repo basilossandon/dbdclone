@@ -16,4 +16,8 @@ class Receipt extends Model
     public function user(){
       return $this->belongsTo(App\User::class);
     }
+
+    public function paymentMethods(){
+      return $this->belongsToMany(App\PaymentMethod::class);
+    }
 }
