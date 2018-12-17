@@ -14,7 +14,7 @@ class Role extends Model
 			return $this->hasMany('App\User');
 	  }
 		// Un rol pertenece a muchos permisos
-		public function permission()
+		public function permissions()
 		{
 			return $this->belongsToMany('App\Permission');
 		}
