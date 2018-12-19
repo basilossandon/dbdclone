@@ -11,4 +11,8 @@ class Reservation extends Model
     public function receipt(){
       return $this->belongsTo(App\Receipt::class);
     }
+
+    public function tickets(){
+      return $this->hasMany(App\Ticket::class);
+    }
 }
