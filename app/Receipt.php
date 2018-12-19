@@ -20,4 +20,8 @@ class Receipt extends Model
     public function paymentMethods(){
       return $this->hasOne(App\PaymentMethod::class);
     }
+
+    public function reservations(){
+      return $this->hasOne(App\Reservation::class);
+    }
 }

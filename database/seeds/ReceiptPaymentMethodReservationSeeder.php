@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class PaymentMethodAndReceiptSeeder extends Seeder
+class ReceiptPaymentMethodReservationSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,8 +14,11 @@ class PaymentMethodAndReceiptSeeder extends Seeder
         for ($i = 1; $i <= 100; $i++){
           $paymentMethod = factory(App\PaymentMethod::class)->create();
           $receipt = factory(App\Receipt::class)->create();
+          $reservation = factory(App\Reservation::class)->create();
           DB::table('receipts')->where('id', $i)->update(
-            ['payment_method_id' => $paymentMethod->id]);
+            ['payment_method_id' => $paymentMethod->id,
+             'reservation_id' => $reservation->id]
+          );
         }
     }
 }

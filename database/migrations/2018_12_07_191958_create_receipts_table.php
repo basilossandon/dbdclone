@@ -21,8 +21,11 @@ class CreateReceiptsTable extends Migration
             $table->timestamps();
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('payment_method_id')->nullable();
+            $table->unsignedInteger('reservation_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('payment_method_id')->references('id')->on('payment_methods')
+            ->onDelete('cascade');
+            $table->foreign('reservation_id')->references('id')->on('reservations')
             ->onDelete('cascade');
         });
     }
