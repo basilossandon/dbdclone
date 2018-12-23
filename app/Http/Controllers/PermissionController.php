@@ -1,15 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-<<<<<<< HEAD
-use App\Flight;
-use Illuminate\Support\Facades\DB;
-=======
->>>>>>> dd6b9cf768b52eaef21701ff56a035839d4ec6d0
 
 use Illuminate\Http\Request;
 
-class FlightController extends Controller
+class PermissionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,11 +13,7 @@ class FlightController extends Controller
      */
     public function index()
     {
-<<<<<<< HEAD
-        return Flight::all();
-=======
         //
->>>>>>> dd6b9cf768b52eaef21701ff56a035839d4ec6d0
     }
 
     /**
@@ -54,11 +45,7 @@ class FlightController extends Controller
      */
     public function show($id)
     {
-<<<<<<< HEAD
-        return DB::table('flights')->where('id', $id)->get();
-=======
         //
->>>>>>> dd6b9cf768b52eaef21701ff56a035839d4ec6d0
     }
 
     /**
