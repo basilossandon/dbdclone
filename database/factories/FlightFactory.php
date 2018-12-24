@@ -10,8 +10,11 @@ $factory->define(App\Flight::class, function (Faker $faker) {
         'flight_distance' => $faker->numberBetween($min=500, $max=3000),
         'flight_capacity' => $faker->numberBetween($min=35, $max=80),
         'flight_code' => $faker->randomElement($array =
-          array('BR', 'CL', 'ZL', 'US', 'FR', 'JP', 'VEN', 'RUS')). '_' .
-          $faker->randomElement($array = array('COL', 'PER', 'ARG', 'URU',
-         'ESP', 'GER', 'POR')),
+          array('LAN', 'DSM', 'LXP', 'ARE', 'LAP', 'LNC', 'LNC', 'LPE')). '' .
+          $faker->randomElement($array = array('101', '102', '201', '202',
+         '203', '204', '205')),
+        'departure_airport_id' => App\Airport::all()->random()->id,
+        'arrival_airport_id' => App\Airport::all()->random()->id,
+
     ];
 });
