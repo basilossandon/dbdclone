@@ -21,6 +21,12 @@ class CreateFlightsTable extends Migration
             $table->string('flight_assigned_plane');
             $table->date('flight_departure');
             $table->date('flight_arrival');
+            $table->unsignedInteger('departure_airport_id')->nullable();
+            $table->unsignedInteger('arrival_airport_id')->nullable();
+            //$table->foreign('departure_airport_id')->references('id')->on('airport')
+            //->onDelete('cascade');
+            //$table->foreign('arrival_airport_id')->references('id')->on('airport')
+            //->onDelete('cascade');
             $table->timestamps();
 
 

@@ -18,6 +18,8 @@ class FlightController extends Controller
         return Flight::all();
     }
 
+    //public function filterByUser
+
     /**
      * Show the form for creating a new resource.
      *
@@ -47,7 +49,7 @@ class FlightController extends Controller
      */
     public function show($id)
     {
-        return DB::table('flights')->where('id', $id)->get();
+        return Flight::find($id);
     }
 
     /**
