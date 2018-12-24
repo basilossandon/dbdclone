@@ -26,6 +26,6 @@ class DatabaseSeeder extends Seeder
         $this->call(AirportsTableSeeder::class);
         $this->call(FlightsTableSeeder::class);
         $this->call(InsurancesTableSeeder::class);
-
+        $this->call(RoomsTableSeeder::class);
     }
 }
