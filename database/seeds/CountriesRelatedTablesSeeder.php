@@ -21,6 +21,16 @@ class CountriesRelatedTablesSeeder extends Seeder
           'country_code' => $countryCode,
           'country_id' => $countryId,
         ]);
+        // Crear 5 hoteles por pais
+        for ($j=1 ; $j<6 ; $j++){
+          DB::table('hotels')->insert([
+            'hotel_name' => $faker->unique()->word,
+            'hotel_address' => $faker->unique()->address,
+            'hotel_stars' =>$faker->numberBetween($min=1, $max=5),
+            'city_id' => App\City::where('country_code', $countryCode)->get()
+            ->random()->id,
+          ]);
+        }
       }
     }
 }
