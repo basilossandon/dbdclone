@@ -6,7 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Flight extends Model
 {
+	protected $primaryKey = 'id';
     public function airports(){
-      return $this->belongsToMany(App\Airport::class);
+      return $this->belongsToMany(App\Airport::class, 'airport');
     }
 }
