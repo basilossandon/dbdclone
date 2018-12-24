@@ -18,7 +18,7 @@ class CountriesRelatedTablesSeeder extends Seeder
         $faker = Faker\Factory::create('en_'.$countryCode);
         DB::table('cities')->insert([
           'city_name' => $faker->city,
-          'city_code' => 'asd', // Esto falta resolver
+          'country_code' => $countryCode,
           'country_id' => $countryId,
         ]);
       }
