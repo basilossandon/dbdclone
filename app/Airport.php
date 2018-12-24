@@ -8,9 +8,12 @@ class Airport extends Model
 {
 	protected $primaryKey = 'id';
     public function flightsDeparture(){
-      return $this->belongsTo(App\Flight::class, 'departure_airport_id');
+      return $this->HasMany(App\Flight::class, 'departure_airport_id');
     }
     public function flightsArrival(){
-      return $this->belongsTo(App\Flight::class, 'arrival_airport_id');
+      return $this->HasMany(App\Flight::class, 'arrival_airport_id');
     }
+		public function seats(){
+			return $this->belongsToMany(App\Seat::class);
+		}
 }
