@@ -15,4 +15,16 @@ class Reservation extends Model
     public function tickets(){
       return $this->hasMany(App\Ticket::class);
     }
+
+    public function packages(){
+      return $this->belongsToMany(App\Package::class);
+    }
+
+    public function vehicles(){
+      return $this->belongsToMany(App\Vehicle::class);
+    }
+
+    public function rooms(){
+      return $this->belongsToMany(App\Room::class);
+    }
 }

@@ -9,7 +9,7 @@ class PaymentMethod extends Model
     protected $table = 'payment_methods';
     protected $primarykey = 'id';
 
-    public function receipts(){
+    public function receipt(){
       return $this->belongsTo(App\Receipt::class);
     }
 }

@@ -17,11 +17,11 @@ class Receipt extends Model
       return $this->belongsTo(App\User::class);
     }
 
-    public function paymentMethods(){
+    public function paymentMethod(){
       return $this->hasOne(App\PaymentMethod::class);
     }
 
-    public function reservations(){
+    public function reservation(){
       return $this->hasOne(App\Reservation::class);
     }
 }
