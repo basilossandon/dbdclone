@@ -22,10 +22,8 @@ class CreateFlightsTable extends Migration
             $table->date('flight_departure');
             $table->date('flight_arrival');
             $table->integer('departure_airport_id')->unsigned()->index();
-            $table->integer('arrival_airport_id')->unsigned()->index();
-            $table->foreign('departure_airport_id')->references('id')->on('airports')->onDelete('cascade');
-            $table->foreign('arrival_airport_id')->references('id')->on('airports')->onDelete('cascade');
-
+            $table->integer('arrival_airport_id')->unsigned()->index(); 
+            $table->foreign('departure_airport_id', 'arrival_airport_id')->references('id')->on('airports')->onDelete('cascade');
             //$table->foreign('departure_airport_id')->references('id')->on('airport')
             //->onDelete('cascade');
             //$table->foreign('arrival_airport_id')->references('id')->on('airport')

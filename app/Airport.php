@@ -8,6 +8,6 @@ class Airport extends Model
 {
 	protected $primaryKey = 'id';
     public function flights(){
-      return $this->belongsToMany(App\Flight::class);
+      return $this->belongsToMany(App\Flight::class, 'flight');
     }
 }
