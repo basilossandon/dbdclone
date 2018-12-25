@@ -12,5 +12,5 @@ class Vehicle extends Model
 
     public function reservations(){
       return $this->belongsToMany(App\Reservation::class);
-    })
+    }
 }
