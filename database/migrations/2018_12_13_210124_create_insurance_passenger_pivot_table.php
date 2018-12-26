@@ -17,6 +17,8 @@ class CreateInsurancePassengerPivotTable extends Migration
             $table->foreign('insurance_id')->references('id')->on('insurances')->onDelete('cascade');
             $table->integer('passenger_id')->unsigned()->index();
             $table->foreign('passenger_id')->references('id')->on('passengers')->onDelete('cascade');
+            $table->integer('flight_id')->unsigned();
+            $table->foreign('flight_id')->references('id')->on('flights')->onDelete('cascade');
             $table->date('insurance_start');
             $table->date('insurance_finnish');
             $table->primary(['insurance_id', 'passenger_id']);
