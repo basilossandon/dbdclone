@@ -8,10 +8,10 @@ class City extends Model
 {
     protected $table = 'cities';
     public function country(){
-      return $this->belongsTo(App\Country::class);
+      return $this->belongsTo(Country::class);
     }
 
     public function hotels(){
-      return $this->hasMany(App\Hotel::class);
+      return $this->hasMany(Hotel::class);
     }
 }

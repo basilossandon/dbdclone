@@ -7,18 +7,18 @@ use Illuminate\Database\Eloquent\Model;
 class Package extends Model
 {
     public function tickets(){
-      return $this->hasMany(App\Ticket::class);
+      return $this->hasMany(Ticket::class);
     }
 
     public function vehicle(){
-      return $this->belongsTo(App\Vehicle::class);
+      return $this->belongsTo(Vehicle::class);
     }
 
     public function receipts(){
-      return $this->belongsToMany(App\Receipt::class);
+      return $this->belongsToMany(Receipt::class);
     }
 
     public function rooms(){
-      return $this->belongsToMany(App\Room::class);
+      return $this->belongsToMany(Room::class);
     }
 }

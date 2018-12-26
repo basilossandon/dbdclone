@@ -9,22 +9,22 @@ class Reservation extends Model
     protected $primarykey = 'id';
 
     public function receipt(){
-      return $this->belongsTo(App\Receipt::class);
+      return $this->belongsTo(Receipt::class);
     }
 
     public function tickets(){
-      return $this->hasMany(App\Ticket::class);
+      return $this->hasMany(Ticket::class);
     }
 
     public function packages(){
-      return $this->belongsToMany(App\Package::class);
+      return $this->belongsToMany(Package::class);
     }
 
     public function vehicles(){
-      return $this->belongsToMany(App\Vehicle::class);
+      return $this->belongsToMany(Vehicle::class);
     }
 
     public function rooms(){
-      return $this->belongsToMany(App\Room::class);
+      return $this->belongsToMany(Room::class);
     }
 }

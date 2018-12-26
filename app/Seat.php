@@ -7,10 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class Seat extends Model
 {
     public function tickets(){
-      return $this->hasMany(App\Ticket::class);
+      return $this->hasMany(Ticket::class);
     }
 
     public function flights(){
-      return $this->belongsToMany(App\Flight::class);
+      return $this->belongsToMany(Flight::class);
     }
 }

@@ -21,10 +21,10 @@ class User extends Authenticatable
     ];
     public function role()
     {
-        return $this->belongsTo('App\Role');
+        return $this->belongsTo(Role::class);
     }
     public function receipts()
     {
-        return $this->hasMany(App\Receipt::class);
+        return $this->hasMany(Receipt::class);
     }
 }

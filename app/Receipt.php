@@ -14,14 +14,14 @@ class Receipt extends Model
     ];
 
     public function user(){
-      return $this->belongsTo(App\User::class);
+      return $this->belongsTo(User::class);
     }
 
     public function paymentMethod(){
-      return $this->hasOne(App\PaymentMethod::class);
+      return $this->hasOne(PaymentMethod::class);
     }
 
     public function reservation(){
-      return $this->hasOne(App\Reservation::class);
+      return $this->hasOne(Reservation::class);
     }
 }

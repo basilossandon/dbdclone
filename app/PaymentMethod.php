@@ -10,6 +10,6 @@ class PaymentMethod extends Model
     protected $primarykey = 'id';
 
     public function receipt(){
-      return $this->belongsTo(App\Receipt::class);
+      return $this->belongsTo(Receipt::class);
     }
 }

@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Insurance extends Model
 {
     public function passengers(){
-      return $this->belongsToMany(App\Passenger::class);
+      return $this->belongsToMany(Passenger::class);
     }
 }
