@@ -17,7 +17,7 @@ class Reservation extends Model
     }
 
     public function packages(){
-      return $this->belongsToMany(Package::class);
+      return $this->belongsTo(Package::class);
     }
 
     public function vehicles(){

@@ -14,11 +14,11 @@ class Package extends Model
       return $this->belongsTo(Vehicle::class);
     }
 
-    public function receipts(){
-      return $this->belongsToMany(Receipt::class);
-    }
-
     public function rooms(){
       return $this->belongsToMany(Room::class);
+    }
+
+    public function reservations(){
+      return $this->hasMany(Reservation::class);
     }
 }
