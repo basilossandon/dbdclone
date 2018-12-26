@@ -45,7 +45,7 @@ class ReceiptController extends Controller
      */
     public function show($id)
     {
-        //
+        return Receipt::find($id);
     }
 
     /**

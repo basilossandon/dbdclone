@@ -45,7 +45,7 @@ class PassengerController extends Controller
      */
     public function show($id)
     {
-        //
+        return Passenger::find($id);
     }
 
     /**

@@ -45,7 +45,7 @@ class InsuranceController extends Controller
      */
     public function show($id)
     {
-        //
+        return Insurance::find($id);
     }
 
     /**

@@ -46,7 +46,7 @@ class AirportController extends Controller
      */
     public function show($id)
     {
-        //
+        return Airport::find($id);
     }
 
     /**

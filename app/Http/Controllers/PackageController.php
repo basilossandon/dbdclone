@@ -45,7 +45,7 @@ class PackageController extends Controller
      */
     public function show($id)
     {
-        //
+        return Package::find($id);
     }
 
     /**

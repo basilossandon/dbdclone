@@ -45,7 +45,7 @@ class PermissionController extends Controller
      */
     public function show($id)
     {
-        //
+        return Permission::find($id);
     }
 
     /**

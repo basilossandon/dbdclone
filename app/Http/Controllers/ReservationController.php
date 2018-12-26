@@ -45,7 +45,7 @@ class ReservationController extends Controller
      */
     public function show($id)
     {
-        //
+        return Reservation::find($id);
     }
 
     /**

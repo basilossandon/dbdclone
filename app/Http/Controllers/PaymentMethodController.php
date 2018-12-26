@@ -45,7 +45,7 @@ class PaymentMethodController extends Controller
      */
     public function show($id)
     {
-        //
+        return PaymentMethod::find($id);
     }
 
     /**
