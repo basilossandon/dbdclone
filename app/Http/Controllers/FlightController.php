@@ -72,7 +72,16 @@ class FlightController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $flight = Flight::find($id);
+        $flight->flight_code = $request->input('flight_code');
+        $flight->flight_capacity = $request->input('flight_capacity');
+        $flight->flight_distance = $request->input('flight_distance');
+        $flight->flight_assigned_plane = $request->input('flight_assigned_plane');
+        $flight->flight_departure = $request->input('flight_departure');
+        $flight->flight_arrival = $request->input('flight_arrival');
+        $flight->flight_departure_airport_id = $request->input('departure_airport_id');
+        $flight->flight_arrival_airport_id = $request->input('arrival_airport_id');
+        $flight->save();
     }
 
     /**
@@ -83,6 +92,7 @@ class FlightController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $flight = Flight::find($id);
+        $flight->delete();
     }
 }
