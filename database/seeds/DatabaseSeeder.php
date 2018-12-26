@@ -15,11 +15,12 @@ class DatabaseSeeder extends Seeder
         $this->call(UsersTableSeeder::class);
         $this->call(PermissionsTableSeeder::class);
         $this->call(PermissionRoleTableSeeder::class);
-        $this->call(ReceiptPaymentMethodReservationSeeder::class);
         $this->call(VehiclesTableSeeder::class);
         $this->call(PackagesTableSeeder::class);
         $this->call(PassengersTableSeeder::class);
         $this->call(SeatsTableSeeder::class);
+        $this->call(ReservationsTableSeeder::class);
+
         $this->call(TicketsTableSeeder::class);
         $this->call(CountriesTableSeeder::class);
         $this->call(CountriesRelatedTablesSeeder::class);
