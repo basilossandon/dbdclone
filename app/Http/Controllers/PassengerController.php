@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Passenger;
 use Illuminate\Http\Request;
 
 class PassengerController extends Controller
@@ -13,7 +13,7 @@ class PassengerController extends Controller
      */
     public function index()
     {
-        //
+        return Passenger::all();
     }
 
     /**

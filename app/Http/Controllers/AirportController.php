@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Airport;
 
 use Illuminate\Http\Request;
 
@@ -13,7 +14,7 @@ class AirportController extends Controller
      */
     public function index()
     {
-        //
+        return Airport::all();
     }
 
     /**

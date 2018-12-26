@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Receipt;
 use Illuminate\Http\Request;
 
 class ReceiptController extends Controller
@@ -13,7 +13,7 @@ class ReceiptController extends Controller
      */
     public function index()
     {
-        //
+        return Receipt::all();
     }
 
     /**
