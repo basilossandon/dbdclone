@@ -6,7 +6,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class Flight extends Model
 {
-	protected $primaryKey = 'id';
+		protected $primaryKey = 'id';
+		protected $fillable = [
+			'flight_code',
+			'flight_capacity',
+			'flight_distance',
+			'flight_assigned_plane',
+			'flight_departure',
+			'flight_arrival',
+			'departure_airport_id',
+			'arrival_airport_id',
+		];
 
 		public function arrival_airport(){
       return $this->belongsTo(Airport::class, 'arrival_airport_id');

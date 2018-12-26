@@ -79,8 +79,8 @@ class FlightController extends Controller
         $flight->flight_assigned_plane = $request->input('flight_assigned_plane');
         $flight->flight_departure = $request->input('flight_departure');
         $flight->flight_arrival = $request->input('flight_arrival');
-        $flight->flight_departure_airport_id = $request->input('departure_airport_id');
-        $flight->flight_arrival_airport_id = $request->input('arrival_airport_id');
+        $flight->departure_airport_id = $request->input('departure_airport_id');
+        $flight->arrival_airport_id = $request->input('arrival_airport_id');
         $flight->save();
     }
 
