@@ -8,6 +8,6 @@ class Insurance extends Model
 {
     public function passengers(){
       return $this->belongsToMany(Passenger::class)->withPivot('insurance_passenger',
-    'insurance_id', 'passenger_id', 'flight_id', 'insurance_start', 'insurance_finnish');
+    'insurance_id', 'passenger_id', 'flight_id');
     }
 }

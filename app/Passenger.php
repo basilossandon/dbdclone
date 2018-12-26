@@ -12,6 +12,6 @@ class Passenger extends Model
 
     public function insurances(){
       return $this->belongsToMany(Insurance::class)->withPivot('insurance_passenger',
-      'insurance_id', 'passenger_id', 'flight_id', 'insurance_start', 'insurance_finnish');
+      'insurance_id', 'passenger_id', 'flight_id');
     }
 }
