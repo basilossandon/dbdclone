@@ -1,8 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\User;
 use Illuminate\Http\Request;
+
 
 class UserController extends Controller
 {
@@ -13,7 +14,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        return User::all();
     }
 
     /**
@@ -34,7 +35,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        User::create($request->all());
     }
 
     /**
@@ -45,7 +46,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        return User::find($id);
     }
 
     /**
@@ -79,6 +80,7 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::find($id);
+        $user->delete();  
     }
 }

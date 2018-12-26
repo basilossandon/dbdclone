@@ -18,5 +18,17 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-
+Route::resource('airports', 'AirportController');
 Route::resource('flights', 'FlightController');
+Route::resource('insurances', 'InsuranceController');
+Route::resource('packages', 'PackageController');
+Route::resource('passengers', 'PassengerController');
+Route::resource('paymentmethods', 'PaymentMethodController');
+Route::resource('permissions', 'PermissionController');
+Route::resource('receipts', 'ReceiptController');
+Route::resource('reservations', 'ReservationController');
+Route::resource('roles', 'RoleController');
+Route::resource('seats', 'SeatController');
+Route::resource('tickets', 'TicketController');
+Route::resource('users', 'UserController');
+Route::resource('vehicles', 'VehicleController');

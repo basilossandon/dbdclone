@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 use App\Flight;
 use Illuminate\Support\Facades\DB;
-
 use Illuminate\Http\Request;
 
 class FlightController extends Controller

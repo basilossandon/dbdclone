@@ -1,9 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Seat;
 use Illuminate\Http\Request;
-
 class SeatController extends Controller
 {
     /**
@@ -13,7 +12,7 @@ class SeatController extends Controller
      */
     public function index()
     {
-        //
+        return Seat::all();
     }
 
     /**
