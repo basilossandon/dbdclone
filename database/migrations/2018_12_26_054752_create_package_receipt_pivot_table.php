@@ -13,7 +13,7 @@ class CreatePackageReceiptPivotTable extends Migration
      */
     public function up()
     {
-        Schema::create('package_receipt_pivot', function (Blueprint $table) {
+        Schema::create('package_receipt', function (Blueprint $table) {
             $table->integer('package_id')->unsigned();
             $table->foreign('package_id')->references('id')->on('packages')->onDelete('cascade');
             $table->integer('receipt_id')->unsigned();
@@ -29,6 +29,6 @@ class CreatePackageReceiptPivotTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('package_receipt_pivot');
+        Schema::dropIfExists('package_receipt');
     }
 }

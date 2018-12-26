@@ -13,13 +13,13 @@ class CreatePackageRoomPivotTable extends Migration
      */
     public function up()
     {
-        Schema::create('package_room_pivot', function (Blueprint $table) {
+        Schema::create('package_room', function (Blueprint $table) {
           $table->integer('package_id')->unsigned();
           $table->foreign('package_id')->references('id')->on('packages')->onDelete('cascade');
           $table->integer('room_id')->unsigned();
           $table->foreign('room_id')->references('id')->on('rooms')->onDelete('cascade');
           $table->primary(['package_id', 'room_id']);
-          
+
         });
     }
 
@@ -30,6 +30,6 @@ class CreatePackageRoomPivotTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('package_room_pivot');
+        Schema::dropIfExists('package_room');
     }
 }
