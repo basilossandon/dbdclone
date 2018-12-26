@@ -11,6 +11,6 @@ class Vehicle extends Model
     }
 
     public function reservations(){
-      return $this->belongsToMany(Reservation::class);
+      return $this->belongsToMany(Reservation::class)->withPivot('reservation_vehicle', 'reservation_id', 'vehicle_id', 'vehicle_reservation_lease', 'vehicle_reservation_return');
     }
 }

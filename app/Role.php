@@ -11,11 +11,11 @@ class Role extends Model
 
 		public function user()
 	  {
-			return $this->hasMany('App\User');
+			return $this->hasMany(User::class);
 	  }
 		// Un rol pertenece a muchos permisos
 		public function permissions()
 		{
-			return $this->belongsToMany('App\Permission');
+			return $this->belongsToMany(Permission::class);
 		}
 }
