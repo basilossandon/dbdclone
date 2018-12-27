@@ -17,6 +17,9 @@ class CreateReservationsTable extends Migration
             $table->increments('id');
             $table->timestamp('reservation_date');
             $table->string('reservation_ip');
+            $table->integer('package_id')->unsigned()->nullable();
+            $table->foreign('package_id')->references('id')->on('packages')->
+            onDelete('cascade');
             $table->timestamps();
         });
     }
