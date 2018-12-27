@@ -22,8 +22,6 @@ class CreatePackagesTable extends Migration
             $table->timestamps();
             $table->integer('vehicle_id')->unsigned()->index();
             $table->foreign('vehicle_id')->references('id')->on('vehicles')->onDelete('cascade');
-            $table->integer('reservation_id')->unsigned();
-            $table->foreign('reservation_id')->references('id')->on('reservations')->onDelete('cascade');
         });
     }
 
