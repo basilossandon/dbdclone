@@ -15,8 +15,8 @@ class CreateTicketsTable extends Migration
     {
         Schema::create('tickets', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('seat_number');
-            $table->char('seat_letter');
+            $table->integer('seat_number')->nullablle();
+            $table->char('seat_letter')->nullable();
             $table->timestamps();
 
             // Llaves foraneas para pasajero, paquete, asiento y reserva.
