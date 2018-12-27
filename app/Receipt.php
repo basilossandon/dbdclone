@@ -18,10 +18,10 @@ class Receipt extends Model
     }
 
     public function paymentMethod(){
-      return $this->hasOne(PaymentMethod::class);
+      return $this->belongsTo(PaymentMethod::class, 'payment_method_id');
     }
 
     public function reservation(){
-      return $this->hasOne(Reservation::class);
+      return $this->belongsTo(Reservation::class);
     }
 }

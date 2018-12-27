@@ -9,7 +9,7 @@ class Reservation extends Model
     protected $primarykey = 'id';
 
     public function receipt(){
-      return $this->belongsTo(Receipt::class);
+      return $this->hasOne(Receipt::class);
     }
 
     public function tickets(){
