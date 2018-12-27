@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 use App\Receipt;
+use App\User;
+use App\PaymentMethod;
 use Illuminate\Http\Request;
 
 class ReceiptController extends Controller
@@ -81,5 +83,17 @@ class ReceiptController extends Controller
     {
         $receipt = Receipt::find($id);
         $receipt->delete();       
+    }
+
+    /**
+    * Display the receipt paymentMethod
+    *
+    * @param int $userId
+    * @param int $receiptId
+    */
+    public function showPaymentMethod($userId, $receiptId){
+        $user = User::find($userId);
+        $receipt = $user->receipts()->where('id', $receiptId)->first();
+        return $receipt->paymentMethod;
     }
 }

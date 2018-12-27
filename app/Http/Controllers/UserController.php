@@ -81,6 +81,16 @@ class UserController extends Controller
     public function destroy($id)
     {
         $user = User::find($id);
-        $user->delete();  
+        $user->delete();
+    }
+
+    /**
+    * Display all users Receipts
+    * @param int $id
+    */
+    public function showReceipts($id)
+    {
+        $user = User::find($id);
+        return $user->receipts()->get();
     }
 }
