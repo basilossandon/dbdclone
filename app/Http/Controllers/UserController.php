@@ -24,7 +24,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('users');
     }
 
     /**
@@ -35,8 +35,20 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        User::create($request->all());
+        Usuario::create([
+            'id' => $request->id,
+            'name' => $request->name,
+            'email' => $request->nombre_usuario,
+            'password' => $request->password,
+            'user_date_of_birth' => $request->user_date_of_birth,
+            'user_phone' => $request->user_phone,
+            'user_points' => $request->user_points,   
+            'email_verified_at' => $request->email_verified_at,
+            'role_id' => $request->role_id,
+        ]);
+        return Usuario::all();
     }
+
 
     /**
      * Display the specified resource.
@@ -57,7 +69,8 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $usuario = User::find($id);
+        return view('edit_user')->with('user', $user);    
     }
 
     /**
@@ -69,7 +82,18 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        User::find($id)->update([
+            'id' => $request->id,
+            'name' => $request->name,
+            'email' => $request->nombre_usuario,
+            'password' => $request->password,
+            'user_date_of_birth' => $request->user_date_of_birth,
+            'user_phone' => $request->user_phone,
+            'user_points' => $request->user_points,   
+            'email_verified_at' => $request->email_verified_at,
+            'role_id' => $request->role_id,
+        ]);
+        return User::all();
     }
 
     /**
@@ -82,6 +106,7 @@ class UserController extends Controller
     {
         $user = User::find($id);
         $user->delete();
+        return User::all();
     }
 
     /**
