@@ -28,6 +28,8 @@ class CreateTicketsTable extends Migration
             $table->foreign('seat_id')->references('id')->on('seats')->onDelete('cascade');
             $table->integer('reservation_id')->unsigned()->nullable()->index();
             $table->foreign('reservation_id')->references('id')->on('reservations')->onDelete('cascade');
+            $table->integer('flight_id')->unsigned();
+            $table->foreign('flight_id')->references('id')->on('flights')->onDelete('cascade');
         });
     }
 
