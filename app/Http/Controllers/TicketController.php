@@ -21,9 +21,9 @@ class TicketController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function createOrEdit()
     {
-        //
+        return view('tickets');
     }
 
     /**
@@ -32,10 +32,39 @@ class TicketController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function storeOrUpdate(Request $request)
     {
-        //
+        $auxTicket = Ticket::find($request->id);
+        if($auxTicket == null){
+            $ticket = new Ticket();
+            $ticket->updateOrCreate([
+                'seat_number' => $request->seat_number,
+                'seat_letter' => $request->seat_letter,
+                'passenger_id' => $request->passenger_id,
+                'package_id' => $request->package_id,
+                'seat_id' => $request->seat_id
+                'reservation_id' => $request->reservation_id,
+                'flight_id' => $request->flight_id
+            ],[]);
+        }
+        else{
+            $ticket = new ticket();
+            $ticket->updateOrCreate([
+                'id' => $request->id,
+            ], 
+                ['seat_number' => $request->seat_number,
+                'seat_letter' => $request->seat_letter,
+                'passenger_id' => $request->passenger_id,
+                'package_id' => $request->package_id,
+                'seat_id' => $request->seat_id
+                'reservation_id' => $request->reservation_id,
+                'flight_id' => $request->flight_id
+            ]);   
+        }
+        $ticket = Ticket::all();
+        return $ticket;
     }
+
 
     /**
      * Display the specified resource.
@@ -54,10 +83,7 @@ class TicketController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        //
-    }
+
 
     /**
      * Update the specified resource in storage.
@@ -66,11 +92,6 @@ class TicketController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
     /**
      * Remove the specified resource from storage.
      *
@@ -80,6 +101,8 @@ class TicketController extends Controller
     public function destroy($id)
     {
         $ticket = Ticket::find($id);
-        $ticket->delete();    
+        $ticket->delete(); 
+        $ticket = Tickets::all();
+        return $ticket;   
     }
 }

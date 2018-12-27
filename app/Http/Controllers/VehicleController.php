@@ -22,8 +22,9 @@ class VehicleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create() {
-        return view('create_vehicle');
+    public function createOrEdit()
+    {
+        return view('vehicles');
     }
 
     /**
@@ -59,11 +60,7 @@ class VehicleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        $vehicle = Vehicle::find($id);
-        return view('edit_vehicle')->with('vehicle', $vehicle);
-    }
+
 
     /**
      * Update the specified resource in storage.
