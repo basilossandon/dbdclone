@@ -20,6 +20,7 @@ class ReservationsTableSeeder extends Seeder
             $reservation->save();
             /*
              Relacionamos cada servicio asociado a paquete con reserva, a traves
+             de sus respectivas tablas intermedias
             */
 
             // Relacion reservation-room
@@ -46,7 +47,6 @@ class ReservationsTableSeeder extends Seeder
             $tickets = App\Ticket::where('package_id', $packageId)->get();
             foreach($tickets as $ticket){
                 $newTicket = new App\Ticket;
-                $newTicket->passenger_id = App\Passenger::all()->random()->id;
                 $newTicket->reservation_id = $reservation->id;
                 $newTicket->seat_id = $ticket->seat_id;
                 $newTicket->package_id = $ticket->package_id;
@@ -55,6 +55,12 @@ class ReservationsTableSeeder extends Seeder
                 $newTicket->seat_number = $faker->numberBetween($min=1,
                 $max=$flight->flight_capacity);
                 $newTicket->flight_id = $flight->id;
+                // Insertar pasajero-seguro-flight a la tabla insurance_passenger.
+                // Este pasajero esta relacionado con el ticket que estamos creando.
+                $passenger = factory(App\Passenger::class)->create();
+                $newTicket->passenger_id = $passenger->id;
+                $passenger->insurances()->attach(App\Insurance::all()->random()->id,
+                  ['flight_id' => $newTicket->flight_id]);
                 $newTicket->save();
             }
         });
