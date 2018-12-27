@@ -35,7 +35,6 @@ class RoleController extends Controller
     public function store(Request $request)
     {
         Role::create([
-            'id' => $request->id,
             'role_name' => $request->role_name,
             'role_description' => $request->role_description,
         ]);
@@ -76,8 +75,7 @@ class RoleController extends Controller
     public function update(Request $request, $id)
     {
         Role::find($id)->update([
-            'id' => $request->id,
-            'role_name' => $request->name,
+            'role_name' => $request->role_name,
             'role_description' => $request->role_description,
         ]);
         return Role::all();
