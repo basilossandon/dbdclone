@@ -11,6 +11,13 @@ class ReceiptsTableSeeder extends Seeder
      */
     public function run()
     {
-        factory('App\Receipt', 100)->create();
+        $receipts = factory(App\Receipt::class, 100)->create();
+        $receipts->each(function ($receipt){
+            $paymentMethod = factory(App\PaymentMethod::class)->create();
+            $reservation = factory(App\Reservation::class)->create();
+            $receipt->payment_method_id = $paymentMethod->id;
+            $receipt->reservation_id = $reservation->id;
+            $receipt->save();
+        });
     }
 }
