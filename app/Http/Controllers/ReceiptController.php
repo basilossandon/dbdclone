@@ -82,7 +82,7 @@ class ReceiptController extends Controller
     public function destroy($id)
     {
         $receipt = Receipt::find($id);
-        $receipt->delete();       
+        $receipt->delete();
     }
 
     /**
@@ -94,6 +94,26 @@ class ReceiptController extends Controller
     public function showPaymentMethod($userId, $receiptId){
         $user = User::find($userId);
         $receipt = $user->receipts()->where('id', $receiptId)->first();
+        if ($receipt == null){
+          echo 'EL USUARIO '.$userId. ' NO TIENE ACCESO AL RECIBO '. $receiptId;
+          return null;
+        }
         return $receipt->paymentMethod;
+    }
+
+    /**
+    *
+    * Display the reservation of this Receipt
+    * @param int $userId
+    * @param int $receiptId
+    */
+    public function showReservation($userId, $receiptId){
+        $user = User::find($userId);
+        $receipt = $user->receipts()->where('id', $receiptId)->first();
+        if ($receipt == null){
+          echo 'EL USUARIO '.$userId. ' NO TIENE ACCESO AL RECIBO '. $receiptId;
+          return null;
+        }
+        return $receipt->reservation;
     }
 }
