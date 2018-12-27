@@ -20,13 +20,13 @@ class CreateTicketsTable extends Migration
             $table->timestamps();
 
             // Llaves foraneas para pasajero, paquete, asiento y reserva.
-            $table->integer('passenger_id')->unsigned()->index();
+            $table->integer('passenger_id')->unsigned()->nullable()->index();
             $table->foreign('passenger_id')->references('id')->on('passengers')->onDelete('cascade');
-            $table->integer('package_id')->unsigned()->index();
+            $table->integer('package_id')->unsigned()->nullable()->index();
             $table->foreign('package_id')->references('id')->on('packages')->onDelete('cascade');
             $table->integer('seat_id')->unsigned()->index();
             $table->foreign('seat_id')->references('id')->on('seats')->onDelete('cascade');
-            $table->integer('reservation_id')->unsigned()->index();
+            $table->integer('reservation_id')->unsigned()->nullable()->index();
             $table->foreign('reservation_id')->references('id')->on('reservations')->onDelete('cascade');
         });
     }
