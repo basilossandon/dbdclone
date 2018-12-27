@@ -8,6 +8,6 @@ $factory->define(App\Ticket::class, function (Faker $faker) {
         'seat_id' => App\Seat::all()->random()->id,
         'seat_letter' => $faker->randomLetter,
         'seat_number' => $faker->numberBetween($min=1, $max=60),
-
+        'flight_id' => App\Flight::all()->random()->id,
     ];
 });

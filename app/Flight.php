@@ -30,4 +30,8 @@ class Flight extends Model
 			return $this->belongsToMany(Seat::class)->withPivot('flight_seat',
 		'seat_id', 'flight_id', 'seat_type_capacity');
 		}
+
+		public function tickets(){
+			return $this->hasMany(Ticket::class);
+		}
 }

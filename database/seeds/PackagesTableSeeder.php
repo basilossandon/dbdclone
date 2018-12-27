@@ -22,6 +22,7 @@ class PackagesTableSeeder extends Seeder
             $ticket = new App\Ticket;
             $ticket->package_id = $package->id;
             $ticket->seat_id = App\Seat::all()->random()->id;
+            $ticket->flight_id = App\Flight::all()->random()->id;
             $ticket->save();
         });
     }
