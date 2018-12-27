@@ -5,79 +5,50 @@ use App\Seat;
 use Illuminate\Http\Request;
 class SeatController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         return Seat::all();
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function createOrEdit()
     {
-        //
+        return view('seats');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function storeOrUpdate(Request $request)
     {
-        //
+        $auxSeat = Ticket::find($request->id);
+        if($auxSeat == null){
+            $seat = new Seat();
+            $seat->updateOrCreate([
+                'seat_type' => $request->seat_type,
+                'price_modifier' => $request->price_modifier
+            ],[]);
+        }
+        else{
+            $seat = new ticket();
+            $seat->updateOrCreate([
+                'id' => $request->id,
+            ], 
+                ['seat_type' => $request->seat_type,
+                'price_modifier' => $request->price_modifier
+            ]);   
+        }
+        $seat = Ticket::all();
+        return $seat;
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         return Seat::find($id);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        //
+        $seat = Seat::find($id);
+        $seat->delete();    
+        $seat = Seat::all();
+        return $seat;   
     }
 }

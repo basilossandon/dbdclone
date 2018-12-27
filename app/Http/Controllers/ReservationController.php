@@ -79,6 +79,7 @@ class ReservationController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $reservation = Reservation::find($id);
+        $reservation->delete();       
     }
 }

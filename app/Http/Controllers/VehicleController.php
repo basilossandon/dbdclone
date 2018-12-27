@@ -22,9 +22,9 @@ class VehicleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function createOrEdit()
     {
-        //
+        return view('vehicles');
     }
 
     /**
@@ -35,9 +35,14 @@ class VehicleController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        Vehicle::create([
+            'vehicle_price' => $request->vehicle_price,
+            'vehicle_type' => $request->vehicle_type,
+            'vehicle_licence_plate' => $request->vehicle_licence_plate,
 
+        ]);
+        return Vehicle::all();
+    }
     /**
      * Display the specified resource.
      *
@@ -55,10 +60,7 @@ class VehicleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        //
-    }
+
 
     /**
      * Update the specified resource in storage.
@@ -69,7 +71,13 @@ class VehicleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        Vehicle::find($id)->update([
+            'vehicle_price' => $request->vehicle_price,
+            'vehicle_type' => $request->vehicle_type,
+            'vehicle_licence_plate' => $request->vehicle_licence_plate,
+
+        ]);
+        return Vehicle::all();
     }
 
     /**
@@ -80,6 +88,15 @@ class VehicleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $vehicle = Vehicle::find($id);
+        $vehicle->delete();      
     }
 }
+
+    public function searchVehicle(Request $request) {
+        // por implementar
+    }
+
+    public function reserveVehicle(Request $request){
+        // por implementar
+    }

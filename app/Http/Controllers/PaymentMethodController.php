@@ -79,6 +79,7 @@ class PaymentMethodController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $paymentMethod = PaymentMethod::find($id);
+        $paymentMethod->delete();       
     }
 }

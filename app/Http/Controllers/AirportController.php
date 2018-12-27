@@ -80,6 +80,8 @@ class AirportController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $airport = Airport::find($id);
+        $airport->delete();       
     }
+}
 }
