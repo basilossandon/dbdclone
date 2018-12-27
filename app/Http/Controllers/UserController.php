@@ -35,7 +35,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        Usuario::create([
+        User::create([
             'id' => $request->id,
             'name' => $request->name,
             'email' => $request->nombre_usuario,
@@ -46,7 +46,7 @@ class UserController extends Controller
             'email_verified_at' => $request->email_verified_at,
             'role_id' => $request->role_id,
         ]);
-        return Usuario::all();
+        return User::all();
     }
 
 
