@@ -21,12 +21,12 @@ class Reservation extends Model
     }
 
     public function vehicles(){
-      return $this->belongsToMany(Vehicle::class)->withPivot('reservation_vehicle',
-      'reservation_id', 'vehicle_id', 'vehicle_reservation_lease', 'vehicle_reservation_return');
+      return $this->belongsToMany(Vehicle::class)->withPivot('vehicle_reservation_lease',
+      'vehicle_reservation_return');
     }
 
     public function rooms(){
-      return $this->belongsToMany(Room::class)->withPivot('reservation_room',
-      'reservation_id', 'room_id', 'reservation_room_lease', 'reservation_room_return');
+      return $this->belongsToMany(Room::class)->withPivot('reservation_room_lease',
+      'reservation_room_return');
     }
 }

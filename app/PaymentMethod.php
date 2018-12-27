@@ -10,6 +10,6 @@ class PaymentMethod extends Model
     protected $primarykey = 'id';
 
     public function receipt(){
-      return $this->hasOne(Receipt::class, 'paymet_method_id');
+      return $this->hasOne(Receipt::class, 'payment_method_id');
     }
 }
