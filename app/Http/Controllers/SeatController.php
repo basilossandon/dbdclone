@@ -78,6 +78,7 @@ class SeatController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $Seat = Seat::find($id);
+        $Seat->delete();    
     }
 }

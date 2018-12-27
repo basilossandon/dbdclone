@@ -79,6 +79,7 @@ class ReceiptController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $receipt = Receipt::find($id);
+        $receipt->delete();       
     }
 }

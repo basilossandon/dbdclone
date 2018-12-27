@@ -79,6 +79,7 @@ class PassengerController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $passenger = Passenger::find($id);
+        $passenger->delete();       
     }
 }

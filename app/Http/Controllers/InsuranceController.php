@@ -79,6 +79,8 @@ class InsuranceController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $insurance = Insurance::find($id);
+        $insurance->delete();       
     }
+}
 }
