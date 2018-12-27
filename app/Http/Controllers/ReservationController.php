@@ -80,6 +80,19 @@ class ReservationController extends Controller
     public function destroy($id)
     {
         $reservation = Reservation::find($id);
-        $reservation->delete();       
+        $reservation->delete();
+    }
+
+    /**
+    * Get the list of services purchased in a reservation
+    * @param int $reservation_id
+    * @return \Illuminate\Support\Collection
+    */
+    public function showDetail($reservation_id){
+      $reservation = Reservation::find($reservation_id);
+      $rooms = $reservation->rooms()->get();
+      $tickets = $reservation->tickets()->get();
+      $vehicles = $reservation->vehicles()->get();
+      return collect([$rooms, $tickets, $vehicles]);
     }
 }
