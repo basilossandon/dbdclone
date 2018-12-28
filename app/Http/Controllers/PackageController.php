@@ -69,7 +69,6 @@ class PackageController extends Controller
         $tickets = $package->tickets()->get();
         $flightsInfo = Collection::make();
         foreach($tickets as $ticket){
-            $flightInfo = new FlightUserInfo;
             $departureAirportId = $ticket->flight->departure_airport_id;
             $arrivalAirportId = $ticket->flight->arrival_airport_id;
 
