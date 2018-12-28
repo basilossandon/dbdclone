@@ -81,7 +81,8 @@ class AirportController extends Controller
     public function destroy($id)
     {
         $airport = Airport::find($id);
-        $airport->delete();       
+        $airport->delete();   
+        return Airport::all();
     }
 }
 }

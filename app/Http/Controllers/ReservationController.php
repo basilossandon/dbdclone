@@ -6,88 +6,51 @@ use Illuminate\Http\Request;
 
 class ReservationController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         return Reservation::all();
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function createOrEdit()
     {
-        //
+        return view('reservations');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function storeOrUpdate(Request $request)
     {
-        //
+        $auxReservation = Reservation::find($request->id);
+        if($auxReservation == null){
+            $reservation = new Reservation();
+            $reservation->updateOrCreate([
+                'reservation_date' => $request->reservation_date,
+                'reservation_ip' => $request->reservation_ip
+            ],[]);
+        }
+        else{
+            $reservation = new Reservation();
+            $reservation->updateOrCreate([
+                'id' => $request->id,
+            ], 
+                ['reservation_date' => $request->reservation_date,
+                'reservation_ip' => $request->reservation_ip
+            ]);   
+        }
+        return Reservation::all();
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         return Reservation::find($id);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         $reservation = Reservation::find($id);
         $reservation->delete();
+        return Reservation::all();
     }
 
-    /**
-    * Get the list of services purchased in a reservation
-    * @param int $reservation_id
-    * @return \Illuminate\Support\Collection
-    */
     public function showDetail($reservation_id){
       $reservation = Reservation::find($reservation_id);
       $rooms = $reservation->rooms()->get();

@@ -18,7 +18,7 @@ class SeatController extends Controller
 
     public function storeOrUpdate(Request $request)
     {
-        $auxSeat = Ticket::find($request->id);
+        $auxSeat = Seat::find($request->id);
         if($auxSeat == null){
             $seat = new Seat();
             $seat->updateOrCreate([
@@ -27,7 +27,7 @@ class SeatController extends Controller
             ],[]);
         }
         else{
-            $seat = new ticket();
+            $seat = new Seat();
             $seat->updateOrCreate([
                 'id' => $request->id,
             ], 
@@ -35,7 +35,7 @@ class SeatController extends Controller
                 'price_modifier' => $request->price_modifier
             ]);   
         }
-        $seat = Ticket::all();
+        $seat = Seat::all();
         return $seat;
     }
 
@@ -48,7 +48,6 @@ class SeatController extends Controller
     {
         $seat = Seat::find($id);
         $seat->delete();    
-        $seat = Seat::all();
-        return $seat;   
+        return Seat::all();
     }
 }
