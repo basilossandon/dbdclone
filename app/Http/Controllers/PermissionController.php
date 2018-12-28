@@ -24,7 +24,7 @@ class PermissionController extends Controller
             $permission->updateOrCreate([
                 'permission_name' => $request->permission_name,
                 'permission_type' => $request->permission_type
-            ],[]);
+            ]);
         }
         else{
             $permission = new Permission();

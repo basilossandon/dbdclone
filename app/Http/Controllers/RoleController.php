@@ -30,7 +30,7 @@ class RoleController extends Controller
             $role->updateOrCreate([
                 'role_name' => $request->role_name,
                 'role_description' => $request->role_description
-            ],[]);
+            ]);
         }
         else{
             $role = new Role();

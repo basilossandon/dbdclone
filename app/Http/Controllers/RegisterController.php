@@ -25,7 +25,7 @@ class RegisterController extends Controller
                 'user_id' => $request->user_id,
                 'modified_table_name' => $request->modified_table_name,
                 'modification' => $request->modification
-            ],[]);
+            ]);
         }
         else{
             $register = new Register();

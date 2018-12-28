@@ -26,7 +26,7 @@ class PassengerController extends Controller
                 'doc_number' => $request->doc_number,
                 'doc_type' => $request->doc_type,
                 'passenger_name' => $request->passenger_name
-            ],[]);
+            ]);
         }
         else{
             $passenger = new Passenger();

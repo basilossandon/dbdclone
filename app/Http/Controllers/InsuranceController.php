@@ -26,7 +26,7 @@ class InsuranceController extends Controller
                 'insurance_price' => $request->insurance_price,
                 'created_at' => $request->created_at,
                 'updated_at' => $request->updated_at
-            ],[]);
+            ]);
         }
         else{
             $insurance = new Insurance();

@@ -24,7 +24,7 @@ class ReservationController extends Controller
             $reservation->updateOrCreate([
                 'reservation_date' => $request->reservation_date,
                 'reservation_ip' => $request->reservation_ip
-            ],[]);
+            ]);
         }
         else{
             $reservation = new Reservation();

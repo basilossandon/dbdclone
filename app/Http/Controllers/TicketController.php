@@ -45,7 +45,7 @@ class TicketController extends Controller
                 'seat_id' => $request->seat_id
                 'reservation_id' => $request->reservation_id,
                 'flight_id' => $request->flight_id
-            ],[]);
+            ]);
         }
         else{
             $ticket = new Ticket();

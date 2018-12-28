@@ -27,7 +27,7 @@ class AirportController extends Controller
                 'airport_code' => $request->airport_code,
                 'airport_address' => $request->airport_address,
                 'city_id' => $request->city_id
-            ],[]);
+            ]);
         }
         else{
             $airport = new Airport();

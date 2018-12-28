@@ -25,7 +25,7 @@ class VehicleController extends Controller
                 'vehicle_price' => $request->vehicle_price,
                 'vehicle_type' => $request->vehicle_type,
                 'vehicle_licence_plate' => $request->vehicle_licence_plate
-            ],[]);
+            ]);
         }
         else{
             $vehicle = new Vehicle();

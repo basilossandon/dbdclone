@@ -31,7 +31,7 @@ class PackageController extends Controller
                 'package_stock' => $request->package_stock,
                 'package_type' => $request->package_type,
                 'vehicle_id' => $request->vehicle_id
-            ],[]);
+            ]);
         }
         else{
             $package = new Package();

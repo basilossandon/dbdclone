@@ -28,7 +28,7 @@ class HotelController extends Controller
                 'hotel_address' => $request->hotel_address,
                 'hotel_stars' => $request->hotel_stars,
                 'city_id' => $request->city_id
-            ],[]);
+            ]);
         }
         else{
             $hotel = new Hotel();

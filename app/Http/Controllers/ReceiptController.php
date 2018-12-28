@@ -27,7 +27,7 @@ class ReceiptController extends Controller
                 'receipt_ammount' => $request->reservation_date,
                 'receipt_date' => $request->reservation_ip,
                 'receipt_type' => $request->receipt_type
-            ],[]);
+            ]);
         }
         else{
             $receipt = new Receipt();

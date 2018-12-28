@@ -31,7 +31,7 @@ class UserController extends Controller
                 'user_points' => $request->user_points,   
                 'email_verified_at' => $request->email_verified_at,
                 'role_id' => $request->role_id
-            ],[]);
+            ]);
         }
         else{
             $user = new User();

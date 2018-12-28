@@ -24,7 +24,7 @@ class SeatController extends Controller
             $seat->updateOrCreate([
                 'seat_type' => $request->seat_type,
                 'price_modifier' => $request->price_modifier
-            ],[]);
+            ]);
         }
         else{
             $seat = new Seat();

@@ -25,7 +25,7 @@ class PaymentMethodController extends Controller
                 'payment_account_number' => $request->payment_account_number,
                 'payment_method_name' => $request->payment_method_name,
                 'payment_method_type' => $request->payment_method_type
-            ],[]);
+            ]);
         }
         else{
             $paymentMethod = new PaymentMethod();

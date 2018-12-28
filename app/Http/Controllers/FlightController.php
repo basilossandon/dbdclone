@@ -31,7 +31,7 @@ class FlightController extends Controller
                 'flight_code' => $request->flight_code,
                 'departure_airport_id' => $request->departure_airport_id,
                 'arrival_airport_id' => $request->arrival_airport_id
-            ],[]);
+            ]);
         }
         else{
             $flight = new Flight();
