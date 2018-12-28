@@ -3,7 +3,5 @@
     <div class="navbar-header">
      <img src=./images/logo.png class="logo"> 
     </div>
-
-
-  </div>
+      </div>
 </nav>
