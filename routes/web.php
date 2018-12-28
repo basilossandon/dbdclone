@@ -10,14 +10,15 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Auth::routes();
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+// Main routes
 Route::resource('airports', 'AirportController');
 Route::resource('flights', 'FlightController');
 Route::resource('insurances', 'InsuranceController');
@@ -32,3 +33,5 @@ Route::resource('seats', 'SeatController');
 Route::resource('tickets', 'TicketController');
 Route::resource('users', 'UserController');
 Route::resource('vehicles', 'VehicleController');
+Route::resource('registers', 'RegisterController');
+
