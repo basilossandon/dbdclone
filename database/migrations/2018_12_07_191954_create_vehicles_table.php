@@ -18,7 +18,7 @@ class CreateVehiclesTable extends Migration
             $table->integer('vehicle_price');
             $table->string('vehicle_type');
             $table->string('vehicle_licence_plate');
-            $table->timestamps();   
+            $table->timestamps();
             $table->integer('city_id')->unsigned();
             $table->foreign('city_id')->references('id')->on('cities')->onDelete('cascade');
         });
