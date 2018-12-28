@@ -6,80 +6,51 @@ use Illuminate\Http\Request;
 
 class PassengerController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         return Passenger::all();
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function createOrEdit()
     {
-        //
+        return view('passengers');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function storeOrUpdate(Request $request)
     {
-        //
+        $auxpassenger = Passenger::find($request->id);
+        if($auxpassenger == null){
+            $passenger = new Passenger();
+            $passenger->updateOrCreate([
+                'doc_country_emission' => $request->doc_country_emission,
+                'doc_number' => $request->doc_number,
+                'doc_type' => $request->doc_type,
+                'passenger_name' => $request->passenger_name
+            ],[]);
+        }
+        else{
+            $passenger = new Passenger();
+            $passenger->updateOrCreate([
+                'id' => $request->id,
+            ], 
+                ['doc_country_emission' => $request->doc_country_emission,
+                'doc_number' => $request->doc_number,
+                'doc_type' => $request->doc_type,
+                'passenger_name' => $request->passenger_name
+            ]);   
+        }
+        return Passenger::all();
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         return Passenger::find($id);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         $passenger = Passenger::find($id);
-        $passenger->delete();       
+        $passenger->delete();
+        return Passenger::all();
     }
 }

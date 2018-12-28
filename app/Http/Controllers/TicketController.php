@@ -48,7 +48,7 @@ class TicketController extends Controller
             ],[]);
         }
         else{
-            $ticket = new ticket();
+            $ticket = new Ticket();
             $ticket->updateOrCreate([
                 'id' => $request->id,
             ], 
@@ -102,7 +102,6 @@ class TicketController extends Controller
     {
         $ticket = Ticket::find($id);
         $ticket->delete(); 
-        $ticket = Tickets::all();
-        return $ticket;   
+        return Tickets::all();
     }
 }

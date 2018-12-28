@@ -10,77 +10,49 @@ use \Illuminate\Support\Collection;
 
 class PackageController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         return Package::all();
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function createOrEdit()
     {
-        //
+        return view('packages');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function storeOrUpdate(Request $request)
     {
-        //
+        $auxpackage = Package::find($request->id);
+        if($auxpackage == null){
+            $package = new Package();
+            $package->updateOrCreate([
+                'package_name' => $request->package_name,
+                'package_price' => $request->package_price,
+                'package_stock' => $request->package_stock,
+                'package_type' => $request->package_type,
+                'vehicle_id' => $request->vehicle_id
+            ],[]);
+        }
+        else{
+            $package = new Package();
+            $package->updateOrCreate([
+                'id' => $request->id,
+            ],
+                ['package_name' => $request->package_name,
+                'package_price' => $request->package_price,
+                'package_stock' => $request->package_stock,
+                'package_type' => $request->package_type,
+                'vehicle_id' => $request->vehicle_id
+            ]);
+        }
+        return Package::all();
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         return Package::find($id);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         $package = Package::find($id);
