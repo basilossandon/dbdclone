@@ -60,19 +60,4 @@ class TicketController extends Controller
         $ticket->delete(); 
         return Tickets::all();
     }
-  public function reserveTicket($flight_id, $passenger_id,$seat_id){
-        $flightToReserve = Flight::find($id);
-        $ticket = null; 
-        if(Auth::user())
-        {
-            $ticket = new Ticket([  'passenger_id' => $passenger_id,
-                                    'seat_id' => $seat_id,
-                                    'reservation_id' => $request->reservation_id,
-                                    'flight_id' => $flight_id]);
-            $ticket->save();
-            }   
-            return $ticket;
-        }
-    }
 }
-

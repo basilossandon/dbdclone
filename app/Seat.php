@@ -9,6 +9,7 @@ class Seat extends Model
     public function tickets(){
       return $this->hasMany(Ticket::class);
     }
+
     public function flights(){
       return $this->belongsToMany(Flight::class)->withPivot('seat_type_capacity');
     }

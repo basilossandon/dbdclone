@@ -19,7 +19,6 @@ class CreateFlightSeatPivotTable extends Migration
             $table->integer('flight_id')->unsigned()->index();
             $table->foreign('flight_id')->references('id')->on('flights')->onDelete('cascade');
             $table->integer('seat_type_capacity');
-            $table->boolean('available');
             $table->primary(['seat_id', 'flight_id']);
         });
     }
