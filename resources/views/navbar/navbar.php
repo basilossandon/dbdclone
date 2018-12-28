@@ -20,8 +20,8 @@
 			</li>
 		</ul>
 	<div class="top-right links">
-		<a href="{{ route('login') }}" style="color:white">Login</a>
-		<a href="{{ route('register') }}"" style="color:white"> Register</a>
+		<a href="/login" style="color:white">Login</a>
+		<a href="/register" style="color:white"> Register</a>
 	</div>
 </div>
 </nav>
