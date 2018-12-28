@@ -66,7 +66,7 @@ class PackageController extends Controller
     */
     public function showDetail($packageId){
         $package = Package::find($packageId);
-        $tickets = $package->tickets()->get();
+        $tickets = $package->tickets()->where('passenger_id', null)->get();
         $flightsInfo = Collection::make();
         foreach($tickets as $ticket){
             $departureAirportId = $ticket->flight->departure_airport_id;
