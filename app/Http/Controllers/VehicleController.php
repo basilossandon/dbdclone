@@ -16,36 +16,34 @@ class VehicleController extends Controller
         return view('vehicles');
     }
 
-
-    public function store(Request $request)
+    public function storeOrUpdate(Request $request)
     {
-        Vehicle::create([
-            'vehicle_price' => $request->vehicle_price,
-            'vehicle_type' => $request->vehicle_type,
-            'vehicle_licence_plate' => $request->vehicle_licence_plate,
-
-        ]);
+        $auxVehicle = Vehicle::find($request->id);
+        if($auxVehicle == null){
+            $vehicle = new Vehicle();
+            $vehicle->updateOrCreate([
+                'vehicle_price' => $request->vehicle_price,
+                'vehicle_type' => $request->vehicle_type,
+                'vehicle_licence_plate' => $request->vehicle_licence_plate
+            ],[]);
+        }
+        else{
+            $vehicle = new Vehicle();
+            $vehicle->updateOrCreate([
+                'id' => $request->id,
+            ], 
+                ['vehicle_price' => $request->vehicle_price,
+                'vehicle_type' => $request->vehicle_type,
+                'vehicle_licence_plate' => $request->vehicle_licence_plate
+            ]);   
+        }
         return Vehicle::all();
     }
-
 
     public function show($id)
     {
         return Vehicle::find($id);
     }
-
-    public function update(Request $request, $id)
-    {
-        Vehicle::find($id)->update([
-            'vehicle_price' => $request->vehicle_price,
-            'vehicle_type' => $request->vehicle_type,
-            'vehicle_licence_plate' => $request->vehicle_licence_plate,
-
-        ]);
-        return Vehicle::all();
-    }
-
-
 
     public function destroy($id)
     {
