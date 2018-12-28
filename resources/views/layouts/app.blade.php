@@ -32,15 +32,6 @@
             .content {
                 padding-bottom: 25vh;
             }
-            .formulario {
-                padding: 15px;
-                border: 1px solid #ced4da;
-                border-radius: .375rem;
-            }
-            .formulario .form-control:focus {
-                border-color: #74b4af;
-                box-shadow: 0 0 0 .2rem #04998d4d;
-            }
             .error {
                 color: #d15757;
             }
@@ -54,10 +45,9 @@
         </div>
         <div class="container content">
             <h1 class="titulo">@yield('title')</h1>
-            @yield('contenido')
+             @yield('content')
         </div>
     </body>
-
     <script src="/js/jquery-slim.min.js"></script>
     <script src="/js/popper.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>

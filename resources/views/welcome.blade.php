@@ -1,7 +1,5 @@
-@extends('layouts.form')
-
-@section('title', 'Welcome')
-
-@section('form')
-    
+@extends('layouts.app')
+@section('title', 'Bienvenido')
+@section('content')
+@include('carousel.carousel')
 @endsection
