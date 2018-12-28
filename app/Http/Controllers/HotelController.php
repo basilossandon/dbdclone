@@ -34,12 +34,12 @@ class HotelController extends Controller
             $hotel = new Hotel();
             $hotel->updateOrCreate([
                 'id' => $request->id,
-            ], 
+            ],
                 ['hotel_name' => $request->hotel_name,
                 'hotel_address' => $request->hotel_address,
                 'hotel_stars' => $request->hotel_stars,
                 'city_id' => $request->city_id
-            ]);   
+            ]);
         }
         return Hotel::all();
     }
@@ -55,8 +55,6 @@ class HotelController extends Controller
         $hotel->delete();
         return Hotel::all();
     }
-}
-
 
     public function showRooms($hotel_id){
         $hotel = Hotel::find($hotel_id);
