@@ -27,4 +27,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Receipt::class);
     }
+
+    public function register()
+    {
+        return $this->hasMany(Register::class);
+    }
 }
