@@ -14,7 +14,7 @@ class CreateRegistersUserInsertTrigger extends Migration
           $BODY$
           BEGIN
             INSERT INTO registers(id,created_at,updated_at,user_id, modified_table_name, modification)
-            VALUES(NEW.id, now(), null, OLD.user_id,\'users_table\', \'INSERT\');
+            VALUES(NEW.id, now(), null, NEW.user_id,\'users_table\', \'INSERT\');
             RETURN NEW;
           END
           $BODY$
