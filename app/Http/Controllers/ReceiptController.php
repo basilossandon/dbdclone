@@ -8,89 +8,51 @@ use Illuminate\Http\Request;
 
 class ReceiptController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         return Receipt::all();
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function createOrEdit()
     {
-        //
+        return view('receipts');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function storeOrUpdate(Request $request)
     {
-        //
+        $auxReceipt = Receipt::find($request->id);
+        if($auxReceipt == null){
+            $receipt = new Receipt();
+            $receipt->updateOrCreate([
+                'receipt_ammount' => $request->reservation_date,
+                'receipt_date' => $request->reservation_ip,
+                'receipt_type' => $request->receipt_type
+            ],[]);
+        }
+        else{
+            $receipt = new Receipt();
+            $receipt->updateOrCreate([
+                'id' => $request->id,
+            ], 
+                ['receipt_ammount' => $request->reservation_date,
+                'receipt_date' => $request->reservation_ip,
+                'receipt_type' => $request->receipt_type
+            ]);   
+        }
+        return Receipt::all();
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         return Receipt::find($id);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         $receipt = Receipt::find($id);
         $receipt->delete();
     }
 
-    /**
-    * Display the receipt paymentMethod
-    *
-    * @param int $userId
-    * @param int $receiptId
-    */
     public function showPaymentMethod($userId, $receiptId){
         $user = User::find($userId);
         $receipt = $user->receipts()->where('id', $receiptId)->first();
@@ -101,12 +63,6 @@ class ReceiptController extends Controller
         return $receipt->paymentMethod;
     }
 
-    /**
-    *
-    * Display the reservation of this Receipt
-    * @param int $userId
-    * @param int $receiptId
-    */
     public function showReservation($userId, $receiptId){
         $user = User::find($userId);
         $receipt = $user->receipts()->where('id', $receiptId)->first();
