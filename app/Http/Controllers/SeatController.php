@@ -50,4 +50,8 @@ class SeatController extends Controller
         $seat->delete();    
         return Seat::all();
     }
+    public function checkSeatAvailable($seat_id,$flight_id){
+       $flights = Flight::find($flight_id);
+       $seat = Seat::find($seat_id);
+    }
 }
