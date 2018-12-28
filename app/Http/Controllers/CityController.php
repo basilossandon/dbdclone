@@ -8,87 +8,51 @@ use \Illuminate\Support\Collection;
 use App\Flight;
 class CityController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        return City::all();
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function createOrEdit()
     {
-        //
+        return view('cities');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function storeOrUpdate(Request $request)
     {
-        //
+        $auxCity = City::find($request->id);
+        if($auxCity == null){
+            $city = new City();
+            $city->updateOrCreate([
+                'city_name' => $request->city_name,
+                'country_code' => $request->country_code,
+                'country_id' => $request->country_id
+            ]);
+        }
+        else{
+            $city = new Airport();
+            $city->updateOrCreate([
+                'id' => $request->id,
+            ], 
+                ['city_name' => $request->city_name,
+                'country_code' => $request->country_code,
+                'country_id' => $request->country_id
+            ]);   
+        }
+        return City::all();
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
-        //
+        return City::find($id);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        //
+        $city = City::find($id);
+        $city->delete();
+        return City::all();
     }
-
-    /**
-    * Display all the available flights in a certain city
-    * @param int $city_id
-    *
-    */
     public function showAvailableFlights($city_id){
       $city = City::find($city_id);
       $airports = $city->airports()->get();
