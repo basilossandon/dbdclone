@@ -51,6 +51,7 @@ class ReceiptController extends Controller
     {
         $receipt = Receipt::find($id);
         $receipt->delete();
+        return Receipt::all();
     }
 
     public function showPaymentMethod($userId, $receiptId){

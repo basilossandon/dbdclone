@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use App\Permissions;
 use Illuminate\Http\Request;
 
-class permissionController extends Controller
+class PermissionController extends Controller
 {
     public function index()
     {
@@ -47,6 +47,6 @@ class permissionController extends Controller
     {
         $permission = Permission::find($id);
         $permission->delete();
+        return Permission::all();
     }
-
 }
