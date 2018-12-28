@@ -9,5 +9,7 @@ $factory->define(App\Ticket::class, function (Faker $faker) {
         'seat_letter' => $faker->randomLetter,
         'seat_number' => $faker->numberBetween($min=1, $max=60),
         'flight_id' => App\Flight::all()->random()->id,
+        'age_category' => $faker->randomElement($array =
+        array('Adult', 'Child', 'Infant')),
     ];
 });
