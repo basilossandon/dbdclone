@@ -34,4 +34,7 @@ Route::resource('tickets', 'TicketController');
 Route::resource('users', 'UserController');
 Route::resource('vehicles', 'VehicleController');
 Route::resource('registers', 'RegisterController');
-
+Route::get('/hotel/{hotel_id}/rooms', 'HotelController@showRooms');
+Route::get('/hotel/{hotel_id}/reservations', 'HotelController@showReservatedRooms');
+Route::get('/hotel/{hotel_id}/available_rooms/{date}', 'HotelController@showAvailableRooms');
+Route::get('/cities/{city_id}/available_flights', 'CityController@showAvailableFlights');
