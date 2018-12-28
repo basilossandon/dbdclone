@@ -9,10 +9,21 @@ class CreateRegistersInsertTrigger extends Migration
    public function up()
    {
           DB::unprepared('
-          CREATE TRIGGER TR_register BEFORE INSERT ON users FOR EACH ROW
+          CREATE OR REPLACE FUNCTION insertRegister()
+          RETURNS trigger AS
+          $BODY$
           BEGIN
-            INSERT INTO register(register_id, modified_table_name, modification) VALUES(NEW.id, users, \'INSERT\');
+            INSERT INTO registers(id,created_at,updated_at,user_id, modified_table_name, modification)
+            VALUES(NEW.id, now(), null, NEW.id,\'users_table\', \'INSERT\');
+            RETURN NEW;
           END
+          $BODY$
+          LANGUAGE plpgsql;
+          ');
+
+          DB::unprepared('
+          CREATE TRIGGER TR_register AFTER INSERT ON users FOR EACH ROW
+          EXECUTE PROCEDURE insertRegister();
           ');
    }
 
