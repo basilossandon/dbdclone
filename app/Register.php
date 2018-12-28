@@ -9,7 +9,7 @@ class Register extends Model
     protected $primarykey = 'id';
     protected $fillable = [
       'modified_table_name',
-      'action',
+      'modification',
     ];
 
     public function user()
