@@ -18,4 +18,7 @@ class City extends Model
     public function airports(){
       return $this->hasMany(Airport::class);
     }
+    public function vehicle(){
+      return $this->hasMany(Vehicle::class);
+    }
 }

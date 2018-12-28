@@ -6,5 +6,6 @@ $factory->define(App\Vehicle::class, function (Faker $faker) {
         'vehicle_type' => $faker->randomElement($array =
           array('Sedan', 'Coupe', 'Station', 'hatchback')),
         'vehicle_licence_plate' => $faker->ean8,
+        'city_id' => App\City::all()->random()->id,
     ];
 });
