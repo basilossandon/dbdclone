@@ -1,0 +1,29 @@
+.nav-link{
+    margin-left: 5px;
+}
+
+.nav-font-style{
+    color: #fff;
+    font-style: italic;
+}
+.icono {
+    width: 25px;
+    height: 25px;
+    margin-top: 5px;
+    margin-left: 5px;
+}
+
+.carousel-inner img {
+    width: 700;
+    height: 400;
+}
+
+.carousel-control-next-icon {
+    bottom: 0%;
+    margin-left: 700px;
+}
+
+.titulo {
+    margin: 25px 0;
+    text-align: center;
+}
