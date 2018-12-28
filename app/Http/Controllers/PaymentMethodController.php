@@ -8,12 +8,12 @@ class PaymentMethodController extends Controller
 {
     public function index()
     {
-        return PaymentMethods::all();
+        return PaymentMethod::all();
     }
 
     public function createOrEdit()
     {
-        return view('paymentMethods');
+        return view('paymentmethods');
     }
 
     public function storeOrUpdate(Request $request)

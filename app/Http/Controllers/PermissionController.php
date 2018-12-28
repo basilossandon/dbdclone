@@ -8,7 +8,7 @@ class PermissionController extends Controller
 {
     public function index()
     {
-        return Permissions::all();
+        return Permission::all();
     }
 
     public function createOrEdit()
