@@ -1,85 +1,52 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Permission;
+use App\Permissions;
 use Illuminate\Http\Request;
 
-class PermissionController extends Controller
+class permissionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
+        return Permissions::all();
+    }
+
+    public function createOrEdit()
+    {
+        return view('permissions');
+    }
+
+    public function storeOrUpdate(Request $request)
+    {
+        $auxpermission = Permission::find($request->id);
+        if($auxpermission == null){
+            $permission = new Permission();
+            $permission->updateOrCreate([
+                'permission_name' => $request->permission_name,
+                'permission_type' => $request->permission_type
+            ],[]);
+        }
+        else{
+            $permission = new Permission();
+            $permission->updateOrCreate([
+                'id' => $request->id,
+            ], 
+                ['permission_name' => $request->permission_name,
+                'permission_type' => $request->permission_type
+            ]);   
+        }
         return Permission::all();
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         return Permission::find($id);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         $permission = Permission::find($id);
-        $permission->delete();       
+        $permission->delete();
     }
+
 }
