@@ -36,11 +36,9 @@ Route::resource('vehicles', 'VehicleController');
 Route::resource('registers', 'RegisterController');
 Route::resource('hotels', 'HotelController');
 Route::resource('cities', 'CityController');
-<<<<<<< HEAD
-=======
+
 
 // Hotel routes
->>>>>>> 02d49e311faeed13558f3c59878ec60a5a274df3
 Route::get('/hotel/{hotel_id}/rooms', 'HotelController@showRooms');
 Route::get('/hotel/{hotel_id}/reservations', 'HotelController@showReservatedRooms');
 Route::get('/hotel/{hotel_id}/available_rooms/{date}', 'HotelController@showAvailableRooms');
@@ -51,12 +49,9 @@ Route::post('/cities_post', 'CityController@storeOrUpdate');
 
 // Package routes
 Route::get('/packages/{packageId}/details', 'PackageController@showDetail');
-<<<<<<< HEAD
-=======
 Route::post('/packagse_post', 'PackageController@storeOrUpdate');
 
 // Users rotues
->>>>>>> 02d49e311faeed13558f3c59878ec60a5a274df3
 Route::get('/users/{userId}/receipts/{receiptId}/payment_method', 'ReceiptController@showPaymentMethod');
 Route::get('/users/{userId}/receipts/{receiptId}/reservation', 'ReceiptController@showReservation');
 Route::get('/users/{id}/receipts', 'UserController@showReceipts');
