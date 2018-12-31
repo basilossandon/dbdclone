@@ -16,10 +16,10 @@ class DatabaseSeeder extends Seeder
         $this->call(PermissionsTableSeeder::class);
         $this->call(PermissionRoleTableSeeder::class);
         $this->call(ReceiptsTableSeeder::class);
-        $this->call(VehiclesTableSeeder::class);
         $this->call(SeatsTableSeeder::class);
         $this->call(CountriesTableSeeder::class);
         $this->call(CountriesRelatedTablesSeeder::class);
+        $this->call(VehiclesTableSeeder::class);
         $this->call(RoomsTableSeeder::class);
         $this->call(AirportsTableSeeder::class);
         $this->call(FlightsTableSeeder::class);
