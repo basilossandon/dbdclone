@@ -1,7 +1,4 @@
-<link rel="stylesheet" href="/css/bootstrap.min.css">
-<script src="/js/popper.min.js"></script>
-<script src="/js/bootstrap.min.js"></script>
-<script src="/js/jquery-3.3.1.slim.js"></script>
+
 
 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
   <ol class="carousel-indicators">

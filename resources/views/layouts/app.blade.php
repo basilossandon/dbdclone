@@ -11,30 +11,11 @@
                 background-color: #1b0088; 
                 padding: 15px 0;
                 box-shadow: 0 7px 0 0 #ed1650; 
-                margin-bottom: 50px;
-            }
-            body {
-                background-image: radial-gradient(#fff, #FFFFFF, #FFFFFF);
-                margin: 0px;
-             }
-            .container input[type=submit], .container button, a.btn {
-                background-color: #FFFFFF;
-            }
-            a.btn {
-                color: #212529;
-            }
-            a {
-                color: #57a09a;
             }
             .carousel img {
-                border-radius: .375rem;
+                border-radius: .900rem;
             }
-            .content {
-                padding-bottom: 25vh;
-            }
-            .error {
-                color: #d15757;
-            }
+
         </style>
     </head>
     <body>

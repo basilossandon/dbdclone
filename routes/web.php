@@ -36,15 +36,12 @@ Route::resource('vehicles', 'VehicleController');
 Route::resource('registers', 'RegisterController');
 Route::resource('hotels', 'HotelController');
 Route::resource('cities', 'CityController');
-
 Route::get('/hotel/{hotel_id}/rooms', 'HotelController@showRooms');
 Route::get('/hotel/{hotel_id}/reservations', 'HotelController@showReservatedRooms');
 Route::get('/hotel/{hotel_id}/available_rooms/{date}', 'HotelController@showAvailableRooms');
 Route::get('/cities/{city_id}/available_flights', 'CityController@showAvailableFlights');
 Route::get('/packages/{packageId}/details', 'PackageController@showDetail');
-Route::get('/users/{userId}/receipts/{receiptId}/payment_method',
-'ReceiptController@showPaymentMethod');
-Route::get('/users/{userId}/receipts/{receiptId}/reservation',
-'ReceiptController@showReservation');
+Route::get('/users/{userId}/receipts/{receiptId}/payment_method', 'ReceiptController@showPaymentMethod');
+Route::get('/users/{userId}/receipts/{receiptId}/reservation', 'ReceiptController@showReservation');
 Route::get('/users/{id}/receipts', 'UserController@showReceipts');
 Route::get('/reservations/{reservation_id}/detail', 'ReservationController@showDetail');
