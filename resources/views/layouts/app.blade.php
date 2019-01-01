@@ -5,12 +5,13 @@
         <meta name="csrf-token" content="{{ csrf_token() }}" />
         <link rel="stylesheet" href="/css/navbar.css">
         <link rel="stylesheet" href="/css/bootstrap.min.css">
+        @yield('header')
         <title>@yield('title') | LATAM.com</title>
         <style>
             .heading {
-                background-color: #1b0088; 
+                background-color: #1b0088;
                 padding: 15px 0;
-                box-shadow: 0 7px 0 0 #ed1650; 
+                box-shadow: 0 7px 0 0 #ed1650;
             }
             .carousel img {
                 border-radius: .900rem;
@@ -32,4 +33,5 @@
     <script src="/js/jquery-slim.min.js"></script>
     <script src="/js/popper.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
+    @yield('scripts')
 </html>
