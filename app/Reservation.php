@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Reservation extends Model
 {
     protected $primarykey = 'id';
+    protected $guarded = [];
 
     public function receipt(){
       return $this->hasOne(Receipt::class);

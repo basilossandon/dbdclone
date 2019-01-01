@@ -11,6 +11,8 @@ class Receipt extends Model
       'receipt_ammount',
       'receipt_date',
       'receipt_type',
+      'user_id',
+      'reservation_id',
     ];
 
     public function user(){
