@@ -1,9 +1,12 @@
-
 <nav class="navbar navbar-expand-lg">
+
+
 <img src=./images/logo.png class="logo"> 
 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
 <span class="navbar-toggler-icon"></span>
 </button>
+
+
 <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
 
 
@@ -20,10 +23,12 @@
 			</li>
 		</ul>
 	<div class="top-right links">
-		<a href="/login" style="color:white">Login</a>
-		<a href="/register" style="color:white"> Register</a>
+	<button class="btn btn-primary" onclick="location.href='/login'" type="button">
+     Login</button>
+	<button class="btn btn-primary" onclick="location.href='/register'" type="button">
+     Register</button>	
+ 		</div>
 	</div>
-</div>
 </nav>
 
 

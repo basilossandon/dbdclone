@@ -37,6 +37,7 @@ Route::resource('registers', 'RegisterController');
 Route::resource('hotels', 'HotelController');
 Route::resource('cities', 'CityController');
 
+
 // Hotel routes
 Route::get('/hotel/{hotel_id}/rooms', 'HotelController@showRooms');
 Route::get('/hotel/{hotel_id}/reservations', 'HotelController@showReservatedRooms');
