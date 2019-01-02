@@ -177,7 +177,10 @@ class FlightController extends Controller
             // Agregar la coleccion de vuelos de rama a $flightsFound
             $this->flightsFound->push($rama->all());
         }else if ($rama->count() < 2){
-            $candidatos = Flight::all()->filter(function ($flight) use ($rama){
+            // Candidatos son los vuelos que tienen origen en el destino del ultimo de rama
+            // y ademas cumplen las condiciones impuestas en
+            $candidatos = Flight::where('departure_airport_id', $rama->last()->arrival_airport_id)->get()
+            ->filter(function ($flight) use ($rama){
                 $fecha_salida = Carbon::parse($flight->flight_departure);
                 $fecha_llegada = Carbon::parse($rama->last()->flight_arrival);
                 // El destino del vuelo no es una ciudad origen presente en los vuelos de $rama
@@ -189,9 +192,6 @@ class FlightController extends Controller
                     (!($rama->contains($flight))) &&
                     // vuelo tiene al menos un asiento disponible
                     ($this->flightAvailable($flight)) &&
-                    // El origen del vuelo es el destino del ultimo vuelo en $rama
-                    //($this->originCity($flight->id) == $this->destinyCity($rama->last()->id)) &&
-                    ($flight->departure_airport_id == $rama->last()->arrival_airport_id) &&
                     $no_se_devuelve
                     // La fecha de salida de $flight es la misma o posterior a la
                     // de llegada del ultimo vuelo en $rama
