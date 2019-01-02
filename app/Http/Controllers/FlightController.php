@@ -178,7 +178,7 @@ class FlightController extends Controller
             $this->flightsFound->push($rama->all());
         }else if ($rama->count() < 2){
             // Candidatos son los vuelos que tienen origen en el destino del ultimo de rama
-            // y ademas cumplen las condiciones impuestas en
+            // y ademas cumplen las condiciones impuestas en filter
             $candidatos = Flight::where('departure_airport_id', $rama->last()->arrival_airport_id)->get()
             ->filter(function ($flight) use ($rama){
                 $fecha_salida = Carbon::parse($flight->flight_departure);

@@ -21,7 +21,7 @@
 
 @section('content')
 
-<div class="reserveForm"> 
+<div class="reserveForm">
   <form action="/reserve/choose_flights" method="POST" >
     <div class="rows">
     <div class="dropDownMenus">
@@ -61,19 +61,19 @@
       <div class="columns" style="margin-top: 5px">
         <div class="column is-2">
           <label>ORIGEN</label>
-         <select name="ciudad_ida" class="form-control select2">
+         <select name="origen" class="form-control select2">
            @foreach ($cities as $city)
              <option>{{$city->city_name}}</option>
            @endforeach
-         </select>            
+         </select>
         </div>
         <div class="column is-2">
           <label>DESTINO</label>
-          <select name="ciudad_vuelta" class="form-control select2">
+          <select name="destino" class="form-control select2">
              @foreach ($cities as $city)
                  <option>{{$city->city_name}}</option>
              @endforeach
-          </select>            
+          </select>
         </div>
         <div class="column is-2">
             <label>FECHA DE IDA</label>
@@ -81,7 +81,7 @@
               <script>
                 $('#datepickerida').datepicker({
                   uiLibrary: 'bootstrap4'});
-              </script>            
+              </script>
         </div>
         <div class="column is-2">
           <label>FECHA DE VUELTA</label>
@@ -90,10 +90,10 @@
             $('#datepickervuelta').datepicker({
             uiLibrary: 'bootstrap4'
             });
-            </script>            
+            </script>
           </div>
     </div>
-    <div class="buttonWrapper"> 
+    <div class="buttonWrapper">
             <button class="btn btn-primary" type="submit" style="
             margin-top: 25px;
             border-bottom-left-radius: 20px;
