@@ -176,13 +176,13 @@ class FlightController extends Controller
         if ($this->destinyCity($rama->last()->id) == $destino){
             // Agregar la coleccion de vuelos de rama a $flightsFound
             $this->flightsFound->push($rama->all());
-        } else{
+        }else if ($rama->count() < 2){
             $candidatos = Flight::all()->filter(function ($flight) use ($rama){
                 $fecha_salida = Carbon::parse($flight->flight_departure);
                 $fecha_llegada = Carbon::parse($rama->last()->flight_arrival);
                 // El destino del vuelo no es una ciudad origen presente en los vuelos de $rama
                 $no_se_devuelve = $rama->every(function ($vuelo_rama) use ($flight){
-                    return ($vuelo_rama->departure_airport_id != $flight->arrival_airport_id);
+                    return ($this->originCity($vuelo_rama->id) != $this->destinyCity($flight->id));
                 });
                 return (
                     // vuelo no esta en $rama
@@ -199,10 +199,13 @@ class FlightController extends Controller
                 );
             });
             foreach($candidatos as $candidato){
-                $rama->push($candidato);
-                $this->findFlights($rama, $destino);
+                $rama_copia = Collection::make();
+                foreach($rama as $elem){
+                    $rama_copia->push($elem);
+                }
+                $rama_copia->push($candidato);
+                $this->findFlights($rama_copia, $destino);
             }
-            $rama->pop();
         }
     }
 
