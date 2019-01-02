@@ -16,11 +16,11 @@
 
 @endsection
 @section('content')
-<form action="/reserve/choose_flights" method="POST">
+<form action="/reserve/select_flight" method="GET">
     <div class="row">
       <div class="col">
           <label>ORIGEN</label>
-             <select name="ciudad_ida" class="form-control select2">
+             <select name="origen" class="form-control select2">
                @foreach ($cities as $city)
                    <option>{{$city->city_name}}</option>
                @endforeach
@@ -28,7 +28,7 @@
       </div>
       <div class="col">
           <label>DESTINO</label>
-             <select name="ciudad_vuelta" class="form-control select2">
+             <select name="destino" class="form-control select2">
                  @foreach ($cities as $city)
                      <option>{{$city->city_name}}</option>
                  @endforeach

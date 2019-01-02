@@ -14,6 +14,8 @@ use Carbon\Carbon;
 
 class FlightController extends Controller
 {
+    public $flightsFound;
+
     public function index()
     {
         return Flight::all();
@@ -96,6 +98,10 @@ class FlightController extends Controller
         return $availableSeats->all();
     }
 
+    // Determina si un vuelo tiene al menos un asiento disponible
+    public function flightAvailable($flight){
+        return ($flight->tickets->count() < $flight->flight_capacity);
+    }
     // Reserva un vuelo
     public function reserveTicket($flight_id, $passenger_id, $seat_id, $seat_number){
         $flightToReserve = Flight::find($flight_id);
@@ -155,5 +161,58 @@ class FlightController extends Controller
         $city_id = $airport->city_id;
         $city = City::find($city_id);
         return $city->city_name;
+    }
+
+    /**
+    * Almacena  en $flightsFound las colecciones de vuelos (escalas) disponibles que pueden
+    * ser tomados para llegar desde un origen a un destino
+    *
+    * @param \Illuminate\Support\Collection $rama
+    * @param string $destino
+    * Inicialmente rama debe ser una coleccion que contenga un vuelo con el origen
+    */
+    public function findFlights(\Illuminate\Support\Collection $rama, $destino){
+        // Si el destino del ultimo vuelo en rama es el destino buscado
+        if ($this->destinyCity($rama->last()->id) == $destino){
+            // Agregar la coleccion de vuelos de rama a $flightsFound
+            $this->flightsFound->push($rama->all());
+        } else{
+            $candidatos = Flight::all()->filter(function ($flight) use ($rama){
+                $fecha_salida = Carbon::parse($flight->flight_departure);
+                $fecha_llegada = Carbon::parse($rama->last()->flight_arrival);
+                // El destino del vuelo no es una ciudad origen presente en los vuelos de $rama
+                $no_se_devuelve = $rama->every(function ($vuelo_rama) use ($flight){
+                    return ($vuelo_rama->departure_airport_id != $flight->arrival_airport_id);
+                });
+                return (
+                    // vuelo no esta en $rama
+                    (!($rama->contains($flight))) &&
+                    // vuelo tiene al menos un asiento disponible
+                    ($this->flightAvailable($flight)) &&
+                    // El origen del vuelo es el destino del ultimo vuelo en $rama
+                    //($this->originCity($flight->id) == $this->destinyCity($rama->last()->id)) &&
+                    ($flight->departure_airport_id == $rama->last()->arrival_airport_id) &&
+                    $no_se_devuelve
+                    // La fecha de salida de $flight es la misma o posterior a la
+                    // de llegada del ultimo vuelo en $rama
+                    //($fecha_salida->greaterThanOrEqualTo($fecha_llegada))
+                );
+            });
+            foreach($candidatos as $candidato){
+                $rama->push($candidato);
+                $this->findFlights($rama, $destino);
+            }
+            $rama->pop();
+        }
+    }
+
+    public function showFoundFlights($origen, $destino){
+        $this->flightsFound = Collection::make();
+        Flight::all()->each(function ($flight) use($origen, $destino){
+            if ($this->originCity($flight->id) == $origen){
+                $this->findFlights(collect([$flight]), $destino);
+            }
+        });
+        return $this->flightsFound;
     }
 }
