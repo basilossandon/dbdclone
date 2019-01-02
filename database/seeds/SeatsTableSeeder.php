@@ -19,13 +19,13 @@ class SeatsTableSeeder extends Seeder
             'updated_at' => $date,
           ]);
         DB::table('seats')->insert([
-            'seat_type' => 'Premium economy',
+            'seat_type' => 'First Class',
             'price_modifier' => 1.2,
             'created_at' => $date,
             'updated_at' => $date,
           ]);
         DB::table('seats')->insert([
-            'seat_type' => 'Premium business',
+            'seat_type' => 'Business Class',
             'price_modifier' => 1.4,
             'created_at' => $date,
             'updated_at' => $date,

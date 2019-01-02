@@ -1,0 +1,48 @@
+
+.columns {
+    display: flex;
+    margin: -10px -10px 0 -10px;
+}
+
+.column {
+    flex: 1;
+    padding: 10px;
+}
+
+
+.column.is-2 {
+    width: 25%;
+    flex: none;
+}
+
+.reserveForm {
+    border-radius: 8px;
+    box-sizing: border-box;
+    margin-top: 20px;
+    min-width: 852px;
+    padding: 10px 32px 48px;
+    position: relative;
+    z-index: initial;
+    background: #1b0088;
+    color: rgb(255, 255, 255);
+    font-family: Roboto, HelveticaNeue, Arial, sans-serif;
+    font-kerning: auto;
+    font-size: 16px;
+    font-stretch: 100%;
+    padding-bottom: 48px;
+    padding-left: 32px;
+    padding-right: 32px;
+    padding-top: 10px;
+}
+
+.buttonWrapper{
+    align-items: center;
+    bottom: calc(-40px/2);
+    display: flex;
+    flex-direction: column;
+    left: 0;
+    margin: 0 auto;
+    pointer-events: none;
+    position: absolute;
+    right: 0;
+}
