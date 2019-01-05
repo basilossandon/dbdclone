@@ -7,6 +7,7 @@ use \Illuminate\Support\Collection;
 use App\Http\Controllers\FlightController;
 use App\City;
 use App\Flight;
+use Carbon\Carbon;
 
 class ReserveController extends Controller{
 
@@ -19,10 +20,17 @@ class ReserveController extends Controller{
     public function chooseFlights(Request $request){
         $origen = $request->input('origen');
         $destino = $request->input('destino');
+        $fecha_ida = Carbon::parse($request->input('fecha_ida'));
+        $fecha_vuelta = Carbon::parse($request->input('fecha_vuelta'));
         $flightController = new FlightController;
         $flightController->flightsFound = Collection::make();
-        Flight::all()->each(function ($flight) use($origen, $destino, $flightController){
-            if ($flightController->originCity($flight->id) == $origen){
+        // Filtrar los vuelos que tengan el origen y fecha deseada para buscar
+        // escalas posibles a partir de ellos
+        Flight::all()->each(function ($flight) use($origen, $destino, $flightController, $fecha_ida, $fecha_vuelta){
+            $departure_date = Carbon::parse($flight->flight_departure);
+            if ($flightController->originCity($flight->id) == $origen &&
+                $departure_date->equalTo($fecha_ida)){
+
                 $flightController->findFlights(collect([$flight]), $destino);
             }
         });

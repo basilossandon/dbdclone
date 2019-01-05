@@ -11,6 +11,6 @@ class FlightsTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Flight::class, 500)->create();
+        factory(App\Flight::class, 1000)->create();
     }
 }

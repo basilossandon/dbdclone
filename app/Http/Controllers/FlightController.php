@@ -192,10 +192,10 @@ class FlightController extends Controller
                     (!($rama->contains($flight))) &&
                     // vuelo tiene al menos un asiento disponible
                     ($this->flightAvailable($flight)) &&
-                    $no_se_devuelve
+                    $no_se_devuelve &&
                     // La fecha de salida de $flight es la misma o posterior a la
                     // de llegada del ultimo vuelo en $rama
-                    //($fecha_salida->greaterThanOrEqualTo($fecha_llegada))
+                    ($fecha_salida->greaterThanOrEqualTo($fecha_llegada))
                 );
             });
             foreach($candidatos as $candidato){
