@@ -7,6 +7,7 @@ use \Illuminate\Support\Collection;
 use App\Http\Controllers\FlightController;
 use App\City;
 use App\Flight;
+use App\Seat;
 use Carbon\Carbon;
 
 class ReserveController extends Controller{
@@ -14,7 +15,8 @@ class ReserveController extends Controller{
     public function searchFlights()
     {
         $cities = City::all();
-        return view('reserve', compact('cities'));
+        $seats = Seat::all();
+        return view('reserve', compact('cities', 'seats'));
     }
 
     public function chooseFlights(Request $request){
