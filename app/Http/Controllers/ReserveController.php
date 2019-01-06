@@ -31,7 +31,7 @@ class ReserveController extends Controller{
         Flight::all()->each(function ($flight) use($origen, $destino, $flightController, $fecha_ida, $fecha_vuelta){
             $departure_date = Carbon::parse($flight->flight_departure);
             if ($flightController->originCity($flight->id) == $origen &&
-                $departure_date->equalTo($fecha_ida)){
+                $departure_date->isSameDay($fecha_ida)){
 
                 $flightController->findFlights(collect([$flight]), $destino);
             }
