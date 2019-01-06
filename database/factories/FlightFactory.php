@@ -5,11 +5,7 @@ $factory->define(App\Flight::class, function (Faker $faker) {
     $departure = Carbon::instance($faker->dateTimeBetween($startDate='+1 days',
     $endDate='+9 days', $timezone=null));
     $arrival = Carbon::instance($departure);
-    $aux = rand(0,1);
-    if ($aux == 1){
-        $arrival->addDay();
-    }
-    $arrival->addHours($faker->numberBetween($min=1, $max=17));
+    $arrival->addHours($faker->numberBetween($min=1, $max=12));
     $airports = App\Airport::all();
     $departure_airport_id = $airports->random()->id;
     $arrival_airport_id = $airports->random()->id;
