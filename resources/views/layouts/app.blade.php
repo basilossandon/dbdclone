@@ -8,14 +8,6 @@
         @yield('header')
         <title>@yield('title') | LATAM.com</title>
         <style>
-            .heading {
-                background-color: #1b0088;
-                padding: 15px 0;
-                box-shadow: 0 7px 0 0 #ed1650;
-            }
-            .carousel img {
-                border-radius: .900rem;
-            }
 
         </style>
     </head>

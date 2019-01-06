@@ -11,7 +11,7 @@ class CountriesRelatedTablesSeeder extends Seeder
      */
     public function run()
     {
-      for ($i = 1; $i < 51; $i++){
+      for ($i = 1; $i < 15; $i++){
         $countryCode = App\Country::all()->random()->country_code;
         $countryId = App\Country::where('country_code', $countryCode)->first()->
         id;
