@@ -17,8 +17,10 @@
                 @include('navbar.navbar')
             </div>
         </div>
+        @include('carousel.carousel')
+
         <div class="container content">
-            <h1 class="titulo">@yield('title')</h1>
+            <h1 class="titulo"></h1> 
              @yield('content')
         </div>
     </body>

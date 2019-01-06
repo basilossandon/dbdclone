@@ -1,4 +1,3 @@
-
 .columns {
     display: flex;
     margin: -10px -10px 0 -10px;
@@ -9,7 +8,6 @@
     padding: 10px;
 }
 
-
 .column.is-2 {
     width: 25%;
     flex: none;
@@ -18,12 +16,12 @@
 .reserveForm {
     border-radius: 8px;
     box-sizing: border-box;
-    margin-top: 20px;
+    margin-top: 200px;
     min-width: 852px;
     padding: 10px 32px 48px;
     position: relative;
     z-index: initial;
-    background: #222120; /* latam 1b0088 */
+    background: #11172b; /* latam 1b0088 */
     color: rgb(255, 255, 255);
     font-family: Roboto, HelveticaNeue, Arial, sans-serif;
     font-kerning: auto;
@@ -33,6 +31,8 @@
     padding-left: 32px;
     padding-right: 32px;
     padding-top: 10px;
+    box-shadow: 0 5px 5px -3px rgba(0,0,0,0.2), 0 8px 10px 1px rgba(0,0,0,0.14), 0 3px 14px 2px rgba(0,0,0,0.80);
+
 }
 
 .buttonWrapper{
@@ -46,6 +46,6 @@
     right: 0;
 }
 .btn-primary:hover {
-    box-shadow: 0 5px 5px -3px rgba(0,0,0,0.2), 0 8px 10px 1px rgba(0,0,0,0.14), 0 3px 14px 2px rgba(0,0,0,0.12);
+    box-shadow: 0 5px 5px -3px rgba(0,0,0,0.2), 0 8px 10px 1px rgba(0,0,0,0.14), 0 3px 14px 2px rgba(0,0,0,0.75);
     outline: none;
 }
