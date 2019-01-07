@@ -1,5 +1,7 @@
-<nav class="navbar navbar-expand-lg fixed-top">
 
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+
+<nav class="navbar navbar-expand-lg fixed-top">
 <a href="{!! URL::to('/') !!}">
    <img src="/images/logosimple-min2.png" />
 </a><button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
@@ -18,6 +20,12 @@
 				<a class="nav-link" href="#" style="color:white">Travel information</a>
 			</li>
 		</ul>
+	<div class="d-flex justify-content-center h-100">
+        <div class="searchbar">
+          <input class="search_input" type="text" name="" placeholder="Search...">
+          <a href="#" class="search_icon"><i class="fas fa-search"></i></a>
+        </div>
+  	</div>
 	<div class="top-right links">
 
 	<button class="btn btn-primary" onclick="location.href='/login'" type="button">
