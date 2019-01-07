@@ -137,8 +137,8 @@ body {
   
 .navbar {
   border: none;
-  -webkit-box-shadow: 0 7px 0 0 #7d2880;
-          box-shadow: 0 7px 0 0 #7d2880;
+  -webkit-box-shadow: 0 7px 0 0 #7d2880, 0 5px 5px -3px rgba(0,0,0,0.7), 0 8px 10px 1px rgba(0,0,0,0.6), 0 3px 14px 2px rgba(0,0,0,0.80); 
+          box-shadow: 0 7px 0 0 #7d2880, 0 5px 5px -3px rgba(0,0,0,0.7), 0 8px 10px 1px rgba(0,0,0,0.6), 0 3px 14px 2px rgba(0,0,0,0.80);
   background:#11172b;;
   position:relative;
 }
@@ -153,11 +153,6 @@ body {
 
 .nav-link{
     margin-left: 5px;
-}
-
-.nav-font-style{
-    color: #fff;
-    font-style: italic;
 }
 
 #content-wrapper {
@@ -216,28 +211,6 @@ body {
     }
 }
 
-
-
-html, 
-body, 
-.carousel, 
-.carousel-inner, 
-.carousel-inner .item {
-    height: 100%;
-}
-
-.item:nth-child(1) {
-    background: #74C390;
-}
-
-.item:nth-child(2) {
-    background: #51BCE8;
-}
-
-.item:nth-child(3) {
-    background: #E46653;
-}
-
 .carousel-item {
   position: relative;
   width: 100vh;
@@ -248,8 +221,6 @@ body,
   align-items: center;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
-  perspective: 1080px;
-  background-color: #777;
   background: no-repeat center center scroll;
   -webkit-background-size: cover;
   -moz-background-size: cover;
