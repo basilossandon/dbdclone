@@ -16,7 +16,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
     <script>$('.select2').select2();</script>
 @endsection
+
 @section('content')
+<div class="reservationFormWrapper">
 
 <div class="reserveForm">
   <form action="/reserve/choose_flights" method="POST" >
@@ -73,15 +75,16 @@
         </div>
         <div class="column is-2">
             <label>FECHA DE IDA</label>
-            <input name="fecha_ida" id="datepickerida" class="form-control"/>
+            <input name="fecha_ida" id="datepickerida" class="form-control" data-date-container='#myModalId'/>
               <script>
                 $('#datepickerida').datepicker({
                   uiLibrary: 'bootstrap4'});
               </script>
+
         </div>
         <div class="column is-2">
           <label>FECHA DE VUELTA</label>
-            <input name="fecha_vuelta" id="datepickervuelta" class="form-control"/>
+            <input name="fecha_vuelta" id="datepickervuelta" class="form-control" data-date-container='#myModalId'/>
             <script>
             $('#datepickervuelta').datepicker({
             uiLibrary: 'bootstrap4'
@@ -101,7 +104,7 @@
         </div>
           </form>
 
-</div>
+</div></div>
 
 
 @endsection
