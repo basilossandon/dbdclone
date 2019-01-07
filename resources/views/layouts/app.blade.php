@@ -3,7 +3,6 @@
     <head>
         <meta name="viewport" content="width=device-width, user-scalable=no initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <meta name="csrf-token" content="{{ csrf_token() }}" />
-        <link rel="stylesheet" href="/css/navbar.css">
         <link rel="stylesheet" href="/css/bootstrap.min.css">
         @yield('header')
         <title>@yield('title') | LATAM.com</title>
@@ -12,7 +11,7 @@
         </style>
     </head>
     <body>
-        <div class="heading">
+        <div class="header">
             <div class="container">
                 @include('navbar.navbar')
             </div>

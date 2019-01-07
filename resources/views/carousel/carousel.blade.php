@@ -12,7 +12,7 @@
           <div class="container">
             <div class="carousel-caption d-none d-md-block text-left">
               <h1>The new year means new experiences</h1>
-              <p>Get ready to explore Miami</p>
+              <p>Get ready to explore Chicago</p>
               <p><a class="btn btn-lg btn-primary" href="#" role="button">View package</a></p>
             </div>
           </div>

@@ -12,3 +12,4 @@
 @section('title', 'Bienvenido')
 @section('content')
 @endsection
+
