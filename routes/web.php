@@ -66,3 +66,7 @@ Route::post('/flights_post', 'FlightController@storeOrUpdate');
 Route::get('/flights/{id}/available_seats', 'FlightController@availableSeats');
 Route::get('/reserve', 'ReserveController@searchFlights');
 Route::post('/reserve/choose_flights', 'ReserveController@chooseFlights');
+Route::post('/reserve/storeChosenFlights', 'ReserveController@storeChosenFlights');
+Route::get('/reserve/retrievePassengersInfo', 'ReserveController@retrievePassengersInfo');
+Route::post('/reserve/storePassengersInfo', 'ReserveController@storePassengersInfo');
+Route::get('/reserve/selectSeats', 'ReserveController@selectSeats');

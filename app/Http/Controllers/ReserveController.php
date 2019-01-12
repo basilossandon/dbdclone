@@ -9,6 +9,8 @@ use App\City;
 use App\Flight;
 use App\Seat;
 use Carbon\Carbon;
+use Cart;
+use App\FlightController;
 
 class ReserveController extends Controller{
 
@@ -19,6 +21,10 @@ class ReserveController extends Controller{
         return view('reserve', compact('cities', 'seats'));
     }
 
+    /**
+    * Dado un origen, destino, fecha_ida y fecha_vuelta, busca vuelos que cumplan
+    * con esas condiciones y retorna la vista chooseFlights.
+    */
     public function chooseFlights(Request $request){
         $origen = $request->input('origen');
         $destino = $request->input('destino');
@@ -61,6 +67,54 @@ class ReserveController extends Controller{
             }
             $routesFound->push($route);
         });
+        Cart::add(array(
+            'id' => 1,
+            'name' => 'Sample Item',
+            'price' => 0,
+            'quantity' => 1,
+            'attributes' => array(
+                'passengers' => 2
+            )
+        ));
         return view('chooseFlights', compact('routesFound'));
+    }
+
+    public function storeChosenFlights(Request $request){
+        $cart_id = 1
+        // Ids recibidos desde request luego de que el usuario escogiera
+        $flights_ids = $request->all();
+        // Obteniendo el carrito del usuario
+        $reserve = Cart::get($cart_id);
+        $reserve->attributes->flightIds = flights_ids;
+        return redirect('/reserve/retrievePassengersInfo');
+    }
+    /**
+     * Muestra la vista para que el usuario ingrese la informacion de los pasajeros del vuelo
+     */
+    public function retrievePassengersInfo(){
+        //Cart::session($userId);
+        $cartData = Cart::get(1);
+        //return $cartData->attributes->passengers;
+        return view('retrievePassengersInfo', compact('cartData'));
+    }
+
+    /**
+     * Almacena informacion de pasajeros
+     * 
+     */
+    public function storePassengersInfo(Request $request){
+        foreach ($request->all() as $pasajero){
+            echo $pasajero . PHP_EOL;
+        }
+        return redirect('/reserve/selectSeats');
+    }
+
+    /**
+     * Retorna la vista para seleccionar asiento
+     */
+    public function selectSeats(FlightController $fc){
+
+        $availableSeats = fc->availableSeats();
+        return view('selectSeats', compact('availableSeats'));
     }
 }
