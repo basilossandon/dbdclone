@@ -8,7 +8,7 @@
 </head>
 <body>
     <form action="/reserve/storePassengersInfo" method="POST">
-        @for ($i = 0; $i < $cartData->attributes->passengers; $i++)
+        @for ($i = 0; $i < $passengers; $i++)
             <input name="data{{$i}}" id="data{{$i}}" type="hidden" value="">
             <label>Pasajero{{$i}}</label>
             <div class="form-group">

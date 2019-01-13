@@ -39,7 +39,7 @@ class PassengerController extends Controller
                 'passenger_name' => $request->passenger_name
             ]);   
         }
-        return Passenger::all();
+        // return Passenger::all();
     }
 
     public function show($id)

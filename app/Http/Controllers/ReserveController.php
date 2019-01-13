@@ -10,7 +10,8 @@ use App\Flight;
 use App\Seat;
 use Carbon\Carbon;
 use Cart;
-use App\FlightController;
+use App\PassenngerController;
+use App\Passenger;
 
 class ReserveController extends Controller{
 
@@ -28,8 +29,20 @@ class ReserveController extends Controller{
     public function chooseFlights(Request $request){
         $origen = $request->input('origen');
         $destino = $request->input('destino');
+        $num_pasajeros = 2;
         $fecha_ida = Carbon::parse($request->input('fecha_ida'));
         $fecha_vuelta = Carbon::parse($request->input('fecha_vuelta'));
+        $user_id = 1; // Id del usuario que esta logeado
+        Cart::session($user_id);
+        // En el primer elemento del carrito guardaremos cuantos pasajeros
+        // ingreso el usuario (en al atributo quantity)
+        Cart::add(array(
+            'id' => 1,
+            'name' => 'aux',
+            'price' => 0,
+            'quantity' => $num_pasajeros,
+        ));
+
         $flightController = new FlightController;
         $flightController->flightsFound = Collection::make();
         // Filtrar los vuelos que tengan el origen y fecha deseada para buscar
@@ -67,46 +80,79 @@ class ReserveController extends Controller{
             }
             $routesFound->push($route);
         });
-        Cart::add(array(
-            'id' => 1,
-            'name' => 'Sample Item',
-            'price' => 0,
-            'quantity' => 1,
-            'attributes' => array(
-                'passengers' => 2
-            )
-        ));
         return view('chooseFlights', compact('routesFound'));
     }
 
     public function storeChosenFlights(Request $request){
-        $cart_id = 1
+        $user_id = 1; // El usuario logeado
+        Cart::session($user_id);
         // Ids recibidos desde request luego de que el usuario escogiera
+        // Se espera un array de ids de vuelos
         $flights_ids = $request->all();
-        // Obteniendo el carrito del usuario
-        $reserve = Cart::get($cart_id);
-        $reserve->attributes->flightIds = flights_ids;
+        // Numero de vuelos
+        $num_vuelos = $flights_ids->count();
+        // Numero de pasajeros seleccionados en el primer paso
+        $reserve = Cart::get(1);
+        $num_pasajeros = $reserve->quantity;
+        // Crear un pasaje por cada vuelo y pasajero
+        for ($i=0; $i<$num_vuelos; $i++){
+            for($j=0; $j<$num_pasajeros; $j++){
+                Cart::add(array(
+                    'id' => Cart::getContent()->count() + 1,
+                    'name' => "",
+                    'price' => 0,
+                    'attributes' => array(
+                        'id_pasajero' => 0,
+                        'id_seguro' => 0,
+                        'id_vuelo' => $flights_ids[$i],
+                        'num_doc' => "",
+                        'pais_doc' => "",
+                        'tipo_doc' => "",
+                        'num_asiento' => 0,
+                        )
+                    ));
+            }
+        }
         return redirect('/reserve/retrievePassengersInfo');
     }
     /**
      * Muestra la vista para que el usuario ingrese la informacion de los pasajeros del vuelo
      */
-    public function retrievePassengersInfo(){
-        //Cart::session($userId);
+    public function retrievePassengersInfo(PassengerController $pc){
+        $user_id = 1; // Usuario loggeado
+        Cart::session($user_id);
         $cartData = Cart::get(1);
+        $passengers = $cartData->quantity;
         //return $cartData->attributes->passengers;
-        return view('retrievePassengersInfo', compact('cartData'));
+        return view('retrievePassengersInfo', compact('passengers'));
     }
 
     /**
-     * Almacena informacion de pasajeros
+     * Almacena informacion de pasajeros en la DB
      * 
      */
     public function storePassengersInfo(Request $request){
+        $user_id = 1; // Usuario loggeado
+        Cart::session($user_id);
+        // Separar elementos del carrito por id_vuelo
+        // $tickets_por_vuelo = Collection::make();
+        
+        $passengers_ids = Collection::make();
         foreach ($request->all() as $pasajero){
-            echo $pasajero . PHP_EOL;
+            // $datos[0] = nombre ; $datos[1] = num_doc
+            // $datos[2] = pais_doc ; $datos[3] = tipo_doc
+            // $datos[4] = id_seguro (-1 si no desea) 
+            $datos_pasajero = explode("_", $pasajero);
+            // Crear un modelo de Passenger por cada pasajero
+            $passenger = new Passenger;
+            $passenger->name = $datos_pasajero[0];
+            $passenger->doc_number = $pasajero[1];
+            $passenger->save();
+            $passengers->push($passenger->id);
+            //Cart::update('')
         }
-        return redirect('/reserve/selectSeats');
+        //$cart->update();
+        //return redirect('/reserve/selectSeats');
     }
 
     /**
@@ -114,7 +160,7 @@ class ReserveController extends Controller{
      */
     public function selectSeats(FlightController $fc){
 
-        $availableSeats = fc->availableSeats();
+        $availableSeats = $fc->availableSeats();
         return view('selectSeats', compact('availableSeats'));
     }
 }
