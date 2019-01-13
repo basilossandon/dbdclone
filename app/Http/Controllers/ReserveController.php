@@ -4,12 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use \Illuminate\Support\Collection;
+use App\Http\Controllers\FlightController;
 use App\City;
 use App\Flight;
 use App\Seat;
 use Carbon\Carbon;
 use Cart;
-use App\FlightController;
 
 class ReserveController extends Controller{
 
