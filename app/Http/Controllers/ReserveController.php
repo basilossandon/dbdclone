@@ -12,6 +12,7 @@ use Carbon\Carbon;
 use Cart;
 use App\PassenngerController;
 use App\Passenger;
+use App\Ticket;
 
 class ReserveController extends Controller{
 
@@ -83,36 +84,19 @@ class ReserveController extends Controller{
         return view('chooseFlights', compact('routesFound'));
     }
 
+    /**
+     * Almacena los vuelos seleccionados en el carrito
+     */
     public function storeChosenFlights(Request $request){
-        $user_id = 1; // El usuario logeado
+        $user_id = 1; // El usuario loggeado
         Cart::session($user_id);
         // Ids recibidos desde request luego de que el usuario escogiera
         // Se espera un array de ids de vuelos
         $flights_ids = $request->all();
         // Numero de vuelos
         $num_vuelos = $flights_ids->count();
-        // Numero de pasajeros seleccionados en el primer paso
-        $reserve = Cart::get(1);
-        $num_pasajeros = $reserve->quantity;
-        // Crear un pasaje por cada vuelo y pasajero
-        for ($i=0; $i<$num_vuelos; $i++){
-            for($j=0; $j<$num_pasajeros; $j++){
-                Cart::add(array(
-                    'id' => Cart::getContent()->count() + 1,
-                    'name' => "",
-                    'price' => 0,
-                    'attributes' => array(
-                        'id_pasajero' => 0,
-                        'id_seguro' => 0,
-                        'id_vuelo' => $flights_ids[$i],
-                        'num_doc' => "",
-                        'pais_doc' => "",
-                        'tipo_doc' => "",
-                        'num_asiento' => 0,
-                        )
-                    ));
-            }
-        }
+        // Guardar los ids de los vuelos seleccionados en 'attributes' del elemento 1 del carro
+        $reserve->update(array('attributes' => $flights_ids));
         return redirect('/reserve/retrievePassengersInfo');
     }
     /**
@@ -122,37 +106,61 @@ class ReserveController extends Controller{
         $user_id = 1; // Usuario loggeado
         Cart::session($user_id);
         $cartData = Cart::get(1);
+        // Obtiene el numero de pasajeros seleccionados para saber cuantos formularios
+        // desplegar en la vista
         $passengers = $cartData->quantity;
-        //return $cartData->attributes->passengers;
         return view('retrievePassengersInfo', compact('passengers'));
     }
 
     /**
      * Almacena informacion de pasajeros en la DB
-     * 
+     * Se espera que Request sea una lista de strings con la info de pasajeros
+     * en donde cada pasajero tiene sus datos separados por _
      */
     public function storePassengersInfo(Request $request){
         $user_id = 1; // Usuario loggeado
         Cart::session($user_id);
-        // Separar elementos del carrito por id_vuelo
-        // $tickets_por_vuelo = Collection::make();
-
-        $passengers_ids = Collection::make();
+        // Elemento 1 del carro
+        $aux = Cart::get(1);
+        $ids_vuelos = $aux->attributes;
+        // Por cada pasajero, agregar un elemento al carrito por vuelo en ids_vuelos
         foreach ($request->all() as $pasajero){
-            // $datos[0] = nombre ; $datos[1] = num_doc
-            // $datos[2] = pais_doc ; $datos[3] = tipo_doc
-            // $datos[4] = id_seguro (-1 si no desea) 
+            // $pasajero[0] = nombre ; $pasajero[1] = num_doc
+            // $pasajero[2] = pais_doc ; $pasajero[3] = tipo_doc
+            // $pasajero[4] = id_seguro (-1 si no desea)
+            // Separar los datos por guion bajo 
             $datos_pasajero = explode("_", $pasajero);
             // Crear un modelo de Passenger por cada pasajero
             $passenger = new Passenger;
-            $passenger->name = $datos_pasajero[0];
+            $passenger->passenger_name = $datos_pasajero[0];
             $passenger->doc_number = $pasajero[1];
+            $passenger->doc_country_emission = $pasajero[2];
+            $passenger->doc_type = $pasajero[3];
+            // Guardar al pasajero en la DB
             $passenger->save();
-            $passengers->push($passenger->id);
-            //Cart::update('')
+            // Crear un ticket para este pasajero para cada vuelo
+            foreach ($ids_vuelos as $id_vuelo){
+                $ticket = new Ticket;
+                $ticket->passenger_id = $passenger_id;
+                $ticket->seat_number = 0; // se va a seleccionar en el proximo paso
+                $ticket->seat_id = 0; // se va a seleccionar en el proximo paso
+                $ticket->reservation_id = 0; // la reserva se crea al momento de pagar
+                $ticket->flight_id = $id_vuelo;
+                // Guardar el ticket en la DB
+                $ticket->save();
+                // Añadir al carrito este ticket
+                Cart::add(array(
+                    'id' => $ticket->id,
+                    'name' => $passenger->name,
+                    'price' => 0, // se calcula a la hora de escoger asiento (proximo paso) 
+                    'attributes' => array(
+                        'id_pasajero' => $passenger_id,
+                        'id_seguro' => $pasajero[4],
+                    )
+                ));
+            }
         }
-        //$cart->update();
-        //return redirect('/reserve/selectSeats');
+        return redirect('/reserve/selectSeats');
     }
 
     /**
