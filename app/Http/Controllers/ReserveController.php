@@ -80,7 +80,7 @@ class ReserveController extends Controller{
     }
 
     public function storeChosenFlights(Request $request){
-        $cart_id = 1
+        $cart_id = 1;
         // Ids recibidos desde request luego de que el usuario escogiera
         $flights_ids = $request->all();
         // Obteniendo el carrito del usuario
