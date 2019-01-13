@@ -6,6 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Passenger extends Model
 {
+    protected $fillable = [
+      'id',
+      'passenger_name',
+      'doc_number',
+      'doc_type',
+      'doc_country_emission'
+    ];
     public function tickets(){
       return $this->hasMany(Ticket::class);
     }

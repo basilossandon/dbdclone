@@ -47,7 +47,7 @@
             </div>
             </nav>
         </div>
-        @include('carousel.carousel')
+        {{-- @include('carousel.carousel') --}}
         <div class="container content">
             @yield('content')
         </div>
