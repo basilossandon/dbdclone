@@ -10,11 +10,8 @@ use App\Flight;
 use App\Seat;
 use Carbon\Carbon;
 use Cart;
-<<<<<<< HEAD
 use App\PassenngerController;
 use App\Passenger;
-=======
->>>>>>> 587a7a460299119d17523c451942ff58719769b6
 
 class ReserveController extends Controller{
 
@@ -87,12 +84,8 @@ class ReserveController extends Controller{
     }
 
     public function storeChosenFlights(Request $request){
-<<<<<<< HEAD
         $user_id = 1; // El usuario logeado
         Cart::session($user_id);
-=======
-        $cart_id = 1;
->>>>>>> 587a7a460299119d17523c451942ff58719769b6
         // Ids recibidos desde request luego de que el usuario escogiera
         // Se espera un array de ids de vuelos
         $flights_ids = $request->all();
@@ -143,7 +136,7 @@ class ReserveController extends Controller{
         Cart::session($user_id);
         // Separar elementos del carrito por id_vuelo
         // $tickets_por_vuelo = Collection::make();
-        
+
         $passengers_ids = Collection::make();
         foreach ($request->all() as $pasajero){
             // $datos[0] = nombre ; $datos[1] = num_doc
