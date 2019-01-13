@@ -11,64 +11,59 @@
 @extends('layouts.app')
 @section('content')
 <div class="welcomeCards">
+	<div class="columns">
+		<div class="cardWrapperWelcome">
+			<div class="card text-white bg-dark mb-3" style="max-width: 20rem;">
+			  	<div class="card-header">    
+					<a href="/packages" style="color: white">
+					<img src="/images/vacations-icon.svg">
+					<a href="/packages" style="color: white">
+						Vacation packages
+					<img src="//content.delta.com/content/www/lac/en/home.damAssetRender.20180417T1339174800400.html/content/dam/fresh-air/icons/shopping-band-right-arrow.svg" alt="">
+					</a>
+				</div>
+				<div class="card-body">
+					<h4 class="card-title">Check out our vacation deals</h4>
+					<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+					<a class="btn btn-lg btn-primary" href="/packages" role="button">View packages</a>
+				</div>
+			</div>
+		</div>
+		<div class="cardWrapperWelcome">
+		<div class="card text-white bg-dark mb-3" style="max-width: 20rem;">
+			<div class="card-header">    
+				<a  href="/hotels" style="color: white">
+				<img src="/images/hotel-icon.svg">
+					Shop Hotels
+				<img src="//content.delta.com/content/www/lac/en/home.damAssetRender.20180417T1339174800400.html/content/dam/fresh-air/icons/shopping-band-right-arrow.svg" alt="">
+				</a>
+				</div>
+				<div class="card-body">
+				<h4 class="card-title">Book a room</h4>
+				<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+				<a class="btn btn-lg btn-primary" href="/hotels" role="button">Book room</a>
 
-<div class="columns">
-
-<div class="cardWrapperWelcome">
-<div class="card text-white bg-dark mb-3" style="max-width: 20rem;">
-	  <div class="card-header">    
-	    <a href="/packages" style="color: white">
-		<img src="/images/vacations-icon.svg">
-	    <a href="/packages" style="color: white">
-
-      	Vacation packages
-
-		<img src="//content.delta.com/content/www/lac/en/home.damAssetRender.20180417T1339174800400.html/content/dam/fresh-air/icons/shopping-band-right-arrow.svg" alt="">
-	    </a>
-	  </div>
-	  <div class="card-body">
-	    <h4 class="card-title">Check out our vacation deals</h4>
-	    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-	  </div>
+			</div>
+		</div>
+		</div>
+		<div class="cardWrapperWelcome">
+			<div class="card text-white bg-dark mb-3" style="max-width: 20rem;">
+			  	<div class="card-header">    
+				    <a href="/vehicles" style="color: white">
+					<img src="/images/car-icon.svg">
+				    Rent a card
+					<img src="//content.delta.com/content/www/lac/en/home.damAssetRender.20180417T1339174800400.html/content/dam/fresh-air/icons/shopping-band-right-arrow.svg" alt="">
+				    </a>
+			  	</div>
+			 	<div class="card-body">
+			    	<h4 class="card-title">Pick any vehicle</h4>
+				    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+				    <a class="btn btn-lg btn-primary" href="/vehicles" role="button">Rent car</a>
+			  	</div>
+			</div>
+		</div>
+		</div>
 	</div>
-</div>
-<div class="cardWrapperWelcome">
-<div class="card text-white bg-dark mb-3" style="max-width: 20rem;">
-	  <div class="card-header">    
-	    <a  href="/hotels" style="color: white">
-		<img src="/images/hotel-icon.svg">
-
-      	Shop Hotels
-
-		<img src="//content.delta.com/content/www/lac/en/home.damAssetRender.20180417T1339174800400.html/content/dam/fresh-air/icons/shopping-band-right-arrow.svg" alt="">
-	    </a>
-	  </div>
-	  <div class="card-body">
-	    <h4 class="card-title">Book a room</h4>
-	    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-	  </div>
-	</div>
-</div>
-<div class="cardWrapperWelcome">
-<div class="card text-white bg-dark mb-3" style="max-width: 20rem;">
-	  <div class="card-header">    
-	    <a href="/vehicles" style="color: white">
-		<img src="/images/car-icon.svg">
-
-	    Rent a card
-
-		<img src="//content.delta.com/content/www/lac/en/home.damAssetRender.20180417T1339174800400.html/content/dam/fresh-air/icons/shopping-band-right-arrow.svg" alt="">
-	    </a>
-	  </div>
-	  <div class="card-body">
-	    <h4 class="card-title">Pick any vehicle</h4>
-	    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-	  </div>
-	</div>
-</div>
-</div>
-</div>
-
 </div>
 @endsection
 

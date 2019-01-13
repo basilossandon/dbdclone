@@ -7,7 +7,6 @@
         @yield('header')
         <title>@yield('title') | LATAM.com</title>
         <style>
-
         </style>
     </head>
     <body>
@@ -52,9 +51,7 @@
         <div class="container content">
             @yield('content')
         </div>
-        
     </body>
-
     <script src="/js/jquery-slim.min.js"></script>
     <script src="/js/popper.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>

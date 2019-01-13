@@ -1,12 +1,5 @@
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    {{-- <link rel="stylesheet" href="/css/bootstrap.min.css"> --}}
-    <title>Pasajeros</title>
-</head>
-<body>
+@extends('layouts.app')
+<title>Pasajeros</title>
     <form action="/reserve/storePassengersInfo" method="POST">
         @for ($i = 0; $i < $passengers; $i++)
             <input name="data{{$i}}" id="data{{$i}}" type="hidden" value="">
@@ -25,6 +18,5 @@
                 }
             </script>
         <input type="submit" value="Enviar">
-    </form>
-</body>
-</html>
+ </form>
+
