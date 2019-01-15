@@ -38,10 +38,10 @@ class ReserveController extends Controller{
         $user_id = 1; // Id del usuario que esta logeado
         Cart::session($user_id);
         Cart::clear();
-        // En el primer elemento del carrito guardaremos cuantos pasajeros
-        // ingreso el usuario (en al atributo quantity)
+        // En el elemento 0 del carrito guardaremos cuantos pasajeros
+        // ingreso el usuario (en al atributo quantity).
         Cart::add(array(
-            'id' => 1,
+            'id' => 0,
             'name' => 'aux',
             'price' => 0,
             'quantity' => $num_pasajeros,
@@ -98,8 +98,8 @@ class ReserveController extends Controller{
         // Ids recibidos desde request luego de que el usuario escogiera
         $flights_ids = $request->all();
         // Se espera un array de ids de vuelos
-        // Guardar los ids de los vuelos seleccionados en 'attributes' del elemento 1 del carro
-        Cart::update(1, array('attributes' => $flights_ids));
+        // Guardar los ids de los vuelos seleccionados en 'attributes' del elemento 0 del carro
+        Cart::update(0, array('attributes' => $flights_ids));
         return redirect('/reserve/retrievePassengersInfo');
     }
     /**
@@ -108,7 +108,7 @@ class ReserveController extends Controller{
     public function retrievePassengersInfo(PassengerController $pc){
         $user_id = 1; // Usuario loggeado
         Cart::session($user_id);
-        $cartData = Cart::get(1);
+        $cartData = Cart::get(0);
         // Obtiene el numero de pasajeros seleccionados para saber cuantos formularios
         // desplegar en la vista
         $passengers = $cartData->quantity;
@@ -123,8 +123,8 @@ class ReserveController extends Controller{
     public function storePassengersInfo(Request $request){
         $user_id = 1; // Usuario loggeado
         Cart::session($user_id);
-        // Elemento 1 del carro
-        $aux = Cart::get(1);
+        // Elemento 0 del carro
+        $aux = Cart::get(0);
         $ids_vuelos = $aux->attributes;
         // Crear la reserva
         $reservation = new Reservation;
@@ -140,7 +140,7 @@ class ReserveController extends Controller{
         $receipt->reservation_id = $reservation->id;
         $receipt->save();
         // en aux price guardamos el id del recibo
-        Cart::update(1, ['price' => $receipt->id]);
+        Cart::update(0, ['price' => $receipt->id]);
         // Por cada pasajero, agregar un elemento al carrito por vuelo en ids_vuelos
         foreach ($request->all() as $pasajero){
             // $pasajero[0] = nombre ; $pasajero[1] = num_doc
@@ -189,9 +189,9 @@ class ReserveController extends Controller{
     public function selectSeats(FlightController $fc){
         $user_id = 1; // Usuario loggeado
         Cart::session($user_id);
-        // En attributes del elemento 1 del carrito, se encuentran los ids de los vuelos
+        // En attributes del elemento aux del carrito, se encuentran los ids de los vuelos
         $vuelos_solicitados = Collection::make();
-        foreach (Cart::get(1)->attributes as $id){
+        foreach (Cart::get(0)->attributes as $id){
             $vuelos_solicitados->push($id);
         }
         // Sera una coleccion de colecciones con los asientos disponibles por cada vuelo
