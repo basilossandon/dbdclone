@@ -7,6 +7,7 @@ use App\Reservation;
 use App\Receipt;
 use App\Airport;
 use App\City;
+use App\Seat;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use \Illuminate\Support\Collection;
@@ -161,6 +162,12 @@ class FlightController extends Controller
         $city_id = $airport->city_id;
         $city = City::find($city_id);
         return $city->city_name;
+    }
+
+    public static function calculateFlightPrice($seat_type_id, $flight_id){
+        $price_modifier = Seat::find($seat_type_id)->price_modifier;
+        $flight_distance = Flight::find($flight_id)->flight_distance;
+        return $price_modifier * $flight_distance;
     }
 
     /**

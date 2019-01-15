@@ -70,3 +70,5 @@ Route::post('/reserve/storeChosenFlights', 'ReserveController@storeChosenFlights
 Route::get('/reserve/retrievePassengersInfo', 'ReserveController@retrievePassengersInfo');
 Route::post('/reserve/storePassengersInfo', 'ReserveController@storePassengersInfo');
 Route::get('/reserve/selectSeats', 'ReserveController@selectSeats');
+Route::post('/reserve/storeChosenSeats', 'ReserveController@storeChosenSeats');
+Route::get('/reserve/summary', 'ReserveController@showSummary');

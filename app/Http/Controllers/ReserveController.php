@@ -13,6 +13,8 @@ use Cart;
 use App\PassenngerController;
 use App\Passenger;
 use App\Ticket;
+use App\Reservation;
+use App\Receipt;
 
 class ReserveController extends Controller{
 
@@ -124,6 +126,21 @@ class ReserveController extends Controller{
         // Elemento 1 del carro
         $aux = Cart::get(1);
         $ids_vuelos = $aux->attributes;
+        // Crear la reserva
+        $reservation = new Reservation;
+        $reservation->reservation_ip = "test";
+        $reservation->reservation_date = date('Y-m-d H:i:s');
+        $reservation->save();
+        // Crear un recibo y asociarlo al usuario loggeado
+        $receipt = new Receipt;
+        $receipt->receipt_date = date('Y-m-d H:i:s');
+        $receipt->receipt_type = "boleta";
+        $receipt->receipt_ammount = 0; // se calcula despues
+        $receipt->user_id = $user_id;
+        $receipt->reservation_id = $reservation->id;
+        $receipt->save();
+        // en aux price guardamos el id del recibo
+        Cart::update(1, ['price' => $receipt->id]);
         // Por cada pasajero, agregar un elemento al carrito por vuelo en ids_vuelos
         foreach ($request->all() as $pasajero){
             // $pasajero[0] = nombre ; $pasajero[1] = num_doc
@@ -145,7 +162,7 @@ class ReserveController extends Controller{
                 $ticket->passenger_id = $passenger->id;
                 $ticket->seat_number = 0; // se va a seleccionar en el proximo paso
                 $ticket->seat_id = 1; // se va a seleccionar en el proximo paso
-                $ticket->reservation_id = 1; // la reserva se crea al momento de pagar
+                $ticket->reservation_id = $reservation->id;
                 $ticket->flight_id = $id_vuelo;
                 // Guardar el ticket en la DB
                 $ticket->save();
@@ -162,7 +179,7 @@ class ReserveController extends Controller{
                 ));
             }
         }
-        return Cart::getContent();
+        // return Cart::getContent();
         return redirect('/reserve/selectSeats');
     }
 
@@ -173,18 +190,110 @@ class ReserveController extends Controller{
         $user_id = 1; // Usuario loggeado
         Cart::session($user_id);
         // En attributes del elemento 1 del carrito, se encuentran los ids de los vuelos
-        $vuelos_solicitados = Cart::get(1)->attributes();
+        $vuelos_solicitados = Collection::make();
+        foreach (Cart::get(1)->attributes as $id){
+            $vuelos_solicitados->push($id);
+        }
         // Sera una coleccion de colecciones con los asientos disponibles por cada vuelo
         $availableSeats = Collection::make();
         foreach ($vuelos_solicitados as $id_vuelo){
-            $seats = $fc->availableSeats();
+            $seats = $fc->availableSeats($id_vuelo);
             $availableSeats->push($seats);
         }
         $agrupados_por_nombre = Cart::getContent()->groupBy('name');
         $nombres = Collection::make();
         foreach($agrupados_por_nombre as $grupo){
-            $nombres->push($grupo->first['name']);
+            if ($grupo->first()->name != "aux"){
+                $nombres->push($grupo->first()->name);
+            }
         }
+        // Vuelos_solicitados y available_seats son colecciones del mismo tamaño.
+        // Para ver los asientos disponibles del vuelo i acceder a availableSeats[i]
         return view('selectSeats', compact('availableSeats', 'vuelos_solicitados', 'nombres'));
+    }
+
+    /**
+     * Guarda los asientos seleccionados por cada uno de los pasajeros
+     * Se espera que $request sea una lista de strings de la forma:
+     *  "idVuelo_nombrePasajero:asientoSeleccionado_NombrePasajero:asientoSeleccionado"
+     * Cada string representa contiene los asientos seleccionados por vuelo solicitado.
+     */
+    public function storeChosenSeats(Request $request){
+        $user_id = 1; // id del usuario Loggeado
+        Cart::session($user_id); // Carrito del usuario
+        // Las reservas de cada pasajero
+        $tickets_por_nombre = Cart::getContent()->groupBy('name');
+        // Asignar el asiento seleccionado por cada vuelo
+        // Por cada grupo de nombres (cada pasajero)
+        // Por cada pasajero ...
+        foreach ($tickets_por_nombre as $tickets){
+            if ($tickets->get(0)->name != 'aux'){
+                // Por cada ticket del pasajero ...
+                foreach ($tickets as $ticket){
+                    $id_ticket = $ticket->id;
+                    $nombre_pasajero = $ticket->name;
+                    // Acceder al ticket en la DB
+                    $ticket_db = Ticket::find($id_ticket);
+                    $id_vuelo_ticket = $ticket_db->flight_id;
+                    $datos_vuelo = $request[$id_vuelo_ticket];
+                    $datos_vuelo_separados = array_slice(explode("_", $datos_vuelo), 1);
+                    // Buscamos el indice del elemento que tenga como nombre el nombre del pasajero
+                    $indice = 0;
+                    for ($aux = 0 ; $aux < count($datos_vuelo_separados) ; $aux++){
+                        if (explode(":", $datos_vuelo_separados[$aux])[0] == $nombre_pasajero){
+                            $indice = $aux;
+                        }
+                    }
+                    $pasajero_asiento = $datos_vuelo_separados[$indice];
+                    // Finalmente el numero de asiento es
+                    $asiento_escogido = explode(":", $pasajero_asiento)[1];
+                    // Guardar el numero de asiento en Ticket
+                    $ticket_db->seat_number = $asiento_escogido;
+                    $ticket_db->save();
+                }
+            }
+            
+        }
+        return redirect('/reserve/summary');
+    }
+
+    /**
+     * Retorna la vista que muestra el sumario de la compra al usuario
+     */
+    public function showSummary(){
+        $user_id = 1; // Usuario loggeado
+        Cart::session($user_id);
+        $aux = Cart::getContent()->firstWhere('name', 'aux');
+        $receipt = Receipt::find($aux->price);
+        $reservation = $receipt->reservation;
+        // Vuelos
+        $vuelos = $reservation->tickets;
+        // datos de cada vuelo
+        $datos_por_vuelo = Collection::make();
+        foreach($vuelos as $vuelo){
+            $ciudad_origen = FlightController::originCity($vuelo->flight_id);
+            $ciudad_destino = FlightController::destinyCity($vuelo->flight_id);
+            $precio = FlightController::calculateFlightPrice($vuelo->seat_id, $vuelo->flight_id);
+            $num_asiento = $vuelo->seat_number;
+            $tipo_asiento = Seat::find($vuelo->seat_id)->seat_type;
+            $pasajero = Passenger::find($vuelo->passenger_id)->passenger_name;
+            $datos_por_vuelo->push(new class($ciudad_origen, $ciudad_destino, $precio, $num_asiento, $tipo_asiento, $pasajero){
+                public $ciudad_origen;
+                public $ciudad_destino;
+                public $precio;
+                public $num_asiento;
+                public $tipo_asiento;
+                public $pasajero;
+                public function __construct($ciudad_origen, $ciudad_destino, $precio, $num_asiento, $tipo_asiento, $pasajero){
+                    $this->ciudad_origen = $ciudad_origen;
+                    $this->ciudad_destino = $ciudad_destino;
+                    $this->precio = $precio;
+                    $this->num_asiento = $num_asiento;
+                    $this->tipo_asiento = $tipo_asiento;
+                    $this->pasajero = $pasajero;
+                }
+            });
+        }
+        return $datos_por_vuelo;
     }
 }
