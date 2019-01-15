@@ -11,17 +11,17 @@
         @for ($i = 0; $i < $vuelos_solicitados->count(); $i++)
             <h1> VUELO {{$vuelos_solicitados->get($i)}} </h1>
             {{-- En este input se guardara los asientos seleccionados por cada pasajero en el vuelo $i.
-                Tendra la forma vuelo[i]_NombrePasajero:numAsiento_NombrePasajero:numAsiento... --}}
+                Tendra la forma vuelo[i]_idPasajero:numAsiento_idPasajero:numAsiento... --}}
             <input name="{{$vuelos_solicitados->get($i)}}" id="{{$vuelos_solicitados->get($i)}}" type="hidden" value="{{$vuelos_solicitados->get($i)}}">
             {{-- Para cada pasajero --}}
-            @foreach ($nombres as $pasajero)
-                <h2> Pasajero: {{$pasajero}} </h2>
-                <select id="{{$vuelos_solicitados->get($i)}}_{{$pasajero}}" onchange="updateSelection(this)">
+            @for ($j = 0; $j < $nombres->count() ; $j++)
+                <h2> Pasajero: {{$nombres->get($j)}} </h2>
+                <select id="{{$vuelos_solicitados->get($i)}}_{{$ids_pasajeros->get($j)}}" onchange="updateSelection(this)">
                     @foreach ($availableSeats->get($i) as $seat)
                         <option value="{{$seat}}">{{$seat}}</option>
                     @endforeach
                 </select>
-            @endforeach
+            @endfor
         @endfor
         <input type="submit" value="enviar">
         <script>

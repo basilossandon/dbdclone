@@ -169,11 +169,11 @@ class ReserveController extends Controller{
                 // Añadir al carrito este ticket
                 Cart::add(array(
                     'id' => $ticket->id,
-                    'name' => $passenger->passenger_name,
+                    'name' => $passenger->id,
                     'price' => 0, // se calcula a la hora de escoger asiento (proximo paso)
                     'quantity' => 1,
                     'attributes' => array(
-                        'id_pasajero' => $passenger->id,
+                        // 'id_pasajero' => $passenger->id,
                         'id_seguro' => $datos_pasajero[4],
                     )
                 ));
@@ -202,20 +202,26 @@ class ReserveController extends Controller{
         }
         $agrupados_por_nombre = Cart::getContent()->groupBy('name');
         $nombres = Collection::make();
+        // Los ids de los pasajeros, en el mismo orden que sus $nombres
+        $ids_pasajeros = Collection::make();
         foreach($agrupados_por_nombre as $grupo){
             if ($grupo->first()->name != "aux"){
-                $nombres->push($grupo->first()->name);
+                // name es el id de passenger
+                $passenger_id = $grupo->first()->name;
+                $ids_pasajeros->push($passenger_id);
+                $name = Passenger::find($passenger_id)->passenger_name;
+                $nombres->push($name);
             }
         }
         // Vuelos_solicitados y available_seats son colecciones del mismo tamaño.
         // Para ver los asientos disponibles del vuelo i acceder a availableSeats[i]
-        return view('selectSeats', compact('availableSeats', 'vuelos_solicitados', 'nombres'));
+        return view('selectSeats', compact('availableSeats', 'vuelos_solicitados', 'nombres', 'ids_pasajeros'));
     }
 
     /**
      * Guarda los asientos seleccionados por cada uno de los pasajeros
      * Se espera que $request sea una lista de strings de la forma:
-     *  "idVuelo_nombrePasajero:asientoSeleccionado_NombrePasajero:asientoSeleccionado"
+     *  "idVuelo_idPasajero:asientoSeleccionado_idPasajero:asientoSeleccionado"
      * Cada string representa contiene los asientos seleccionados por vuelo solicitado.
      */
     public function storeChosenSeats(Request $request){
@@ -231,16 +237,16 @@ class ReserveController extends Controller{
                 // Por cada ticket del pasajero ...
                 foreach ($tickets as $ticket){
                     $id_ticket = $ticket->id;
-                    $nombre_pasajero = $ticket->name;
+                    $id_pasajero = $ticket->name;
                     // Acceder al ticket en la DB
                     $ticket_db = Ticket::find($id_ticket);
                     $id_vuelo_ticket = $ticket_db->flight_id;
                     $datos_vuelo = $request[$id_vuelo_ticket];
                     $datos_vuelo_separados = array_slice(explode("_", $datos_vuelo), 1);
-                    // Buscamos el indice del elemento que tenga como nombre el nombre del pasajero
+                    // Buscamos el indice del elemento que tenga como id el id del pasajero
                     $indice = 0;
                     for ($aux = 0 ; $aux < count($datos_vuelo_separados) ; $aux++){
-                        if (explode(":", $datos_vuelo_separados[$aux])[0] == $nombre_pasajero){
+                        if (explode(":", $datos_vuelo_separados[$aux])[0] == $id_pasajero){
                             $indice = $aux;
                         }
                     }
