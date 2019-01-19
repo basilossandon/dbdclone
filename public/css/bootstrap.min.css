@@ -1,16 +1,8 @@
 /*!
  * Bootswatch v4.2.1
- * Homepage: https://bootswatch.com
- * Copyright 2012-2018 Thomas Park
- * Licensed under MIT
- * Based on Bootstrap
-*/
-/*!
  * Bootstrap v4.2.1 (https://getbootstrap.com/)
- * Copyright 2011-2018 The Bootstrap Authors
- * Copyright 2011-2018 Twitter, Inc.
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
+
 @import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500,700");
 :root {
   --blue: #7d2880;
@@ -73,17 +65,23 @@ body {
   text-align: left;
   background-color: #fff;
   position:relative;
-  margin-top: auto;
+
 }
 
+
 .welcomeCards{
-  padding-top: 200px;
+  padding-top: 15%;
+  width: 100%;
 }
 .cardWrapperWelcome{
   padding-left: 15px;
   padding-right: 15px;
 }
-
+.button-card-container{
+  padding-top: 15px; 
+  position: absolute; 
+  bottom: 10;
+}
 .searchbar{
   margin-bottom: auto;
   margin-top: auto;
@@ -92,7 +90,6 @@ body {
   border-radius: 30px;
   padding: 10px;
 }
-
 .search_input{
   color: white;
   border: 0;
@@ -103,19 +100,16 @@ body {
   line-height: 40px;
   transition: width 0.4s ease-out;
 }
-
 .searchbar:hover > .search_input{
   padding: 0 10px;
   width: 450px;
   caret-color:grey;
   transition: width 0.4s ease-out;
 }
-
 .searchbar:hover > .search_icon{
   background: white;
   color: #7d2880; 
 }
-
 .search_icon{
   height: 40px;
   width: 40px;
@@ -125,14 +119,10 @@ body {
   align-items: center;
   border-radius: 50%;
   color:white;
-
 }
-
-
 .d-flex {
   margin-right: 20px;
 }
-  
 .navbar {
   border: none;
   -webkit-box-shadow: 0 7px 0 0 #7d2880, 0 5px 5px -3px rgba(0,0,0,0.7), 0 8px 10px 1px rgba(0,0,0,0.6), 0 3px 14px 2px rgba(0,0,0,0.80); 
@@ -140,35 +130,40 @@ body {
   background:#11172b;;
   position:relative;
 }
-
-.navbar-brand {
-  font-size: 24px;
-}
-.navbar-nav .nav-link {
-  padding-top: 0.9rem;
-  padding-bottom: 0.9rem;
-}
-
-.nav-link{
-    margin-left: 5px;
-}
-
 #content-wrapper {
   position:absolute;
   min-width:100%;
-  min-height:100%;
-  margin-top: 0px;
+
 }
 .login-form-container{
     position:relative;
-    padding-top: 150px;
+    padding-top: 13%;
 }
+.reservationFormWrapper{
+  width: 100%;
+}
+
+#sticky {
+  width:100%;
+  padding: 20px;
+  background:#11172b;
+  color:white;
+  font-weight:bold;
+  font-size:18px;
+  text-align:center;
+  position:fixed;    /*Here's what sticks it*/
+  bottom:0;          /*to the bottom of the body*/
+  left:0;            /*and to the left of the body.*/
+    display: flex;
+  align-items: center;
+}
+
 .carousel img {
   position: absolute;
   top: 0;
   left: 0;
   min-width: 100%;
-  height: 1080px;
+  height: 100%;
   max-width: none;
 }
 
@@ -212,7 +207,8 @@ body {
 .carousel-item {
   position: relative;
   width: 100vh;
-  height: 100vh;
+  margin-top: 5%;
+  height: 85vh;
   display: none;
   width: 100%;
   -ms-flex-align: center;
@@ -383,9 +379,10 @@ body {
 .carousel-indicators {
   position: absolute;
   right: 0;
-  bottom: 10px;
+  bottom: 0px;
+  margin-bottom: 80px;
   left: 0;
-  z-index: 15;
+  z-index: 5;
   display: -ms-flexbox;
   display: flex;
   -ms-flex-pack: center;
@@ -5363,12 +5360,22 @@ input[type="button"].btn-block {
   margin-left: 1.25rem;
 }
 
+.hiddenRow {
+    padding: 0 !important;
+}
+
 .card-header {
   padding: 0.75rem 1.25rem;
   margin-bottom: 0;
   color: inherit;
   background-color: rgba(0, 0, 0, 0.03);
   border-bottom: 0 solid transparent;
+}
+
+.footer-items {
+  padding: 0.75rem 1.25rem;
+  margin-bottom: 0;
+  color: inherit;
 }
 
 .card-header:first-child {

@@ -1,5 +1,4 @@
 @extends('layouts.app')
-  
 @section('title', 'Reserva tu vuelo')
 @section('header')
     {{-- searchbox inside dropdown --}}
@@ -19,7 +18,6 @@
 
 @section('content')
 <div class="reservationFormWrapper">
-
 <div class="reserveForm">
   <form action="/reserve/choose_flights" method="POST" >
     <div class="rows">
@@ -103,8 +101,8 @@
             </button>
         </div>
           </form>
-
-</div></div>
+  </div>
+</div>
 
 
 @endsection
