@@ -61,7 +61,6 @@
             </div>
             </nav>
         </div>
-         @include('carousel.carousel')
         <div class="container content">
             @yield('content')
         </div>
