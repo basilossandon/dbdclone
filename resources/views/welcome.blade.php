@@ -13,7 +13,7 @@
 <div class="welcomeCards">
 	<div class="columns">
 		<div class="cardWrapperWelcome">
-			<div class="card text-white bg-dark mb-3 h-100" style="max-width: 20rem;">
+			<div class="card text-white bg-dark mb-3" style="max-width: 20rem;">
 			  	<div class="card-header">    
 					<a href="/reserve" style="color: white">
 					<img src="/images/plane-icon.png">
@@ -34,7 +34,7 @@
 
 
 		<div class="cardWrapperWelcome">
-			<div class="card text-white bg-dark mb-3 h-100" style="max-width: 20rem;">
+			<div class="card text-white bg-dark mb-3" style="max-width: 20rem;">
 			  	<div class="card-header">    
 					<a href="/packages" style="color: white">
 					<img src="/images/vacations-icon.svg">
@@ -54,7 +54,7 @@
 		</div>
 
 		<div class="cardWrapperWelcome">
-		<div class="card text-white bg-dark mb-3 h-100" style="max-width: 20rem;">
+		<div class="card text-white bg-dark mb-3" style="max-width: 20rem;">
 			<div class="card-header">    
 				<a  href="/hotels" style="color: white">
 				<img src="/images/hotel-icon.svg">
@@ -72,7 +72,7 @@
 		</div>
 		</div>
 		<div class="cardWrapperWelcome">
-			<div class="card text-white bg-dark mb-3 h-100" style="max-width: 20rem;">
+			<div class="card text-white bg-dark mb-3" style="max-width: 20rem;">
 			  	<div class="card-header">    
 				    <a href="/vehicles" style="color: white">
 					<img src="/images/car-icon.svg">

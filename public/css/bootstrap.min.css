@@ -68,6 +68,53 @@ body {
 
 }
 
+.qty .count {
+    color: #FFF;
+    display: inline-block;
+    vertical-align: top;
+    font-size: 15px;
+    font-weight: 550;
+    line-height: 30px;
+    padding: 0 2px;
+    min-width: 15px;
+    text-align: center;
+}
+.qty .plus {
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: top;
+    color: white;
+    width: 30px;
+    height: 30px;
+    font: 30px/1 Arial,sans-serif;
+    text-align: center;
+    border-radius: 50%;
+    background-color: #7d2880 !important;
+
+    }
+.qty .minus {
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: top;
+    color: white;
+    width: 30px;
+    height: 30px;
+    font: 30px/1 Arial,sans-serif;
+    text-align: center;
+    border-radius: 50%;
+    background-color: #7d2880 !important;
+
+}
+.minus:hover{
+    background-color: #571C59 !important;
+}
+.plus:hover{
+    background-color: #571C59 !important;
+}
+
+
+
+
 
 .welcomeCards{
   padding-top: 15%;
@@ -8670,7 +8717,7 @@ button.bg-dark:focus {
 
 .mt-5,
 .my-5 {
-  margin-top: 3rem !important;
+  margin-top: 0rem !important;
 }
 
 .mr-5,
@@ -11524,13 +11571,13 @@ input[type=number],
 [type=email].form-control,
 [type=tel].form-control,
 [contenteditable].form-control {
-  border-bottom: none!important;
   box-shadow: none!important;
   -webkit-transition: all 0.2s;
   transition: all 0.2s;
   background: #242A48;
   border-radius: 5px;
-
+  border: 0px;
+  margin: 1px;
 }
 
 textarea:focus,

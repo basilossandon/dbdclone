@@ -3,12 +3,15 @@
 @section('header')
 
 @section('content')
+
+<script src="/js/buttons.js"></script>
 <div class="reservationFormWrapper">
 <div class="reserveForm">
   <form action="/reserve/choose_flights" method="POST" >
     <div class="rows">
-    <div class="dropDownMenus">
-            <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+    <div class="reserve-options">
+
+        <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
         <button type="button" class="btn btn-primary">One way/Round trip</button>
         <div class="btn-group" role="group">
           <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
@@ -18,27 +21,17 @@
           </div>
         </div>
       </div>
+
       <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-        <button type="button" class="btn btn-primary">Passengers</button>
-        <div class="btn-group" role="group">
-          <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-          <div class="dropdown-menu" aria-labelledby="btnGroupDrop1" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 45px, 0px);">
-            <a class="dropdown-item" href="#">Adults</a>
-            <a class="dropdown-item" href="#">Children</a>
-          </div>
+
+      <div class="qty mt-5">Cantidad: 
+            <span class="minus bg-dark">-</span>
+            <input type="number" class="count" name="qtypasajeros" value="1">
+            <span class="plus bg-dark">+</span>
         </div>
       </div>
-      <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-        <button type="button" class="btn btn-primary">Seat type</button>
-        <div class="btn-group" role="group">
-          <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-          <div class="dropdown-menu" aria-labelledby="btnGroupDrop1" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 45px, 0px);">
-            @foreach ($seats as $seat)
-                <a class="dropdown-item" href="#">{{$seat->seat_type}}</a>
-            @endforeach
-          </div>
-        </div>
-      </div>
+
+
       </div>
       <div class="columns" style="margin-top: 5px">
         <div class="column is-2">
