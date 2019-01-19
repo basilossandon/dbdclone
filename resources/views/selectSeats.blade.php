@@ -1,22 +1,18 @@
 @extends('layouts.app')
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Seleccionar asientos</title>
-</head>
-<body>
+@section('title', 'Selecciona el asiento')
+@section('content')
+    <div class="reservationFormWrapper">
+        <div class="reserveForm">
     <form action="/reserve/storeChosenSeats", method="POST">
         {{-- Para cada vuelo --}}
         @for ($i = 0; $i < $vuelos_solicitados->count(); $i++)
-            <h1> VUELO {{$vuelos_solicitados->get($i)}} </h1>
+            <p> VUELO {{$vuelos_solicitados->get($i)}} </p>
             {{-- En este input se guardara los asientos seleccionados por cada pasajero en el vuelo $i.
                 Tendra la forma vuelo[i]_idPasajero:numAsiento_idPasajero:numAsiento... --}}
             <input name="{{$vuelos_solicitados->get($i)}}" id="{{$vuelos_solicitados->get($i)}}" type="hidden" value="{{$vuelos_solicitados->get($i)}}">
             {{-- Para cada pasajero --}}
             @for ($j = 0; $j < $nombres->count() ; $j++)
-                <h2> Pasajero: {{$nombres->get($j)}} </h2>
+                <p> Pasajero: {{$nombres->get($j)}} </p>
                 <select id="{{$vuelos_solicitados->get($i)}}_{{$ids_pasajeros->get($j)}}" onchange="updateSelection(this)">
                     @foreach ($availableSeats->get($i) as $seat)
                         <option value="{{$seat}}">{{$seat}}</option>
@@ -24,6 +20,9 @@
                 </select>
             @endfor
         @endfor
+
+
+
         <input type="submit" value="enviar">
         <script>
             function updateSelection(element){
@@ -59,5 +58,7 @@
             }
         </script>
     </form>
-</body>
-</html>
+    </div>
+</div>
+
+@endsection

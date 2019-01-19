@@ -135,6 +135,26 @@ body {
   min-width:100%;
 
 }
+
+
+.table-wrapper-scroll-y {
+    background-color:#242A48;
+    position:absolute;
+    margin-top:150px;  /* half of height */
+    max-height: 600px;
+    overflow-y: auto;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+    z-index: 99999;
+      width: 1110px;
+-webkit-box-shadow: 5px 5px 108px 27px rgba(0,0,0,1);
+-moz-box-shadow: 5px 5px 108px 27px rgba(0,0,0,1);
+box-shadow: 5px 5px 108px 27px rgba(0,0,0,1);
+    }
+
+.tableWrapper{
+  position:absolute;
+  z-index: 999;
+}
 .login-form-container{
     position:relative;
     padding-top: 13%;
@@ -2253,7 +2273,7 @@ pre code {
 .table-dark,
 .table-dark > th,
 .table-dark > td {
-  background-color: #c1c1c1;
+  background-color: #242A48;
 }
 
 .table-dark th,
@@ -2390,11 +2410,13 @@ pre code {
   display: block;
   width: 100%;
   height: calc(2.81875rem + 0rem);
-  padding: 1rem 0;
+  padding: 1rem 2px;
+  margin: 5px;
   font-size: 0.8125rem;
   font-weight: 400;
   line-height: 1.5;
-  color: #666;
+  color: white;
+
   background-color: transparent;
   background-clip: padding-box;
   border: 0rem solid transparent;
@@ -2418,7 +2440,7 @@ pre code {
 }
 
 .form-control:focus {
-  color: #666;
+  color: white;
   background-color: transparent;
   border-color: #9acffa;
   outline: 0;
@@ -2427,22 +2449,22 @@ pre code {
 }
 
 .form-control::-webkit-input-placeholder {
-  color: rgba(0, 0, 0, 0.4);
+  color: #666;
   opacity: 1;
 }
 
 .form-control::-ms-input-placeholder {
-  color: rgba(0, 0, 0, 0.4);
+  color: #666;
   opacity: 1;
 }
 
 .form-control:-ms-input-placeholder {
-  color: rgba(0, 0, 0, 0.4);
+  color: #666;
   opacity: 1;
 }
 
 .form-control::placeholder {
-  color: rgba(0, 0, 0, 0.4);
+  color: #666;
   opacity: 1;
 }
 
@@ -11506,6 +11528,9 @@ input[type=number],
   box-shadow: none!important;
   -webkit-transition: all 0.2s;
   transition: all 0.2s;
+  background: #242A48;
+  border-radius: 5px;
+
 }
 
 textarea:focus,
@@ -11522,6 +11547,7 @@ input[type=number]:focus,
 [contenteditable].form-control:focus {
   border-bottom: none!important;
   box-shadow: none!important;
+  background: #242A48;
 }
 
 textarea[disabled], textarea[readonly],

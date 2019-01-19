@@ -1,20 +1,20 @@
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width={device-width}, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Pasajeros</title>
-</head>
-<body>
+@extends('layouts.app')
+@section('title', 'Ingresa la informacion del pasajero')
+@section('content')
+
+
+    <div class="reservationFormWrapper">
+        <div class="reserveForm">
+
         <form action="/reserve/storePassengersInfo" method="POST">
             @for ($i = 0; $i < $passengers; $i++)
                 <input name="data{{$i}}" id="data{{$i}}" type="hidden" value="">
-                <label>Pasajero{{$i}}</label>
-                <div class="form-group">
-                    <input type="text" class="form-control" onchange="updateData({{$i}})" id="nameInput{{$i}}" placeholder="Nombre">
-                    <input type="text" class="form-control" onchange="updateData({{$i}})" id="RUTInput{{$i}}" placeholder="Rut">
-                    <input type="text" class="form-control" onchange="updateData({{$i}})" id="docType{{$i}}" placeholder="Tipo doc">
-                    <input type="text" cñass="form-control" onchange="updateData({{$i}})" id="docCountry{{$i}}" placeHolder="Pais documento">
+                <label>Pasajero {{$i}}</label>
+                <div class="form-group" >
+                    <input type="text" class="form-control" onchange="updateData({{$i}})" id="nameInput{{$i}}" placeholder="Nombre completo">
+                    <input type="text" class="form-control" onchange="updateData({{$i}})" id="RUTInput{{$i}}" placeholder="RUT">
+                    <input type="text" class="form-control" onchange="updateData({{$i}})" id="docType{{$i}}" placeholder="Tipo de documento">
+                    <input type="text" class="form-control" onchange="updateData({{$i}})" id="docCountry{{$i}}" placeHolder="Pais de origen del documento">
                 </div>
             @endfor
             <script>
@@ -30,8 +30,11 @@
                             "_" + "-1";
                     }
             </script>
-            <input type="submit" value="Enviar">
+            <div class="buttonWrapper">
+            <input class="btn btn-primary" type="submit" value="Enviar"></div>
         </form>
-</body>
-</html>
+    </div>
+</div>
+
+@endsection
 
