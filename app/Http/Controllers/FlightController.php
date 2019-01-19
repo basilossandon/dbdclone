@@ -225,4 +225,18 @@ class FlightController extends Controller
         });
         return $this->flightsFound;
     }
+    
+    /**
+     *  A partir de un id de Flight y numero de asiento, retorna el tipo asociado
+     *  
+     */
+    public function asociatedSeatType(Request $request){
+        $flight = Flight::find($request->input('flight_id'));
+        $seat_number = $request->input('seat_number');
+        $flight_capacity = $flight->flight_capacity;
+        $sections = $flight_capacity / Seat::all()->count();
+        
+        $seat_type = intdiv($seat_number, $sections);
+        echo json_encode(Seat::find($seat_type));
+    }
 }
