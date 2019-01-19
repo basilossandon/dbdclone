@@ -242,17 +242,14 @@ class ReserveController extends Controller{
                     $ticket_db = Ticket::find($id_ticket);
                     $id_vuelo_ticket = $ticket_db->flight_id;
                     $datos_vuelo = $request[$id_vuelo_ticket];
-                    $datos_vuelo_separados = array_slice(explode("_", $datos_vuelo), 1);
-                    // Buscamos el indice del elemento que tenga como id el id del pasajero
-                    $indice = 0;
+                    $datos_vuelo_separados = explode("_", $datos_vuelo);
+                    // Buscamos el numero de asiento seleccionado
+                    $asiento_escogido;
                     for ($aux = 0 ; $aux < count($datos_vuelo_separados) ; $aux++){
                         if (explode(":", $datos_vuelo_separados[$aux])[0] == $id_pasajero){
-                            $indice = $aux;
+                            $asiento_escogido = (int)explode(":", $datos_vuelo_separados[$aux][1]);
                         }
                     }
-                    $pasajero_asiento = $datos_vuelo_separados[$indice];
-                    // Finalmente el numero de asiento es
-                    $asiento_escogido = explode(":", $pasajero_asiento)[1];
                     // Guardar el numero de asiento en Ticket
                     $ticket_db->seat_number = $asiento_escogido;
                     $ticket_db->save();
