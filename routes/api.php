@@ -16,3 +16,15 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+// Redirect the user to the provider authentication page
+Route::get('auth/{provider}', [
+    'as' => 'provider.login',
+    'uses' => 'Auth\LoginController@redirectToProvider'
+]);
+
+// Get the user information from provider
+Route::get('auth/{provider}/callback', [
+    'as' => 'provider.callback',
+    'uses' => 'Auth\LoginController@handleProviderCallback'
+]);
