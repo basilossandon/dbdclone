@@ -96,7 +96,7 @@ class FlightController extends Controller
         $availableSeats = $seatsList->filter(function ($seat) use ($flight_id){
             return $this->available($flight_id, $seat);
         });
-        return $availableSeats->all();
+        return $availableSeats;
     }
 
     // Determina si un vuelo tiene al menos un asiento disponible
@@ -237,6 +237,11 @@ class FlightController extends Controller
         $sections = $flight_capacity / Seat::all()->count();
         
         $seat_type = intdiv($seat_number, $sections) + 1;
-        return Seat::find($seat_type)->toJson();
+        if ($request->ajax()){
+            return Seat::find($seat_type)->toJson();
+        } else {
+            return Seat::find($seat_type);
+        }
+        
     }
 }

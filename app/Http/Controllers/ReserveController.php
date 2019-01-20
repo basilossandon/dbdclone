@@ -256,6 +256,16 @@ class ReserveController extends Controller{
                             $seguro_escogido = (int)explode(":", $datos_vuelo_separados[$aux][2]);
                         }
                     }
+                    $request = new \Illuminate\Http\Request();
+                    $request->replace(['flight_id' => $id_vuelo_ticket, 'seat_number' => $asiento_escogido]);
+                    $fc = new FlightController;
+                    $tipo_asiento = $fc->asociatedSeatType($request)->id;
+                    // Asociar el seguro al vuelo y al pasajero
+                    if ($seguro_escogido != -1){
+                        Insurance::find($seguro_escogido)->passengers()->attach($id_pasajero,
+                        ['flight_id' => $id_vuelo_ticket]);
+                    }
+                    
                     // Guardar el numero de asiento en Ticket
                     $ticket_db->seat_number = $asiento_escogido;
                     $ticket_db->save();
@@ -280,23 +290,32 @@ class ReserveController extends Controller{
         // datos de cada vuelo
         $datos_por_vuelo = Collection::make();
         foreach($vuelos as $vuelo){
-            $ciudad_origen = FlightController::originCity($vuelo->flight_id);
-            $ciudad_destino = FlightController::destinyCity($vuelo->flight_id);
-            $precio = FlightController::calculateFlightPrice($vuelo->seat_id, $vuelo->flight_id);
+            // vuelo es un Ticket
+            $flight_id = $vuelo->flight_id;
+            $ciudad_origen = FlightController::originCity($flight_id);
+            $ciudad_destino = FlightController::destinyCity($flight_id);
+            $precio_vuelo = FlightController::calculateFlightPrice($vuelo->seat_id, $flight_id);
+            $seguro = Passenger::find($vuelo->passenger_id)->insurances->filter(function ($value) use ($flight_id){
+                return $value->pivot->flight_id == $flight_id;
+            })->first();
             $num_asiento = $vuelo->seat_number;
             $tipo_asiento = Seat::find($vuelo->seat_id)->seat_type;
             $pasajero = Passenger::find($vuelo->passenger_id)->passenger_name;
-            $datos_por_vuelo->push(new class($ciudad_origen, $ciudad_destino, $precio, $num_asiento, $tipo_asiento, $pasajero){
+            $datos_por_vuelo->push(new class($seguro, $ciudad_origen, $ciudad_destino, $precio_vuelo, $num_asiento, $tipo_asiento, $pasajero){
                 public $ciudad_origen;
                 public $ciudad_destino;
-                public $precio;
+                public $precio_vuelo;
+                public $tipo_seguro;
+                public $precio_seguro;
                 public $num_asiento;
                 public $tipo_asiento;
                 public $pasajero;
-                public function __construct($ciudad_origen, $ciudad_destino, $precio, $num_asiento, $tipo_asiento, $pasajero){
+                public function __construct($seguro, $ciudad_origen, $ciudad_destino, $precio, $num_asiento, $tipo_asiento, $pasajero){
                     $this->ciudad_origen = $ciudad_origen;
                     $this->ciudad_destino = $ciudad_destino;
-                    $this->precio = $precio;
+                    $this->precio_vuelo = $precio;
+                    $this->tipo_seguro = $seguro->insurance_type;
+                    $this->precio_seguro = $seguro->insurance_price;
                     $this->num_asiento = $num_asiento;
                     $this->tipo_asiento = $tipo_asiento;
                     $this->pasajero = $pasajero;

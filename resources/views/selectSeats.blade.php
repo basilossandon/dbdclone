@@ -17,7 +17,7 @@
             @for ($j = 0; $j < $nombres->count() ; $j++)
             <fieldset>
                 <legend> Pasajero: {{$nombres->get($j)}} </legend>
-                <select id="{{$vuelos_solicitados->get($i)}}_{{$ids_pasajeros->get($j)}}" onchange="updateSelection(this)" value="{{$availableSeats->get(0)[0]}}">
+                <select id="{{$vuelos_solicitados->get($i)}}_{{$ids_pasajeros->get($j)}}" onchange="updateSelection(this)" value="{{$availableSeats->get($i)->first()}}">
                     @foreach ($availableSeats->get($i) as $seat)
                         <option value="{{$seat}}">{{$seat}}</option>
                     @endforeach
