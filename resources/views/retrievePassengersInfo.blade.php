@@ -9,7 +9,7 @@
         <form action="/reserve/storePassengersInfo" method="POST">
             @for ($i = 0; $i < $passengers; $i++)
                 <input name="data{{$i}}" id="data{{$i}}" type="hidden" value="">
-                <label>Pasajero {{$i}}</label>
+                <label>Pasajero {{$i + 1}}</label>
                 <div class="form-group" >
                     <input type="text" class="form-control" onchange="updateData({{$i}})" id="nameInput{{$i}}" placeholder="Nombre completo">
                     <input type="text" class="form-control" onchange="updateData({{$i}})" id="RUTInput{{$i}}" placeholder="RUT">

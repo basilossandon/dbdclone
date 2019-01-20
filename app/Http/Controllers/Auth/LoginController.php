@@ -47,7 +47,7 @@ class LoginController extends Controller
     public function findOrCreateUser($socialMediaUser){
         $user = User::where('email', $socialMediaUser->getEmail())->first(); 
         if(is_null($user)) {
-            $user = User::storeOrUpdate([
+            $user = User::updateOrCreate([
                 'name' => $socialMediaUser->getName(),
                 'email' => $socialMediaUser->getEmail(),
                 'avatar' => $socialMediaUser->getAvatar()

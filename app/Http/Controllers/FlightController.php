@@ -237,6 +237,9 @@ class FlightController extends Controller
         $sections = $flight_capacity / Seat::all()->count();
         
         $seat_type = intdiv($seat_number, $sections) + 1;
+        if ($seat_type > Seat::all()->count()){
+            $seat_type -= 1;
+        }
         if ($request->ajax()){
             return Seat::find($seat_type)->toJson();
         } else {

@@ -175,7 +175,7 @@ class ReserveController extends Controller{
                     'quantity' => 1,
                     'attributes' => array(
                         // 'id_pasajero' => $passenger->id,
-                        'id_seguro' => $datos_pasajero[4],
+                        // 'id_seguro' => $datos_pasajero[4],
                     )
                 ));
             }
@@ -232,46 +232,51 @@ class ReserveController extends Controller{
         $user_id = 1; // id del usuario Loggeado
         Cart::session($user_id); // Carrito del usuario
         // Las reservas de cada pasajero
-        $tickets_por_nombre = Cart::getContent()->groupBy('name');
-        // Asignar el asiento seleccionado por cada vuelo
-        // Por cada grupo de nombres (cada pasajero)
-        // Por cada pasajero ...
-        foreach ($tickets_por_nombre as $tickets){
-            if ($tickets->get(0)->name != 'aux'){
-                // Por cada ticket del pasajero ...
-                foreach ($tickets as $ticket){
-                    $id_ticket = $ticket->id;
-                    $id_pasajero = $ticket->name;
-                    // Acceder al ticket en la DB
-                    $ticket_db = Ticket::find($id_ticket);
-                    $id_vuelo_ticket = $ticket_db->flight_id;
-                    $datos_vuelo = $request[$id_vuelo_ticket];
-                    $datos_vuelo_separados = explode("_", $datos_vuelo);
-                    // Buscamos el numero de asiento seleccionado
-                    $asiento_escogido;
-                    $seguro_escogido;
-                    for ($aux = 0 ; $aux < count($datos_vuelo_separados) ; $aux++){
-                        if (explode(":", $datos_vuelo_separados[$aux])[0] == $id_pasajero){
-                            $asiento_escogido = (int)explode(":", $datos_vuelo_separados[$aux][1]);
-                            $seguro_escogido = (int)explode(":", $datos_vuelo_separados[$aux][2]);
-                        }
+        $tickets = Cart::getContent();
+        // Asignar el asiento seleccionado por cada ticket
+        // Por cada ticket ...
+        // $test = Collection::make();
+
+        foreach ($tickets as $ticket){
+            if ($ticket->id != 0){
+                $id_ticket = $ticket->id;
+                $id_pasajero = $ticket->name;
+                // Acceder al ticket en la DB
+                $ticket_db = Ticket::find($id_ticket);
+                $id_vuelo_ticket = $ticket_db->flight_id;
+                $datos_vuelo = $request[$id_vuelo_ticket];
+                $datos_vuelo_separados = explode("_", $datos_vuelo);
+                // Buscamos el numero de asiento seleccionado
+                $asiento_escogido;
+                $seguro_escogido;
+                for ($aux = 0 ; $aux < count($datos_vuelo_separados) ; $aux++){
+                    $datos_pasajero = $datos_vuelo_separados[$aux];
+                    $datos_pasajero_separados = explode(":", $datos_pasajero);
+                    if ($datos_pasajero_separados[0] == $id_pasajero){
+                        $asiento_escogido = (int)$datos_pasajero_separados[1];
+                        $seguro_escogido = (int)$datos_pasajero_separados[2];
                     }
-                    $request = new \Illuminate\Http\Request();
-                    $request->replace(['flight_id' => $id_vuelo_ticket, 'seat_number' => $asiento_escogido]);
-                    $fc = new FlightController;
-                    $tipo_asiento = $fc->asociatedSeatType($request)->id;
-                    // Asociar el seguro al vuelo y al pasajero
-                    if ($seguro_escogido != -1){
-                        Insurance::find($seguro_escogido)->passengers()->attach($id_pasajero,
-                        ['flight_id' => $id_vuelo_ticket]);
-                    }
-                    
-                    // Guardar el numero de asiento en Ticket
-                    $ticket_db->seat_number = $asiento_escogido;
-                    $ticket_db->save();
                 }
+                // Obtener el tipo de asiento;
+
+                $secciones = Flight::find($id_vuelo_ticket)->flight_capacity / Seat::all()->count();
+                
+                $tipo_asiento = intdiv($asiento_escogido, $secciones) + 1;
+                if ($tipo_asiento > Seat::all()->count()){
+                    $tipo_asiento -= 1;
+                }
+                // Asociar el seguro al vuelo y al pasajero
+                if ($seguro_escogido != -1){
+                    Insurance::find($seguro_escogido)->passengers()->attach($id_pasajero,
+                    ['flight_id' => $id_vuelo_ticket]);
+                }
+                        
+                // Guardar el numero de asiento en Ticket
+                $ticket_db->seat_number = $asiento_escogido;
+                // Guardar el tipo de asiento en Ticket
+                $ticket_db->seat_id = $tipo_asiento;
+                $ticket_db->save();
             }
-            
         }
         return redirect('/reserve/summary');
     }
@@ -287,6 +292,7 @@ class ReserveController extends Controller{
         $reservation = $receipt->reservation;
         // Vuelos
         $vuelos = $reservation->tickets;
+        // return $vuelos;
         // datos de cada vuelo
         $datos_por_vuelo = Collection::make();
         foreach($vuelos as $vuelo){
@@ -295,9 +301,16 @@ class ReserveController extends Controller{
             $ciudad_origen = FlightController::originCity($flight_id);
             $ciudad_destino = FlightController::destinyCity($flight_id);
             $precio_vuelo = FlightController::calculateFlightPrice($vuelo->seat_id, $flight_id);
+            // Buscar el seguro asociado en la tabla insurance_passenger
             $seguro = Passenger::find($vuelo->passenger_id)->insurances->filter(function ($value) use ($flight_id){
                 return $value->pivot->flight_id == $flight_id;
-            })->first();
+            });
+            // Verificamos si existe tal seguro asociado
+            if ($seguro->count() > 0){
+                $seguro = $seguro->first();
+            } else {
+                $seguro = null;
+            }
             $num_asiento = $vuelo->seat_number;
             $tipo_asiento = Seat::find($vuelo->seat_id)->seat_type;
             $pasajero = Passenger::find($vuelo->passenger_id)->passenger_name;
@@ -314,8 +327,13 @@ class ReserveController extends Controller{
                     $this->ciudad_origen = $ciudad_origen;
                     $this->ciudad_destino = $ciudad_destino;
                     $this->precio_vuelo = $precio;
-                    $this->tipo_seguro = $seguro->insurance_type;
-                    $this->precio_seguro = $seguro->insurance_price;
+                    if ($seguro != null){
+                        $this->tipo_seguro = $seguro->insurance_type;
+                        $this->precio_seguro = $seguro->insurance_price;
+                    } else {
+                        $this->tipo_seguro = 'Sin seguro asociado';
+                        $this->precio_seguro = 0;
+                    }
                     $this->num_asiento = $num_asiento;
                     $this->tipo_asiento = $tipo_asiento;
                     $this->pasajero = $pasajero;

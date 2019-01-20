@@ -52,7 +52,7 @@
                     var nuevoValor = "";
                     for (string in substrings){
                         if (substrings[string].includes(id_pasajero)){
-                            var aux = id_pasajero + ":" + asiento_seleccionado + seguro;
+                            var aux = id_pasajero + ":" + asiento_seleccionado + ":" + seguro;
                             nuevoValor += aux;
                         } else {
                             nuevoValor +=  substrings[string];
@@ -62,6 +62,7 @@
                         }
                     }
                     document.getElementById(id_vuelo).value = nuevoValor
+                    console.log(document.getElementById(id_vuelo).value);
                 }
 
             }
