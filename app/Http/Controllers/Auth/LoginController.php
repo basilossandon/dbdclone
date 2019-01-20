@@ -8,7 +8,7 @@ use App\User;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\UserController;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-
+use Illuminate\Http\Request;
 class LoginController extends Controller
 {
     use AuthenticatesUsers;
@@ -36,32 +36,25 @@ class LoginController extends Controller
      */
     public function handleProviderCallback()
     {
-        try{
-            $fb_user = Socialite::driver('facebook')->stateless()->user();
-            }
-        catch(Exception $e)
-            {
-             return redirect()->to('/login');
-            }
-
-        if ($fb_user == User::where('email', $fb_user->getEmail())->first()) 
-        {
-            return redirect()->to('/home');
-        }
-        else {
-        $user = new User();
-        $user->updateOrCreate([
-            'name' => $fb_user->getName(),
-            'email' => $fb_user->getEmail(),
-            'avatar' => $fb_user->getAvatar()
-        ]);
-
+        $socialMediaUser = Socialite::driver('facebook')->stateless()->user();
+        $user = $this->findOrCreateUser($socialMediaUser);
         Auth::login($user, true);
         return redirect()->to('/home');
-        }
     }
+    
+
+
+    public function findOrCreateUser($socialMediaUser){
+        $user = User::where('email', $socialMediaUser->getEmail())->first(); 
+        if(is_null($user)) {
+            $user = User::storeOrUpdate([
+                'name' => $socialMediaUser->getName(),
+                'email' => $socialMediaUser->getEmail(),
+                'avatar' => $socialMediaUser->getAvatar()
+            ]);
+        }
+        return $user;
+    }
+
+
 }
-
-
-
-
