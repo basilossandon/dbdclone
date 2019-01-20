@@ -1,5 +1,8 @@
 @extends('layouts.app')
 @section('title', 'Selecciona el asiento')
+@section('header')
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+@endsection
 @section('content')
     <div class="reservationFormWrapper">
         <div class="reserveForm">
@@ -12,12 +15,22 @@
             <input name="{{$vuelos_solicitados->get($i)}}" id="{{$vuelos_solicitados->get($i)}}" type="hidden" value="">
             {{-- Para cada pasajero --}}
             @for ($j = 0; $j < $nombres->count() ; $j++)
-                <p> Pasajero: {{$nombres->get($j)}} </p>
+            <fieldset>
+                <legend> Pasajero: {{$nombres->get($j)}} </legend>
                 <select id="{{$vuelos_solicitados->get($i)}}_{{$ids_pasajeros->get($j)}}" onchange="updateSelection(this)">
                     @foreach ($availableSeats->get($i) as $seat)
                         <option value="{{$seat}}">{{$seat}}</option>
                     @endforeach
                 </select>
+                <label id="{{$vuelos_solicitados->get($i)}}_{{$ids_pasajeros->get($j)}}_label"  for="{{$vuelos_solicitados->get($i)}}_{{$ids_pasajeros->get($j)}}">TIPO: </label>
+                <label for="{{$vuelos_solicitados->get($i)}}_{{$ids_pasajeros->get($j)}}_seguro"> | SEGURO</label>
+                <select disabled="disabled" {{$vuelos_solicitados->get($i)}}_{{$ids_pasajeros->get($j)}}_seguro" value="-1" onchange="updateInsurance(this)">
+                    @foreach ($seguros as $seguro)
+                        <option value="{{$seguro->id}}">{{$seguro->insurance_type}}</option>
+                    @endforeach
+                </select>
+                
+            </fieldset>
             @endfor
         @endfor
 
@@ -25,12 +38,32 @@
 
         <input type="submit" value="enviar">
         <script>
+            function updateInsurance(element){
+                id = element.id;
+                alert($("#" + id).val());
+            }
             function updateSelection(element){
                 var asiento_seleccionado = document.getElementById(element.id).value;
                 var id = document.getElementById(element.id).id;
                 var datos = id.split('_');
                 var id_vuelo = datos[0];
                 var id_pasajero = datos[1];
+
+                // Activar el seguro
+
+                var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+               
+                $.ajax({
+                    url: '/asociatedSeatType',
+                    type: 'POST',
+                    data: {_token: CSRF_TOKEN, flight_id:id_vuelo, seat_number:asiento_seleccionado},
+                    dataType: 'JSON',
+                    success: function (data) { 
+                        $("#" + id + "_label").html("TIPO: " + data.seat_type);
+                    }
+                }); 
+            
+
                 // Si el id_pasajero no habia sido seleccionado asiento para este vuelo, concaternarlo
                 if (!(document.getElementById(id_vuelo).value.includes(id_pasajero))){
                     var valor_antiguo = document.getElementById(id_vuelo).value;

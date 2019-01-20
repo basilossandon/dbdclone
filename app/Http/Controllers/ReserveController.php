@@ -15,6 +15,7 @@ use App\Passenger;
 use App\Ticket;
 use App\Reservation;
 use App\Receipt;
+use App\Insurance;
 
 class ReserveController extends Controller{
 
@@ -213,9 +214,12 @@ class ReserveController extends Controller{
                 $nombres->push($name);
             }
         }
+
+        $seguros = Insurance::all();
         // Vuelos_solicitados y available_seats son colecciones del mismo tamaño.
         // Para ver los asientos disponibles del vuelo i acceder a availableSeats[i]
-        return view('selectSeats', compact('availableSeats', 'vuelos_solicitados', 'nombres', 'ids_pasajeros'));
+        return view('selectSeats', compact('availableSeats', 'vuelos_solicitados', 'nombres', 'ids_pasajeros',
+                    'seguros', 'user_id'));
     }
 
     /**
@@ -298,5 +302,32 @@ class ReserveController extends Controller{
             });
         }
         return $datos_por_vuelo;
+    }
+
+    /**
+     * Retorna la lista de vuelos de la reserva
+     */
+    public function flightsOfCurrentReserve(Request $request){
+        (int)$id_usuario = $request['id_usuario'];
+        Cart::session($id_usuario);
+        return response()->json(Cart::get(0)->attributes);        
+    }
+
+    /**
+     * Retorna la lista de ids de pasajeros de la reserva
+     */
+    public function passengersOfCurrentReserve(Request $request){
+        (int)$id_usuario = $request['id_usuario'];
+        Cart::session($id_usuario);
+        $agrupados_por_nombre = Cart::getContent()->groupBy('name');
+        $ids_pasajeros = [];
+        foreach($agrupados_por_nombre as $grupo){
+            if ($grupo->first()->name != "aux"){
+                // name es el id de passenger
+                $passenger_id = $grupo->first()->name;
+                array_push($ids_pasajeros, $passenger_id);
+            }
+        }
+        return response()->json($ids_pasajeros);
     }
 }

@@ -72,6 +72,9 @@ Route::post('/reserve/storePassengersInfo', 'ReserveController@storePassengersIn
 Route::get('/reserve/selectSeats', 'ReserveController@selectSeats');
 Route::post('/reserve/storeChosenSeats', 'ReserveController@storeChosenSeats');
 Route::get('/reserve/summary', 'ReserveController@showSummary');
+Route::post('/asociatedSeatType', 'FlightController@asociatedSeatType');
+Route::post('/flightsOfCurrentReserve', 'ReserveController@flightsOfCurrentReserve');
+Route::post('/passengersOfCurrentReserve', 'ReserveController@passengersOfCurrentReserve');
 
 // FB API Routes
 Route::get('auth/{provider}', 'Auth\SocialAuthController@redirectToProvider')->name('social.auth');
