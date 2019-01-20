@@ -17,6 +17,7 @@ class UserController extends Controller
     {
         return view('users');
     }
+
     public function storeOrUpdate(Request $request)
     {
         $auxUser = User::find($request->id);

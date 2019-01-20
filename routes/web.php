@@ -56,6 +56,8 @@ Route::get('/users/{userId}/receipts/{receiptId}/reservation', 'ReceiptControlle
 Route::get('/users/{id}/receipts', 'UserController@showReceipts');
 Route::post('/users_post', 'UserController@storeOrUpdate');
 
+Route::get('/logout','Auth\LoginController@logout');
+
 // Reservations routes
 Route::get('/reservations/{reservation_id}/detail', 'ReservationController@showDetail');
 Route::post('/reservations_post', 'ReservationController@storeOrUpdate');
@@ -77,5 +79,5 @@ Route::post('/flightsOfCurrentReserve', 'ReserveController@flightsOfCurrentReser
 Route::post('/passengersOfCurrentReserve', 'ReserveController@passengersOfCurrentReserve');
 
 // FB API Routes
-Route::get('auth/{provider}', 'Auth\SocialAuthController@redirectToProvider')->name('social.auth');
-Route::get('auth/{provider}/callback', 'Auth\SocialAuthController@handleProviderCallback');
+Route::get('login/facebook', 'Auth\LoginController@redirectToProvider');
+Route::get('login/facebook/callback', 'Auth\LoginController@handleProviderCallback');
