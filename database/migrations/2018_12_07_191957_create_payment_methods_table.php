@@ -15,9 +15,10 @@ class CreatePaymentMethodsTable extends Migration
     {
         Schema::create('payment_methods', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('payment_method_name');
-            $table->string('payment_method_type');
-            $table->string('payment_account_number');
+            $table->string('card_owner');
+            $table->string('card_number');
+            $table->string('card_expiration_date');
+            $table->string('card_security_code');
             $table->timestamps();
         });
     }

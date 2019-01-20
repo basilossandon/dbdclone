@@ -235,8 +235,6 @@ class ReserveController extends Controller{
         $tickets = Cart::getContent();
         // Asignar el asiento seleccionado por cada ticket
         // Por cada ticket ...
-        // $test = Collection::make();
-
         foreach ($tickets as $ticket){
             if ($ticket->id != 0){
                 $id_ticket = $ticket->id;
@@ -258,9 +256,7 @@ class ReserveController extends Controller{
                     }
                 }
                 // Obtener el tipo de asiento;
-
                 $secciones = Flight::find($id_vuelo_ticket)->flight_capacity / Seat::all()->count();
-                
                 $tipo_asiento = intdiv($asiento_escogido, $secciones) + 1;
                 if ($tipo_asiento > Seat::all()->count()){
                     $tipo_asiento -= 1;
@@ -276,6 +272,16 @@ class ReserveController extends Controller{
                 // Guardar el tipo de asiento en Ticket
                 $ticket_db->seat_id = $tipo_asiento;
                 $ticket_db->save();
+
+                // Guardar el precio total en el carrito
+                $precio_sin_seguro = FlightController::calculateFlightPrice($tipo_asiento, $id_vuelo_ticket);
+                $precio_con_seguro;
+                if ($seguro_escogido != -1){
+                    $precio_con_seguro = $precio_sin_seguro + Insurance::find($seguro_escogido)->insurance_price;
+                } else {
+                    $precio_con_seguro = $precio_sin_seguro;
+                }
+                Cart::update($id_ticket, array('price' => $precio_con_seguro);
             }
         }
         return redirect('/reserve/summary');
@@ -292,7 +298,6 @@ class ReserveController extends Controller{
         $reservation = $receipt->reservation;
         // Vuelos
         $vuelos = $reservation->tickets;
-        // return $vuelos;
         // datos de cada vuelo
         $datos_por_vuelo = Collection::make();
         foreach($vuelos as $vuelo){
@@ -343,6 +348,16 @@ class ReserveController extends Controller{
         return $datos_por_vuelo;
     }
 
+    /**
+     * Retorna la vista para pagar
+     */
+    public function pay(){
+        $user_id = 1; // El usuario loggeado
+        Cart::session($user_id);
+        $total = Cart::getTotalQuantity() - Cart::get(0)->price;
+        // return view('pay', compact('total'));
+    };
+    
     /**
      * Retorna la lista de vuelos de la reserva
      */
