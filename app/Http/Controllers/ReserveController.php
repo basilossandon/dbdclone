@@ -225,7 +225,7 @@ class ReserveController extends Controller{
     /**
      * Guarda los asientos seleccionados por cada uno de los pasajeros
      * Se espera que $request sea una lista de strings de la forma:
-     *  "idVuelo_idPasajero:asientoSeleccionado_idPasajero:asientoSeleccionado"
+     *  "idPasajero:asientoSeleccionado:idSeeguro_idPasajero:asientoSeleccionado:idSeguro"
      * Cada string representa contiene los asientos seleccionados por vuelo solicitado.
      */
     public function storeChosenSeats(Request $request){
@@ -249,9 +249,11 @@ class ReserveController extends Controller{
                     $datos_vuelo_separados = explode("_", $datos_vuelo);
                     // Buscamos el numero de asiento seleccionado
                     $asiento_escogido;
+                    $seguro_escogido;
                     for ($aux = 0 ; $aux < count($datos_vuelo_separados) ; $aux++){
                         if (explode(":", $datos_vuelo_separados[$aux])[0] == $id_pasajero){
                             $asiento_escogido = (int)explode(":", $datos_vuelo_separados[$aux][1]);
+                            $seguro_escogido = (int)explode(":", $datos_vuelo_separados[$aux][2]);
                         }
                     }
                     // Guardar el numero de asiento en Ticket
