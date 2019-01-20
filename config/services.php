@@ -40,4 +40,10 @@ return [
         ],
     ],
 
+    'facebook' => [
+        'client_id' => '611457625994416',
+        'client_secret' => 'c6eff1608fdacd1e7ae90e99712dde75',
+        'redirect' => 'http://192.168.10.10:5432/auth/facebook/callback'
+    ],
+
 ];
