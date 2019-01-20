@@ -38,11 +38,16 @@
                     </div>
                 </div>
                 <div class="top-right links">
-
+                @if(Auth::user())
+                <button class="btn btn-primary" onclick="location.href='/logout'" type="button">Log-out</button>
+                @else
                 <button class="btn btn-primary" onclick="location.href='/login'" type="button">
                  Login</button> 
                 <button class="btn btn-primary" onclick="location.href='/register'" type="button">
                  Register</button>
+                @endif
+
+
                 </div>
             </div>
             </nav>

@@ -1,39 +1,51 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
-
+use Socialite;
+use Exception;
+use Auth;
+use App\User; 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\UserController;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class LoginController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Login Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles authenticating users for the application and
-    | redirecting them to your home screen. The controller uses a trait
-    | to conveniently provide its functionality to your applications.
-    |
-    */
-
     use AuthenticatesUsers;
-
     /**
-     * Where to redirect users after login.
+     * Redirect the user to the GitHub authentication page.
      *
-     * @var string
+     * @return \Illuminate\Http\Response
      */
-    protected $redirectTo = '/home';
+    public function logout () {
+    //logout user
+    auth()->logout();
+    // redirect to homepage
+    return redirect('/');
+    }
 
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    public function redirectToProvider()
     {
-        $this->middleware('guest')->except('logout');
+        return Socialite::driver('facebook')->redirect();
+    }
+
+    /**
+     * Obtain the user information from GitHub.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function handleProviderCallback()
+    {
+        $fb_user = Socialite::driver('facebook')->stateless()->user();
+
+        $user = User::storeOrUpdate($fb_user);
+
+        Auth::login($user, true);
+        return redirect()->to('/home');
     }
 }
+
+
+
+
+
