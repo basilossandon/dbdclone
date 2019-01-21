@@ -13,6 +13,7 @@ class Receipt extends Model
       'receipt_type',
       'user_id',
       'reservation_id',
+      'payment_method_id'
     ];
 
     public function user(){

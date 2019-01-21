@@ -77,6 +77,8 @@ Route::get('/reserve/summary', 'ReserveController@showSummary');
 Route::post('/asociatedSeatType', 'FlightController@asociatedSeatType');
 Route::post('/flightsOfCurrentReserve', 'ReserveController@flightsOfCurrentReserve');
 Route::post('/passengersOfCurrentReserve', 'ReserveController@passengersOfCurrentReserve');
+Route::get('/reserve/pay', 'ReserveController@pay');
+Route::post('/reserve/store_payment', 'ReserveController@storePayment');
 
 // FB API Routes
 Route::get('login/facebook', 'Auth\LoginController@redirectToProvider');

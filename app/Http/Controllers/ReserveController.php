@@ -16,6 +16,7 @@ use App\Ticket;
 use App\Reservation;
 use App\Receipt;
 use App\Insurance;
+use App\PaymentMethod;
 
 class ReserveController extends Controller{
 
@@ -281,7 +282,7 @@ class ReserveController extends Controller{
                 } else {
                     $precio_con_seguro = $precio_sin_seguro;
                 }
-                Cart::update($id_ticket, array('price' => $precio_con_seguro);
+                Cart::update($id_ticket, array('price' => $precio_con_seguro));
             }
         }
         return redirect('/reserve/summary');
@@ -354,10 +355,39 @@ class ReserveController extends Controller{
     public function pay(){
         $user_id = 1; // El usuario loggeado
         Cart::session($user_id);
-        $total = Cart::getTotalQuantity() - Cart::get(0)->price;
-        // return view('pay', compact('total'));
-    };
+        $total = 0;
+        foreach (Cart::getContent() as $ticket){
+            if ($ticket->id != 0){
+                $total += $ticket->price;
+            }
+        }
+        // Asignar el total al recibo de esta compra
+        // $recibo = Receipt::find(Cart::get(0)->price);
+        // $recibo->receipt_ammount = $total;
+        // $recibo->save();
+        return view('pay', compact('total'));
+    }
     
+    /**
+     * Guarda el pago realizado
+     */
+    public function storePayment(Request $request){
+        $user_id = 1; // El usuario loggeado
+        Cart::session($user_id);
+        $payment_method = new PaymentMethod();
+        $payment_method->card_owner = $request['cc_owner'];
+        $payment_method->card_number = $request['cc_number'];
+        $payment_method->card_expiration_date = $request['cc_exp_mo'].'-'.$request['cc_exp_yr'];
+        $payment_method->card_security_code = $request['cc_security_code'];
+        $payment_method->save();
+
+        // Asociar el medio de pago a la reserva
+        $recibo = Receipt::find(Cart::get(0)->price);
+        $recibo->payment_method_id = $payment_method->id;
+        $recibo->save();
+        return redirect('/');
+    }
+
     /**
      * Retorna la lista de vuelos de la reserva
      */
