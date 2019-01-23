@@ -24,7 +24,6 @@
   <form action="/reserve/choose_flights" method="POST" >
     <div class="rows">
     <div class="reserve-options">
-
         <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
         <button type="button" class="btn btn-primary">One way/Round trip</button>
         <div class="btn-group" role="group">
@@ -35,21 +34,17 @@
           </div>
         </div>
       </div>
-
       <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-
-      <div class="qty mt-5">Cantidad: 
+      <div class="qty mt-5">Quantity: 
             <span class="minus bg-dark">-</span>
             <input type="number" class="count" name="qtypasajeros" value="1">
             <span class="plus bg-dark">+</span>
         </div>
       </div>
-
-
       </div>
       <div class="columns" style="margin-top: 5px">
         <div class="column is-2">
-          <label>ORIGEN</label>
+          <label>From</label>
          <select name="origen" class="form-control select2">
            @foreach ($cities as $city)
              <option>{{$city->city_name}}</option>
@@ -57,7 +52,7 @@
          </select>
         </div>
         <div class="column is-2">
-          <label>DESTINO</label>
+          <label>To</label>
           <select name="destino" class="form-control select2">
              @foreach ($cities as $city)
                  <option>{{$city->city_name}}</option>
@@ -65,7 +60,7 @@
           </select>
         </div>
         <div class="column is-2">
-            <label>FECHA DE IDA</label>
+            <label>Depart</label>
             <input name="fecha_ida" id="datepickerida" class="form-control" data-date-container='#myModalId'/>
               <script>
                 $('#datepickerida').datepicker({
@@ -74,7 +69,7 @@
 
         </div>
         <div class="column is-2">
-          <label>FECHA DE VUELTA</label>
+          <label>Return</label>
             <input name="fecha_vuelta" id="datepickervuelta" class="form-control" data-date-container='#myModalId'/>
             <script>
             $('#datepickervuelta').datepicker({
@@ -90,7 +85,7 @@
             border-bottom-right-radius: 20px;
             border-top-left-radius: 20px;
             border-top-right-radius: 20px;">
-            Buscar
+            Search
             </button>
         </div>
           </form>

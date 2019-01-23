@@ -246,6 +246,26 @@ body {
 
 }
 
+.seatSelectionWrapper {
+  width: 66%;
+  padding-top: 120px;
+    }
+.selectForm {
+    border-radius: 8px;
+    box-sizing: border-box;
+    position: relative;
+    background: #11172b; /* latam 1b0088 */
+    color: rgb(255, 255, 255);
+    font-family: Roboto, HelveticaNeue, Arial, sans-serif;
+    font-kerning: auto;
+    font-size: 16px;
+    font-stretch: 100%;
+    padding-left: 32px;
+    padding-right: 32px;
+    padding-top: 10px;
+    padding-bottom: 50px;
+    box-shadow: 0 5px 5px -3px rgba(0,0,0,0.2), 0 8px 10px 1px rgba(0,0,0,0.14), 0 3px 14px 2px rgba(0,0,0,0.80);
+}
 
 .table-wrapper-scroll-y {
     background-color:#242A48;
@@ -256,9 +276,10 @@ body {
     -ms-overflow-style: -ms-autohiding-scrollbar;
     z-index: 99999;
       width: 1110px;
--webkit-box-shadow: 5px 5px 108px 27px rgba(0,0,0,1);
--moz-box-shadow: 5px 5px 108px 27px rgba(0,0,0,1);
-box-shadow: 5px 5px 108px 27px rgba(0,0,0,1);
+    -webkit-box-shadow: 5px 5px 108px 27px rgba(0,0,0,1);
+    -moz-box-shadow: 5px 5px 108px 27px rgba(0,0,0,1);
+    box-shadow: 5px 5px 108px 27px rgba(0,0,0,1);
+
     }
 
 .tableWrapper{

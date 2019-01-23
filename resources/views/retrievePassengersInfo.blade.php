@@ -9,12 +9,12 @@
         <form action="/reserve/storePassengersInfo" method="POST">
             @for ($i = 0; $i < $passengers; $i++)
                 <input name="data{{$i}}" id="data{{$i}}" type="hidden" value="">
-                <label>Pasajero {{$i + 1}}</label>
+                <label>Passenger N#{{$i + 1}}</label>
                 <div class="form-group" >
-                    <input type="text" class="form-control" onchange="updateData({{$i}})" id="nameInput{{$i}}" placeholder="Nombre completo">
+                    <input type="text" class="form-control" onchange="updateData({{$i}})" id="nameInput{{$i}}" placeholder="Full name">
                     <input type="text" class="form-control" onchange="updateData({{$i}})" id="RUTInput{{$i}}" placeholder="RUT">
-                    <input type="text" class="form-control" onchange="updateData({{$i}})" id="docType{{$i}}" placeholder="Tipo de documento">
-                    <input type="text" class="form-control" onchange="updateData({{$i}})" id="docCountry{{$i}}" placeHolder="Pais de origen del documento">
+                    <input type="text" class="form-control" onchange="updateData({{$i}})" id="docType{{$i}}" placeholder="Type of document">
+                    <input type="text" class="form-control" onchange="updateData({{$i}})" id="docCountry{{$i}}" placeHolder="Country origin of document">
                 </div>
             @endfor
             <script>
@@ -31,7 +31,7 @@
                     }
             </script>
             <div class="buttonWrapper">
-            <input class="btn btn-primary" type="submit" value="Enviar"></div>
+            <input class="btn btn-primary" type="submit" value="Continue"></div>
         </form>
     </div>
 </div>

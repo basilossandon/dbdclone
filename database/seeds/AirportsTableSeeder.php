@@ -11,6 +11,6 @@ class AirportsTableSeeder extends Seeder
      */
     public function run()
     {
-    	factory(App\Airport::class, 18)->create();
+    	factory(App\Airport::class, 30)->create();
     }
 }
