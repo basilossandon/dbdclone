@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Selecciona el asiento')
+@section('title', 'Select your seat')
 @section('header')
 @endsection
 @section('scripts')

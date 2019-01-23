@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Escoge tus vuelos')
+@section('title', 'Select your flight')
 
 @section('content')
 

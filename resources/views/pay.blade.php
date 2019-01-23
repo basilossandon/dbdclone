@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Paga tus vuelos')
+@section('title', 'Payment')
 
 @section('content')
 

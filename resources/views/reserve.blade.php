@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Reserva tu vuelo')
+@section('title', 'Pick your flight')
 
 @section('header')
 {{-- searchbox inside dropdown --}}

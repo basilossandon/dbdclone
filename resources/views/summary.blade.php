@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Reserva tu vuelo')
+@section('title', 'Summary')
 
 @section('header')
 {{-- searchbox inside dropdown --}}
@@ -25,7 +25,7 @@
     <div class="reserve-options">
 
 
-    
+
 
 
     <div class="buttonWrapper">
