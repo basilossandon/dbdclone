@@ -1,4 +1,5 @@
 @extends('layouts.app')
+
 @section('title', 'Pick your flight')
 
 @section('header')
@@ -9,6 +10,7 @@
 <script src="https://unpkg.com/gijgo@1.9.11/js/gijgo.min.js" type="text/javascript"></script>
 <link href="https://unpkg.com/gijgo@1.9.11/css/gijgo.min.css" rel="stylesheet" type="text/css" />
 <script src="/js/buttons.js"></script>
+
 @endsection
 
 @section('scripts')
@@ -38,8 +40,7 @@
       <div class="qty mt-5">Quantity: 
             <span class="minus bg-dark">-</span>
 
-            <input type="number" name="quantity" class="count"  value="1">
-
+            <input name="quantity" type="number" class="count"  value="1">
             <span class="plus bg-dark">+</span>
         </div>
       </div>

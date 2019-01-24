@@ -35,7 +35,7 @@ class ReserveController extends Controller{
         if (Auth::check()) {
         $origen = $request->input('origen');
         $destino = $request->input('destino');
-        $num_pasajeros = Carbon::parse($request->input('quantity'));
+        $num_pasajeros = $request->input('quantity');
         $fecha_ida = Carbon::parse($request->input('fecha_ida'));
         $fecha_vuelta = Carbon::parse($request->input('fecha_vuelta'));
         $user_id = 1; // Id del usuario que esta logeado
