@@ -37,7 +37,9 @@
       <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
       <div class="qty mt-5">Quantity: 
             <span class="minus bg-dark">-</span>
-            <input type="number" class="count" name="qtypasajeros" value="1">
+
+            <input type="number" name="quantity" class="count"  value="1">
+
             <span class="plus bg-dark">+</span>
         </div>
       </div>

@@ -17,7 +17,7 @@ use App\Reservation;
 use App\Receipt;
 use App\Insurance;
 use App\PaymentMethod;
-
+use Auth;
 class ReserveController extends Controller{
 
     public function searchFlights()
@@ -32,9 +32,10 @@ class ReserveController extends Controller{
     * con esas condiciones y retorna la vista chooseFlights.
     */
     public function chooseFlights(Request $request){
+        if (Auth::check()) {
         $origen = $request->input('origen');
         $destino = $request->input('destino');
-        $num_pasajeros = 2;
+        $num_pasajeros = Carbon::parse($request->input('quantity'));
         $fecha_ida = Carbon::parse($request->input('fecha_ida'));
         $fecha_vuelta = Carbon::parse($request->input('fecha_vuelta'));
         $user_id = 1; // Id del usuario que esta logeado
@@ -89,7 +90,8 @@ class ReserveController extends Controller{
             $routesFound->push($route);
         });
         return view('chooseFlights', compact('routesFound'));
-    }
+        }
+        return redirect('/login');    }
 
     /**
      * Almacena los vuelos seleccionados en el carrito
