@@ -290,6 +290,7 @@ body {
     position: relative;
     z-index: initial;
     background: #11172b; /* latam 1b0088 */
+
     color: rgb(255, 255, 255);
     font-family: Roboto, HelveticaNeue, Arial, sans-serif;
     font-kerning: auto;
@@ -315,11 +316,10 @@ body {
 }
 
 .payButtonWrapper{
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    z-index: 9999999;
+    z-index: 9999999;   
+    position: fixed;
+    bottom: 100px;
+    right: 27%; 
 }
 
 .btn-primary:hover {
