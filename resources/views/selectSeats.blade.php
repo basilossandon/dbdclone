@@ -1,43 +1,59 @@
 @extends('layouts.app')
-@section('title', 'Selecciona el asiento')
+@section('title', 'Select your seat')
 @section('header')
+@endsection
+@section('scripts')
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    {{-- searchbox inside dropdown --}}
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+    <script>$('.select2').select2();</script>
 @endsection
 @section('content')
-    <div class="reservationFormWrapper">
-        <div class="reserveForm">
+    <div class="seatSelectionWrapper mx-auto">
+        <div class="selectForm">
     <form action="/reserve/storeChosenSeats", method="POST">
         {{-- Para cada vuelo --}}
         @for ($i = 0; $i < $vuelos_solicitados->count(); $i++)
-            <p> VUELO {{$vuelos_solicitados->get($i)}} </p>
+            <p> FLIGHT {{$vuelos_solicitados->get($i)}} </p>
             {{-- En este input se guardara los asientos seleccionados por cada pasajero en el vuelo $i.
                 Tendra la forma idPasajero:numAsiento:numSeguro_idPasajero:numAsiento:numSeguro... --}}
             <input name="{{$vuelos_solicitados->get($i)}}" id="{{$vuelos_solicitados->get($i)}}" type="hidden" value="">
             {{-- Para cada pasajero --}}
             @for ($j = 0; $j < $nombres->count() ; $j++)
             <fieldset>
-                <legend> Pasajero: {{$nombres->get($j)}} </legend>
+
+                <legend> Passenger: {{$nombres->get($j)}} </legend>
+                <label id="{{$vuelos_solicitados->get($i)}}_{{$ids_pasajeros->get($j)}}_label"  for="{{$vuelos_solicitados->get($i)}}_{{$ids_pasajeros->get($j)}}">Seat type: </label>
                 <select id="{{$vuelos_solicitados->get($i)}}_{{$ids_pasajeros->get($j)}}" onchange="updateSelection(this)" value="{{$availableSeats->get($i)->first()}}">
                     @foreach ($availableSeats->get($i) as $seat)
                         <option value="{{$seat}}">{{$seat}}</option>
                     @endforeach
                 </select>
-                <label id="{{$vuelos_solicitados->get($i)}}_{{$ids_pasajeros->get($j)}}_label"  for="{{$vuelos_solicitados->get($i)}}_{{$ids_pasajeros->get($j)}}">TIPO: </label>
-                <label for="{{$vuelos_solicitados->get($i)}}_{{$ids_pasajeros->get($j)}}_seguro"> | SEGURO</label>
+
+                <label for="{{$vuelos_solicitados->get($i)}}_{{$ids_pasajeros->get($j)}}_seguro">Insurance</label>
                 <select disabled="disabled" id="{{$vuelos_solicitados->get($i)}}_{{$ids_pasajeros->get($j)}}_seguro" value="-1" onchange="updateInsurance(this)">
-                    <option value="-1">No deseo seguro</option>
+                    <option value="-1">No insurance</option>
                     @foreach ($seguros as $seguro)
                         <option value="{{$seguro->id}}">{{$seguro->insurance_type}}</option>
                     @endforeach
                 </select>
-                
+
+
             </fieldset>
             @endfor
         @endfor
 
 
-
-        <input type="submit" value="enviar">
+        <div class="buttonWrapper">
+            <button class="btn btn-primary" type="submit" value="enviar" style="
+            margin-top: 25px;
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;">
+            Continue
+            </button>
+        </div>
         <script>
             function updateInsurance(element){
                 id = element.id;

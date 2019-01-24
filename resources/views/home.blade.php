@@ -8,7 +8,7 @@
                     <div class="card-header">{{ __('Login') }}</div>
 
                     <div class="card-body" >
-                        <p>Nombre:</p>
+                        <p>Name:</p>
                             <p><strong>{{ Auth::user()->name }}</strong></p>
                             <hr>
                             <p>Email:</p>

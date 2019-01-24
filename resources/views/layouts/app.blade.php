@@ -39,7 +39,8 @@
                 </div>
                 <div class="top-right links">
                 @if(Auth::user())
-                <button class="btn btn-primary" onclick="location.href='/logout'" type="button">Log-out</button>
+                <button class="btn btn-primary" onclick="location.href='/logout'" type="button">Log-out</button>                        
+                            <img style="height: 50px;"src="{{ Auth::user()->avatar }}" alt="{{ Auth::user()->name }}" class="img-responsive img-thumbnail">
                 @else
                 <button class="btn btn-primary" onclick="location.href='/login'" type="button">
                  Login</button> 

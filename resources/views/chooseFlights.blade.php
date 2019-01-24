@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Escoge tus vuelos')
+@section('title', 'Select your flight')
 
 @section('content')
 
@@ -12,10 +12,10 @@
                 <thead>
                     <tr>
                         <th >#</th>
-                        <th >Origen</th>
-                        <th >Destino</th>
-                        <th >Fecha salida</th>
-                        <th >Fecha llegada</th>
+                        <th >From</th>
+                        <th >To</th>
+                        <th >Departure</th>
+                        <th >Arrival</th>
                     </tr>
                 </thead>
                         <tbody>
@@ -30,7 +30,7 @@
                             </tr>
                             @endforeach
                         </tbody>
-                        <input class="btn btn-primary" type="submit" value="Seleccionar">
+                        <input class="btn btn-primary" type="submit" value="Choose flight">
             </table>
         </form>
     @endforeach
