@@ -5,7 +5,6 @@
 
     <div class="reservationFormWrapper">
         <div class="reserveForm">
-
         <form action="/reserve/storePassengersInfo" method="POST">
             @for ($i = 0; $i < $passengers; $i++)
                 <input name="data{{$i}}" id="data{{$i}}" type="hidden" value="">

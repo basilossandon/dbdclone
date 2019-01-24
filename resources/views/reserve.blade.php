@@ -37,11 +37,10 @@
         </div>
       </div>
       <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-      <div class="qty mt-5">Quantity: 
-            <span class="minus bg-dark">-</span>
-
-            <input name="quantity" type="number" class="count"  value="1">
-            <span class="plus bg-dark">+</span>
+        <div class="qty mt-5">Quantity: 
+            <span class="minus bg-dark " id="decrease" value="Decrease Value">-</span>
+            <input name="quantity" type="number" class="count"  id="qty" value="1" min="1" max="4">
+            <span class="plus bg-dark" onclick="incrementValue()" id="increase" value="Increment Value">+</span>
         </div>
       </div>
       </div>
