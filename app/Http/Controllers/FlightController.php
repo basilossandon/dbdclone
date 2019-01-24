@@ -73,23 +73,23 @@ class FlightController extends Controller
         return Flight::all();
     }
 
-    // Determina si un asiento de un vuelo esta disponible
+    // Verifies if a seat in a flght is available
     public function available($flight_id, $seat_number){
         $flight = Flight::find($flight_id);
         if ($seat_number < 0 || $seat_number > $flight->flight_capacity){
             return false;
         }
-        // El vuelo esta disponible si ninguno de sus tickets posee el seat_number
-        // solicitado
+        // The flight is available if none of it's tickets has their seat_number
+        // taken
         return $flight->tickets->every(function ($ticket) use ($seat_number){
             return ($ticket->seat_number != $seat_number);
         });
     }
 
-    // Determina todos los asientos disponibles de un vuelo
+    // Gets available seats from a flight
     public function availableSeats($flight_id){
         $flight = Flight::find($flight_id);
-        // Crea una coleccion de la forma {1, 2, ... , $flight->flight_capacity}
+        // Creates a colletion with this form {1, 2, ... , $flight->flight_capacity}
         $seatsList = Collection::times($flight->flight_capacity, function($number){
             return $number;
         });
@@ -99,11 +99,11 @@ class FlightController extends Controller
         return $availableSeats;
     }
 
-    // Determina si un vuelo tiene al menos un asiento disponible
+    // Verifies if a flight has at least one seat taken
     public function flightAvailable($flight){
         return ($flight->tickets->count() < $flight->flight_capacity);
     }
-    // Reserva un vuelo
+    // Reserves a flight
     public function reserveTicket($flight_id, $passenger_id, $seat_id, $seat_number){
         $flightToReserve = Flight::find($flight_id);
         $ticket = null;
@@ -116,7 +116,7 @@ class FlightController extends Controller
                 'reservation_ip' => 'test',
             ]);
             $reservation->save();
-            // Se asocia un recibo que aun no es pagado
+            // Links an unpaid receipt
             $receipt = new Receipt([
                 'reservation_id' => $reservation->id,
                 //'user_id' => Auth::user()->id,
@@ -126,7 +126,7 @@ class FlightController extends Controller
                 'receipt_ammount' => 0,
             ]);
             $receipt->save();
-            // Se asume que el asiento $seat_number esta disponible
+            // Assumes that the seat $seat_number is available
             $ticket = new Ticket([  'passenger_id' => $passenger_id,
                                     'seat_id' => $seat_id,
                                     'seat_number' => $seat_number,
@@ -171,8 +171,8 @@ class FlightController extends Controller
     }
 
     /**
-    * Almacena  en $flightsFound las colecciones de vuelos (escalas) disponibles que pueden
-    * ser tomados para llegar desde un origen a un destino
+    * Stores in $flightsFound all collections of flights (scales) available that
+    * can be used to get from one place to another
     *
     * @param \Illuminate\Support\Collection $rama
     * @param string $destino
@@ -225,17 +225,17 @@ class FlightController extends Controller
         });
         return $this->flightsFound;
     }
-    
+
     /**
      *  A partir de un id de Flight y numero de asiento, retorna el tipo asociado
-     *  
+     *
      */
     public function asociatedSeatType(Request $request){
         $flight = Flight::find($request['flight_id']);
         $seat_number = $request['seat_number'];
         $flight_capacity = $flight->flight_capacity;
         $sections = $flight_capacity / Seat::all()->count();
-        
+
         $seat_type = intdiv($seat_number, $sections) + 1;
         if ($seat_type > Seat::all()->count()){
             $seat_type -= 1;
@@ -245,6 +245,6 @@ class FlightController extends Controller
         } else {
             return Seat::find($seat_type);
         }
-        
+
     }
 }
