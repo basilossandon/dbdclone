@@ -176,32 +176,32 @@ class FlightController extends Controller
     *
     * @param \Illuminate\Support\Collection $rama
     * @param string $destino
-    * Inicialmente rama debe ser una coleccion que contenga un vuelo con el origen
+    * Initially rama must be a collection that contains a flight with it's origin
     */
     public function findFlights(\Illuminate\Support\Collection $rama, $destino){
-        // Si el destino del ultimo vuelo en rama es el destino buscado
+        // If the last flight's destiny in rama is the target destiny
         if ($this->destinyCity($rama->last()->id) == $destino){
-            // Agregar la coleccion de vuelos de rama a $flightsFound
+            // Add to $flightsFound the flight collection in rama
             $this->flightsFound->push($rama->all());
         }else if ($rama->count() < 2){
-            // Candidatos son los vuelos que tienen origen en el destino del ultimo de rama
-            // y ademas cumplen las condiciones impuestas en filter
+            // Flight candidates are the ones that have their origin in the last destiny in rama
+            // and satisfy the conditions imposed in filter
             $candidatos = Flight::where('departure_airport_id', $rama->last()->arrival_airport_id)->get()
             ->filter(function ($flight) use ($rama){
                 $fecha_salida = Carbon::parse($flight->flight_departure);
                 $fecha_llegada = Carbon::parse($rama->last()->flight_arrival);
-                // El destino del vuelo no es una ciudad origen presente en los vuelos de $rama
+                // The destiny is not an origin city in ramas's flights
                 $no_se_devuelve = $rama->every(function ($vuelo_rama) use ($flight){
                     return ($this->originCity($vuelo_rama->id) != $this->destinyCity($flight->id));
                 });
                 return (
-                    // vuelo no esta en $rama
+                    // Flight not in rama
                     (!($rama->contains($flight))) &&
-                    // vuelo tiene al menos un asiento disponible
+                    // Flight has at least one available seat
                     ($this->flightAvailable($flight)) &&
                     $no_se_devuelve &&
-                    // La fecha de salida de $flight es la misma o posterior a la
-                    // de llegada del ultimo vuelo en $rama
+                    // The departure date in $flight is the same or after
+                    // the last flight's arrival date in rama
                     ($fecha_salida->greaterThanOrEqualTo($fecha_llegada))
                 );
             });
@@ -227,7 +227,7 @@ class FlightController extends Controller
     }
 
     /**
-     *  A partir de un id de Flight y numero de asiento, retorna el tipo asociado
+     *  Based on the id of flight and it's seat number, returns asociated seat type
      *
      */
     public function asociatedSeatType(Request $request){
