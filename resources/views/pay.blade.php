@@ -25,8 +25,11 @@
                         <input name="cc_owner" type="text" class="form-control" id="cc_name" pattern="\w+ \w+.*" title="First and last name" required="required">
                     </div>
                     <div class="form-group">
-                        <label>Card Number</label>
-                        <input name="cc_number" type="text" class="form-control" autocomplete="off" maxlength="20" pattern="\d{16}" title="Credit card number" required="">
+                        <label><br>Card Number</label>
+                        <img class="img-responsive" align="right" src="http://i76.imgup.net/accepted_c22e0.png">
+
+                        <input name="cc_number" type="text" class="form-control right" autocomplete="off" maxlength="20" pattern="\d{16}" title="Credit card number" required="">
+
                     </div>
                     <div class="form-group row">
                         <label class="col-md-12">Card Exp. Date</label>
@@ -64,7 +67,7 @@
                     </div>
                     <div class="form-inline">
                         <div class="input-group">
-                            <div class="input-group-prepend"><span class="input-group-text">$</span></div>
+                            <div class="input-group-prepend"><span class="input-group-text"><h2>$</h2></span></div>
                             <input disabled="disabled" type="text" class="form-control text-right" id="exampleInputAmount" placeholder="{{$total}}">
                             <div class="input-group-append"><span class="input-group-text">.00</span></div>
                         </div>

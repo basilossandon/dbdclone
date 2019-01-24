@@ -51,7 +51,7 @@
             border-bottom-right-radius: 20px;
             border-top-left-radius: 20px;
             border-top-right-radius: 20px;">
-            Pay
+            Continue
             </button>
         </div>
         <script>

@@ -346,7 +346,7 @@ class ReserveController extends Controller{
                 }
             });
         }
-        return $datos_por_vuelo;
+        return view('summary', compact('datos_por_vuelo'));
     }
 
     /**
