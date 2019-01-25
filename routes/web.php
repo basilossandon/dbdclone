@@ -83,5 +83,9 @@ Route::post('/reserve/store_payment', 'ReserveController@storePayment');
 Route::get('login/facebook', 'Auth\LoginController@redirectToProvider');
 Route::get('login/facebook/callback', 'Auth\LoginController@handleProviderCallback');
 
+// Vehicles routes
 Route::get('/reserve/vehicles', 'VehicleController@searchVehicles');
+Route::get('/reserve/choose_car', 'VehicleReservationController@showAvailableVehicles');
+
+// Hotels routes
 Route::get('/reserve/hotels', 'HotelController@searchHotels');
