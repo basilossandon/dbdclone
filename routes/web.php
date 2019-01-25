@@ -100,5 +100,5 @@ Route::get('/reserve/rooms/pay', 'RoomReservationController@pay');
 Route::post('reserve/rooms/store_payment', 'RoomReservationController@storePayment');
 
 Route::get('/dashboard', 'DashboardController@index');
-Route::get('/checkin', 'DashboardController@index');
+Route::get('/checkin', 'ReservationController@showDetail');
 Route::get('/thanks', 'Auth\LoginController@returnUserName');

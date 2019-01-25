@@ -3,6 +3,11 @@
 namespace App\Http\Controllers;
 use App\Reservation;
 use Illuminate\Http\Request;
+use Auth;
+use App\User;
+use App\Receipt;
+use \Illuminate\Support\Collection;
+
 
 class ReservationController extends Controller
 {
@@ -51,11 +56,17 @@ class ReservationController extends Controller
         return Reservation::all();
     }
 
-    public function showDetail($reservation_id){
-      $reservation = Reservation::find($reservation_id);
-      $rooms = $reservation->rooms()->get();
-      $tickets = $reservation->tickets()->get();
-      $vehicles = $reservation->vehicles()->get();
-      return collect([$rooms, $tickets, $vehicles]);
+    public function showDetail(){
+      $user_id = Auth::id();
+      $user = User::find($user_id);
+      $vuelosPorReserva = Collection::make();
+      $receipts = $user->receipts;
+      foreach ($receipts as $receipt){
+        $reservation = $receipt->reservation;
+        $tickets = $reservation->tickets;
+        $vuelosPorReserva->push($tickets);
+      }
+      return view('/checkin', compact('vuelosPorReserva'));
     }
+
 }
