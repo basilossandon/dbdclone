@@ -23,11 +23,11 @@
 					</a>
 
 
-					
+
 				</div>
 				<div class="card-body">
 					<h4 class="card-title">Where do you want to go?</h4>
-					<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+					<p class="card-text">Book your flight with us here.</p>
 					<div class ="button-card-container">
 					<a class="btn btn-lg btn-primary"  href="/reserve" role="button">View flights</a>
 					</div>
@@ -48,7 +48,7 @@
 				</div>
 				<div class="card-body">
 					<h4 class="card-title">Check out our vacation deals</h4>
-					<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+					<p class="card-text">Check the awesome vacation packages we offer here.</p>
 					<div class ="button-card-container">
 					<a class="btn btn-lg btn-primary" href="/reserve/packages" role="button">View packages</a>
 					</div>
@@ -67,7 +67,7 @@
 				</div>
 				<div class="card-body">
 				<h4 class="card-title">Book a room</h4>
-				<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+				<p class="card-text">Book a hotel room with us so you can relax without a worry.</p>
 				<div class ="button-card-container">
 				<a class="btn btn-lg btn-primary" href="/reserve/rooms" role="button">Book room</a>
 				</div>
@@ -85,7 +85,7 @@
 			  	</div>
 			 	<div class="card-body">
 			    	<h4 class="card-title">Pick any vehicle</h4>
-				    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+				    <p class="card-text">Pick a vehicle in the country you are going so tha you don't have to walk on your vacation.</p>
 				    <div class ="button-card-container">
 				    <a class="btn btn-lg btn-primary" href="/reserve/vehicles" role="button">Rent car</a>
 				    </div>
