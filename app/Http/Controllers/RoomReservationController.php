@@ -21,7 +21,6 @@ class RoomReservationController extends Controller
     }
 
     public function chooseHotelRoom(Request $request){
-        // return collect($request);
         $city_name = $request->input('city');
         $city_id = City::all()->where('city_name', $city_name)->first()->id;
         $stars = $request->input('stars');
