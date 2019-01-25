@@ -93,16 +93,16 @@ class HotelController extends Controller
     public function showAvailableRooms($hotel_id, $date){
         $askedDate = Carbon::parse($date);
         $rooms = Hotel::find($hotel_id)->rooms;
-        // filtrar las habitaciones que esten disponibles
+        // Filters all available rooms
         $availableRooms = $rooms->filter(function ($room) use ($askedDate){
-          // Si ninguna de las reservas contiene $askedDate, $thereArentReservations = false
+          // If none of the reserves contains $askedDate, $thereArentReservations = false
           $thereArentReservations = $room->reservations->every(function ($reservation) use ($askedDate){
               $reservation_lease = Carbon::parse($reservation->pivot->reservation_room_lease);
               $reservation_return = Carbon::parse($reservation->pivot->reservation_room_return);
               return (!($askedDate->between($reservation_lease, $reservation_return)));
             });
-          // Se filtra si la haabitacion no tiene reservas o ninguna de sus reservas
-          // ocupa $askedDate
+          // Filters if the room doesn't have any reserves or if none of it's reserves
+          // uses $askedDate
           return ($room->reservations->count() == 0 || $thereArentReservations);
         });
         return $availableRooms;
