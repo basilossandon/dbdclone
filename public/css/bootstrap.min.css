@@ -67,7 +67,7 @@ body {
   text-align: left;
   background-color: #fff;
   position:relative;
-  padding-top: 100px; 
+  padding-top: 0px; 
   bottom: 0;
 }
 
@@ -495,7 +495,7 @@ body {
 }
 .login-form-container{
     position:relative;
-    margin-top: 100px;
+    padding-top: 130px;
 }
 .reservationFormWrapper{
   width: 100%;

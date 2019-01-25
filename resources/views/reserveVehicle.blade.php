@@ -23,7 +23,7 @@
 
 <div class="reservationFormWrapper">
 <div class="reserveForm">
-  <form action="/reserve/vehicles" method="POST" >
+  <form action="/reserve/choose_car" method="POST" >
     <div class="rows">
     <div class="reserve-options">
 
