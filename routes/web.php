@@ -85,5 +85,5 @@ Route::get('login/facebook', 'Auth\LoginController@redirectToProvider');
 Route::get('login/facebook/callback', 'Auth\LoginController@handleProviderCallback');
 
 // Vehicles routes
-Route::get('/reserve/vehicles', 'VehicleController@searchVehicles');
-Route::get('/reserve/choose_car', 'VehicleReservationController@showAvailableVehicles');
+Route::get('/reserve/vehicles', 'VehicleReservationController@searchVehicles');
+Route::post('/reserve/choose_car', 'VehicleReservationController@showAvailableVehicles');
