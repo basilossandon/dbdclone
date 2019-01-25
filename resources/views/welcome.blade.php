@@ -14,7 +14,7 @@
 	<div class="columns">
 		<div class="cardWrapperWelcome">
 			<div class="card text-white bg-dark mb-3" style="max-width: 20rem;">
-			  	<div class="card-header">    
+			  	<div class="card-header">
 					<a href="/reserve" style="color: white">
 					<img src="/images/plane-icon.png">
 					<a href="/reserve" style="color: white">
@@ -27,7 +27,7 @@
 					<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
 					<div class ="button-card-container">
 					<a class="btn btn-lg btn-primary"  href="/reserve" role="button">View flights</a>
-					</div>			
+					</div>
 				</div>
 			</div>
 		</div>
@@ -35,7 +35,7 @@
 
 		<div class="cardWrapperWelcome">
 			<div class="card text-white bg-dark mb-3" style="max-width: 20rem;">
-			  	<div class="card-header">    
+			  	<div class="card-header">
 					<a href="/packages" style="color: white">
 					<img src="/images/vacations-icon.svg">
 					<a href="/packages" style="color: white">
@@ -48,14 +48,14 @@
 					<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
 					<div class ="button-card-container">
 					<a class="btn btn-lg btn-primary" href="/packages" role="button">View packages</a>
-					</div>			
+					</div>
 				</div>
 			</div>
 		</div>
 
 		<div class="cardWrapperWelcome">
 		<div class="card text-white bg-dark mb-3" style="max-width: 20rem;">
-			<div class="card-header">    
+			<div class="card-header">
 				<a  href="/hotels" style="color: white">
 				<img src="/images/hotel-icon.svg">
 					Shop Hotels
@@ -67,13 +67,13 @@
 				<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
 				<div class ="button-card-container">
 				<a class="btn btn-lg btn-primary" href="/hotels" role="button">Book room</a>
-				</div>			
+				</div>
 			</div>
 		</div>
 		</div>
 		<div class="cardWrapperWelcome">
 			<div class="card text-white bg-dark mb-3" style="max-width: 20rem;">
-			  	<div class="card-header">    
+			  	<div class="card-header">
 				    <a href="/vehicles" style="color: white">
 					<img src="/images/car-icon.svg">
 				    Rent a car
@@ -85,7 +85,7 @@
 				    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
 				    <div class ="button-card-container">
 				    <a class="btn btn-lg btn-primary" href="/vehicles" role="button">Rent car</a>
-				    </div>			
+				    </div>
 			  	</div>
 			</div>
 		</div>
@@ -93,4 +93,3 @@
 	</div>
 </div>
 @endsection
-
