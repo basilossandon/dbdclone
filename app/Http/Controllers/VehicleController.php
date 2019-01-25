@@ -2,9 +2,10 @@
 namespace App\Http\Controllers;
 use App\Vehicle;
 use Illuminate\Http\Request;
+use \Illuminate\Support\Collection;
 class VehicleController extends Controller
 {
-    
+
     public function index()
     {
         return Vehicle::all();
@@ -38,11 +39,11 @@ class VehicleController extends Controller
             $vehicle = new Vehicle();
             $vehicle->updateOrCreate([
                 'id' => $request->id,
-            ], 
+            ],
                 ['vehicle_price' => $request->vehicle_price,
                 'vehicle_type' => $request->vehicle_type,
                 'vehicle_licence_plate' => $request->vehicle_licence_plate
-            ]);   
+            ]);
         }
         return Vehicle::all();
     }
@@ -55,7 +56,7 @@ class VehicleController extends Controller
     public function destroy($id)
     {
         $vehicle = Vehicle::find($id);
-        $vehicle->delete();      
+        $vehicle->delete();
         return Vehicle::all();
     }
 
@@ -63,5 +64,14 @@ class VehicleController extends Controller
         // por implementar
     }
 
+    public static function getVehicleTypes(){
+        $vehicle_types = Collection::make();
+        $vehicles = Vehicle::all();
+        foreach ($vehicles as $vehicle) {
+            if (!$vehicle_types->contains($vehicle->vehicle_type)) {
+                $vehicle_types->push($vehicle->vehicle_type);
+            }
+        }
+        return $vehicle_types;
+    }
 }
-
