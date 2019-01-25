@@ -27,6 +27,43 @@
     <div class="rows">
     <div class="reserve-options">
 
+      </div>
+      <div class="columns" style="margin-top: 5px">
+      <div class="column is-2">
+        <label>City</label>
+       <select name="city" class="form-control select2">
+         @foreach ($cities as $city)
+           <option>{{$city->city_name}}</option>
+         @endforeach
+       </select>
+      </div>
+      <div class="column is-2">
+        <label>Vehicle type</label>
+        <select name="vehicle_type" class="form-control select2">
+           @foreach ($vehicle_types as $type)
+               <option>{{$type}}</option>
+           @endforeach
+        </select>
+      </div>
+      <div class="column is-2">
+          <label>Pick-up Date</label>
+          <input name="pickup_date" id="datepickerpickupdate" class="form-control" data-date-container='#myModalId'/>
+            <script>
+              $('#datepickerpickupdate').datepicker({
+                uiLibrary: 'bootstrap4'});
+            </script>
+
+      </div>
+      <div class="column is-2">
+        <label>Drop-off date</label>
+          <input name="dropoff_date" id="datepickerdropoffdate" class="form-control" data-date-container='#myModalId'/>
+          <script>
+          $('#datepickerdropoffdate').datepicker({
+          uiLibrary: 'bootstrap4'
+          });
+          </script>
+        </div>
+      </div>
 
     </div>
     <div class="buttonWrapper">
@@ -39,7 +76,7 @@
             Search
             </button>
         </div>
-          </form>
+    </form>
   </div>
 </div>
 
