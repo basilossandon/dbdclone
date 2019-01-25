@@ -24,7 +24,7 @@
 					<h4 class="card-title">Precio: ${{$vehicle->vehicle_price}}</h4>
 					<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
 					<div class ="button-card-container">
-					<a type="submot" class="btn btn-lg btn-primary"  href="/reserve/store_car/id={{$vehicle->id}}/" role="button">View flights</a>
+					<a class="btn btn-lg btn-primary"  href="/reserve/store_car/id={{$vehicle->id}}/" role="button">View flights</a>
 					</div>
 				</div>
 			</div>

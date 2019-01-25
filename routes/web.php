@@ -49,7 +49,7 @@ Route::post('/cities_post', 'CityController@storeOrUpdate');
 
 // Package routes
 Route::get('/packages/{packageId}/details', 'PackageController@showDetail');
-Route::post('/packages_post', 'PackageController@storeOrUpdate');
+Route::post('/packagse_post', 'PackageController@storeOrUpdate');
 
 // Users rotues
 Route::get('/users/{userId}/receipts/{receiptId}/payment_method', 'ReceiptController@showPaymentMethod');
@@ -84,17 +84,11 @@ Route::post('/reserve/store_payment', 'ReserveController@storePayment');
 Route::get('login/facebook', 'Auth\LoginController@redirectToProvider');
 Route::get('login/facebook/callback', 'Auth\LoginController@handleProviderCallback');
 
-<<<<<<< HEAD
 // Vehicles routes
 Route::get('/reserve/vehicles', 'VehicleReservationController@searchVehicles');
 Route::post('/reserve/choose_car', 'VehicleReservationController@showAvailableVehicles');
-=======
-Route::get('/reserve/vehicles', 'VehicleController@searchVehicles');
-Route::get('/reserve/hotels', 'HotelController@searchHotels');
 
-// dashboard
-Route::get('/dashboard', 'DashboardController@index');
+
 // Reserva de habitacion
 Route::get('/reserve/rooms', 'RoomReservationController@searchRooms');
 Route::post('/reserve/rooms/chooseRoom', 'RoomReservationController@chooseHotelRoom');
->>>>>>> 1d31b4b057918abd692a780cf8c144e1e1b14918
