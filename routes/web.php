@@ -41,6 +41,8 @@ Route::get('/hotel/{hotel_id}/rooms', 'HotelController@showRooms');
 Route::get('/hotel/{hotel_id}/reservations', 'HotelController@showReservatedRooms');
 Route::get('/hotel/{hotel_id}/available_rooms/{date}', 'HotelController@showAvailableRooms');
 Route::post('/hotel_post', 'HotelController@storeOrUpdate');
+Route::get('/reserve/hotels', 'HotelController@searchHotels');
+
 // Cities routes
 Route::get('/cities/{city_id}/available_flights', 'CityController@showAvailableFlights');
 Route::post('/cities_post', 'CityController@storeOrUpdate');
@@ -60,7 +62,6 @@ Route::get('/logout','Auth\LoginController@logout');
 // Reservations routes
 Route::get('/reservations/{reservation_id}/detail', 'ReservationController@showDetail');
 Route::post('/reservations_post', 'ReservationController@storeOrUpdate');
-
 
 // Flights routes
 Route::post('/flights_post', 'FlightController@storeOrUpdate');
@@ -86,6 +87,3 @@ Route::get('login/facebook/callback', 'Auth\LoginController@handleProviderCallba
 // Vehicles routes
 Route::get('/reserve/vehicles', 'VehicleController@searchVehicles');
 Route::get('/reserve/choose_car', 'VehicleReservationController@showAvailableVehicles');
-
-// Hotels routes
-Route::get('/reserve/hotels', 'HotelController@searchHotels');
