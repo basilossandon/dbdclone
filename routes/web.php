@@ -88,3 +88,6 @@ Route::get('/reserve/hotels', 'HotelController@searchHotels');
 
 // dashboard
 Route::get('/dashboard', 'DashboardController@index');
+// Reserva de habitacion
+Route::get('/reserve/rooms', 'RoomReservationController@searchRooms');
+Route::post('/reserve/rooms/chooseRoom', 'RoomReservationController@chooseHotelRoom');
