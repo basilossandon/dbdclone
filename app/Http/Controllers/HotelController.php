@@ -4,10 +4,36 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Hotel;
+use App\City;
+use App\Room;
 use \Illuminate\Support\Collection;
 use Carbon\Carbon;
 class HotelController extends Controller
 {
+
+        public function searchRoomTypes(){
+        $rooms = Room::all();
+        $roomTypes = Collection::make();
+        foreach ($rooms as $room){
+            if (!$roomTypes->contains($room->room_type))
+            {
+                $roomTypes->push($room->room_type);
+            }
+        }
+        return $roomTypes;
+    }
+
+
+        public function searchHotels()
+    {
+        $cities = City::all();
+        $hotels = Hotel::all();
+        $rooms = Room::all();
+        $roomTypes = $this->searchRoomTypes();
+        return view('reserveHotel', compact('cities','hotels','roomTypes'));
+    }
+
+
     public function index()
     {
         return Hotel::all();
