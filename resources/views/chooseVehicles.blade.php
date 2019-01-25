@@ -4,7 +4,7 @@
 @section('content')
 
 <div class="welcomeCards">
-	<div class="columns">      
+	<div class="columns">
 
     @foreach ($available_vehicles as $vehicle)
     <div class="cardWrapperWelcome">
@@ -24,7 +24,7 @@
 					<h4 class="card-title">Price: ${{$vehicle->vehicle_price}}</h4>
 					<p class="card-text">License plate: {{$vehicle->vehicle_licence_plate}}</p>
 					<div class ="button-card-container">
-					<a class="btn btn-lg btn-primary"  href="/reserve/store_car/id={{$vehicle->id}}/" role="button">Choose Vehicle</a>
+					<a class="btn btn-lg btn-primary"  href="/reserve/store_vehicle_reservation/{{$vehicle->id}}/" role="button">Choose Vehicle</a>
 					</div>
 				</div>
 			</div>
