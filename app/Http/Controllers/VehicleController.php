@@ -13,7 +13,7 @@ class VehicleController extends Controller
     public function searchVehicles()
     {
         $vehicles = Vehicle::all();
-        return view('vehicle', compact('vehicles'));
+        return view('reserveVehicle', compact('vehicles'));
     }
 
 

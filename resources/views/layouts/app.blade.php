@@ -70,7 +70,7 @@
         </div>
 
         <div class="footer-items">    
-            <a href="/packages" style="color: white">
+            <a href="/reserve/packages" style="color: white">
             <img src="/images/vacations-icon.svg">
             <a href="/packages" style="color: white">
             Vacation packages
@@ -79,7 +79,7 @@
         </div>
 
         <div class="footer-items">    
-            <a  href="/hotels" style="color: white">
+            <a  href="/reserve/hotels" style="color: white">
             <img src="/images/hotel-icon.svg">
             Shop Hotels
             <img src="//content.delta.com/content/www/lac/en/home.damAssetRender.20180417T1339174800400.html/content/dam/fresh-air/icons/shopping-band-right-arrow.svg" alt="">
@@ -87,7 +87,7 @@
         </div>
 
         <div class="footer-items">    
-            <a href="/vehicles" style="color: white">
+            <a href="/reserve/vehicles" style="color: white">
             <img src="/images/car-icon.svg">
             Rent a car
             <img src="//content.delta.com/content/www/lac/en/home.damAssetRender.20180417T1339174800400.html/content/dam/fresh-air/icons/shopping-band-right-arrow.svg" alt="">
