@@ -32,7 +32,6 @@ Route::resource('roles', 'RoleController');
 Route::resource('seats', 'SeatController');
 Route::resource('tickets', 'TicketController');
 Route::resource('users', 'UserController');
-Route::resource('vehicles', 'VehicleController');
 Route::resource('registers', 'RegisterController');
 Route::resource('hotels', 'HotelController');
 Route::resource('cities', 'CityController');
@@ -83,3 +82,5 @@ Route::post('/reserve/store_payment', 'ReserveController@storePayment');
 // FB API Routes
 Route::get('login/facebook', 'Auth\LoginController@redirectToProvider');
 Route::get('login/facebook/callback', 'Auth\LoginController@handleProviderCallback');
+
+Route::get('/vehicles', 'VehicleController@searchVehicles');

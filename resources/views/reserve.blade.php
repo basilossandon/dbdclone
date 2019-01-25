@@ -26,16 +26,22 @@
   <form action="/reserve/choose_flights" method="POST" >
     <div class="rows">
     <div class="reserve-options">
+
         <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-        <button type="button" class="btn btn-primary">One way/Round trip</button>
-        <div class="btn-group" role="group">
-          <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-          <div class="dropdown-menu" aria-labelledby="btnGroupDrop1" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 45px, 0px);">
-            <a class="dropdown-item" href="#">Round trip</a>
-            <a class="dropdown-item" href="#">One way</a>
-          </div>
+
+        <div class="rows" style="padding-right: 20px;">
+        <div class="custom-control custom-radio">
+          <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input" checked="">
+          <label class="custom-control-label" for="customRadio1">One way</label>
         </div>
-      </div>
+
+        <div class="custom-control custom-radio">
+          <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
+          <label class="custom-control-label" for="customRadio2">Round trip</label>
+        </div>
+        </div>
+        </div>
+
       <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
         <div class="qty mt-5">Quantity: 
             <span class="minus bg-dark " id="decrease" value="Decrease Value">-</span>

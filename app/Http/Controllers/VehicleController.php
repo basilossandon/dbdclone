@@ -10,6 +10,13 @@ class VehicleController extends Controller
         return Vehicle::all();
     }
 
+    public function searchVehicles()
+    {
+        $vehicles = Vehicle::all();
+        return view('vehicle', compact('vehicles'));
+    }
+
+
 
     public function createOrEdit()
     {
@@ -50,9 +57,6 @@ class VehicleController extends Controller
         $vehicle = Vehicle::find($id);
         $vehicle->delete();      
         return Vehicle::all();
-    }
-    public function searchVehicle(Request $request) {
-        // por implementar
     }
 
     public function reserveVehicle(Request $request){

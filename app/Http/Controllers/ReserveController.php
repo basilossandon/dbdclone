@@ -38,7 +38,8 @@ class ReserveController extends Controller{
         $num_pasajeros = $request->input('quantity');
         $fecha_ida = Carbon::parse($request->input('fecha_ida'));
         $fecha_vuelta = Carbon::parse($request->input('fecha_vuelta'));
-        $user_id = 1; // Id del usuario que esta logeado
+
+        $user_id = Auth::user()->id;; // Id del usuario que esta logeado
         Cart::session($user_id);
         Cart::clear();
         // En el elemento 0 del carrito guardaremos cuantos pasajeros
@@ -97,7 +98,7 @@ class ReserveController extends Controller{
      * Almacena los vuelos seleccionados en el carrito
      */
     public function storeChosenFlights(Request $request){
-        $user_id = 1; // El usuario loggeado
+        $user_id = Auth::user()->id;; // El usuario loggeado
         Cart::session($user_id);
         // Ids recibidos desde request luego de que el usuario escogiera
         $flights_ids = $request->all();
@@ -110,7 +111,7 @@ class ReserveController extends Controller{
      * Muestra la vista para que el usuario ingrese la informacion de los pasajeros del vuelo
      */
     public function retrievePassengersInfo(PassengerController $pc){
-        $user_id = 1; // Usuario loggeado
+        $user_id = Auth::user()->id;; // Usuario loggeado
         Cart::session($user_id);
         $cartData = Cart::get(0);
         // Obtiene el numero de pasajeros seleccionados para saber cuantos formularios
@@ -125,7 +126,7 @@ class ReserveController extends Controller{
      * en donde cada pasajero tiene sus datos separados por _
      */
     public function storePassengersInfo(Request $request){
-        $user_id = 1; // Usuario loggeado
+        $user_id = Auth::user()->id; // Usuario loggeado
         Cart::session($user_id);
         // Elemento 0 del carro
         $aux = Cart::get(0);
@@ -140,8 +141,11 @@ class ReserveController extends Controller{
         $receipt->receipt_date = date('Y-m-d H:i:s');
         $receipt->receipt_type = "boleta";
         $receipt->receipt_ammount = 0; // se calcula despues
+
         $receipt->user_id = $user_id;
+
         $receipt->reservation_id = $reservation->id;
+
         $receipt->save();
         // en aux price guardamos el id del recibo
         Cart::update(0, ['price' => $receipt->id]);
@@ -191,7 +195,7 @@ class ReserveController extends Controller{
      * Retorna la vista para seleccionar asiento
      */
     public function selectSeats(FlightController $fc){
-        $user_id = 1; // Usuario loggeado
+        $user_id = Auth::user()->id;; // Usuario loggeado
         Cart::session($user_id);
         // En attributes del elemento aux del carrito, se encuentran los ids de los vuelos
         $vuelos_solicitados = Collection::make();
@@ -232,7 +236,7 @@ class ReserveController extends Controller{
      * Cada string representa contiene los asientos seleccionados por vuelo solicitado.
      */
     public function storeChosenSeats(Request $request){
-        $user_id = 1; // id del usuario Loggeado
+        $user_id = Auth::user()->id;; // id del usuario Loggeado
         Cart::session($user_id); // Carrito del usuario
         // Las reservas de cada pasajero
         $tickets = Cart::getContent();
@@ -294,20 +298,30 @@ class ReserveController extends Controller{
      * Retorna la vista que muestra el sumario de la compra al usuario
      */
     public function showSummary(){
-        $user_id = 1; // Usuario loggeado
+        $user_id = Auth::user()->id;; ; // Usuario loggeado CAMBIAR
         Cart::session($user_id);
         $aux = Cart::getContent()->firstWhere('name', 'aux');
+
         $receipt = Receipt::find($aux->price);
         $reservation = $receipt->reservation;
         // Vuelos
         $vuelos = $reservation->tickets;
         // datos de cada vuelo
         $datos_por_vuelo = Collection::make();
+
         foreach($vuelos as $vuelo){
-            // vuelo es un Ticket
+            // vuelo es un Ticket, gracias kevin
+
+
+            
             $flight_id = $vuelo->flight_id;
+            $flight_code = Flight::find($vuelo->flight_id)->flight_code;
+            $fecha_ida = Carbon::parse($vuelo->flight_departure);
+            $fecha_vuelta = Carbon::parse($vuelo->flight_arrival);
+
             $ciudad_origen = FlightController::originCity($flight_id);
             $ciudad_destino = FlightController::destinyCity($flight_id);
+
             $precio_vuelo = FlightController::calculateFlightPrice($vuelo->seat_id, $flight_id);
             // Buscar el seguro asociado en la tabla insurance_passenger
             $seguro = Passenger::find($vuelo->passenger_id)->insurances->filter(function ($value) use ($flight_id){
@@ -322,7 +336,7 @@ class ReserveController extends Controller{
             $num_asiento = $vuelo->seat_number;
             $tipo_asiento = Seat::find($vuelo->seat_id)->seat_type;
             $pasajero = Passenger::find($vuelo->passenger_id)->passenger_name;
-            $datos_por_vuelo->push(new class($seguro, $ciudad_origen, $ciudad_destino, $precio_vuelo, $num_asiento, $tipo_asiento, $pasajero){
+            $datos_por_vuelo->push(new class( $fecha_ida, $fecha_vuelta,  $flight_code, $seguro, $ciudad_origen, $ciudad_destino, $precio_vuelo, $num_asiento, $tipo_asiento, $pasajero){
                 public $ciudad_origen;
                 public $ciudad_destino;
                 public $precio_vuelo;
@@ -331,7 +345,13 @@ class ReserveController extends Controller{
                 public $num_asiento;
                 public $tipo_asiento;
                 public $pasajero;
-                public function __construct($seguro, $ciudad_origen, $ciudad_destino, $precio, $num_asiento, $tipo_asiento, $pasajero){
+                public $flight_code;
+                public $fecha_ida;
+                public $fecha_vuelta;
+                public function __construct($fecha_ida,$fecha_vuelta,$flight_code, $seguro, $ciudad_origen, $ciudad_destino, $precio, $num_asiento, $tipo_asiento, $pasajero){
+                    $this->fecha_ida = $fecha_ida;
+                    $this->fecha_vuelta = $fecha_vuelta;
+                    $this->flight_code = $flight_code;
                     $this->ciudad_origen = $ciudad_origen;
                     $this->ciudad_destino = $ciudad_destino;
                     $this->precio_vuelo = $precio;
@@ -339,7 +359,7 @@ class ReserveController extends Controller{
                         $this->tipo_seguro = $seguro->insurance_type;
                         $this->precio_seguro = $seguro->insurance_price;
                     } else {
-                        $this->tipo_seguro = 'Sin seguro asociado';
+                        $this->tipo_seguro = 'No insurance';
                         $this->precio_seguro = 0;
                     }
                     $this->num_asiento = $num_asiento;
@@ -355,7 +375,7 @@ class ReserveController extends Controller{
      * Retorna la vista para pagar
      */
     public function pay(){
-        $user_id = 1; // El usuario loggeado
+        $user_id = Auth::user()->id;; // El usuario loggeado
         Cart::session($user_id);
         $total = 0;
         foreach (Cart::getContent() as $ticket){
@@ -374,7 +394,7 @@ class ReserveController extends Controller{
      * Guarda el pago realizado
      */
     public function storePayment(Request $request){
-        $user_id = 1; // El usuario loggeado
+        $user_id = Auth::user()->id;; // El usuario loggeado
         Cart::session($user_id);
         $payment_method = new PaymentMethod();
         $payment_method->card_owner = $request['cc_owner'];

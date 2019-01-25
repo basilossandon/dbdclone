@@ -19,10 +19,13 @@
   <div class="stub">
     <div class="top">
       <span class="admit">{{$datos->pasajero}}</span>
+
       <span class="line"></span>
-      <span class="num">
-        Reservation ID
-        <span> <h1 style="color:white">IED234</h1></span>
+
+      <span class="num">Flight ID
+        <span> 
+          <h1 style="color:white;"> {{$datos->flight_code}}</h1>
+        </span>
       </span>
     </div>
     <div class="number">${{$datos->precio_vuelo}}</div>
@@ -39,11 +42,11 @@
     <div class="info" style="bottom: 0px!important;">
       <section>
         <div class="title">Departure</div>
-        <div>4/27/2016 14:00</div>
+        <div>{{$datos->fecha_ida}}</div>
       </section>
       <section>
         <div class="title">Arrival</div>
-        <div>4/27/2016</div>
+        <div>{{$datos->fecha_vuelta}}</div>
       </section>
       <section>
         <div class="title">Seat number</div>
