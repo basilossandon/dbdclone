@@ -92,3 +92,4 @@ Route::post('/reserve/choose_car', 'VehicleReservationController@showAvailableVe
 // Reserva de habitacion
 Route::get('/reserve/rooms', 'RoomReservationController@searchRooms');
 Route::post('/reserve/rooms/chooseRoom', 'RoomReservationController@chooseHotelRoom');
+Route::get('reserve/store_room_reservation/{id}', 'RoomReservationController@storeRoomReservation');

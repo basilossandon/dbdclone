@@ -29,9 +29,7 @@ class RoomReservationController extends Controller
         $check_out = $request->input('check_out');
 
         $city_hotels = Hotel::all()->where('city_id', $city_id);
-        //return $city_hotels;
         $city_hotels = $city_hotels->where('hotel_stars', $stars);
-        // return $city_hotels;
 
         $availableRooms = Collection::make();
         foreach ($city_hotels as $hotel){
@@ -40,7 +38,10 @@ class RoomReservationController extends Controller
                 $availableRooms->push($room);
             }
         }
-        return $availableRooms;
         return view('chooseRoom', compact('availableRooms'));
+    }
+
+    public function storeRoomReservation(Request $request){
+        return collect($request);
     }
 }
