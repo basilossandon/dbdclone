@@ -7,6 +7,8 @@ use App\City;
 use App\Http\Controllers\VehicleController;
 use Carbon\Carbon;
 use App\Vehicle;
+use Cart;
+use App\Receipt;
 
 class VehicleReservationController extends Controller
 {
@@ -17,11 +19,22 @@ class VehicleReservationController extends Controller
     }
 
     public function showAvailableVehicles(Request $request){
+        $user_id = Auth::id();
+        Cart::session($user_id);
+
         $city = $request->input('city');
         $city_id = City::all()->where('city_name', $city)->first()->id;
         $vehicle_type = $request->input('vehicle_type');
         $pickup_date = Carbon::parse($request->input('pickup_date'));
         $dropoff_date = Carbon::parse($request->input('dropoff_date'));
+
+        Cart::add(array(
+          'id' => 0,
+          'name' => 'aux',
+          'price' => 0,
+          'quantity' => 1,
+          'attributes' => array(['pickup_date' => $pickup_date, 'dropoff_date' => $dropoff_date])
+        ));
 
         $vehicles = Vehicle::all();
         $available_vehicles = $vehicles->filter(function ($vehicles) use($city_id, $pickup_date,$dropoff_date) {
@@ -37,4 +50,17 @@ class VehicleReservationController extends Controller
         });
         return view('chooseVehicles', compact('available_vehicles'));
     }
+
+    public function storeVehicleReservation($id){
+      $user_id = Auth::id();
+      Cart::session($user_id);
+
+      $pickup_date = Cart::get(0)->attributes['pickup_date']
+      $dropoff_date = Cart::get(0)->attributes['dropoff_date']
+
+      $vehicle_id = $id;
+
+      // Create receipt
+    }
+
 }
