@@ -17,7 +17,7 @@
                         <th >Departure</th>
                         <th >Arrival</th>
                     </tr>
-                </thead>
+                    </thead>
                         <tbody>
                             @foreach ($routes as $flight)
                             <input type="hidden" name="id{{$flight->id}}" value="{{$flight->id}}">

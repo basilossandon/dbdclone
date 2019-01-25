@@ -5,7 +5,7 @@
         <meta name="csrf-token" content="{{ csrf_token() }}" />
         <link rel="stylesheet" href="/css/bootstrap.min.css">
         @yield('header')
-        <title>@yield('title') | LATAM.com</title>
+        <title>@yield('title') | Vuelaqui.com</title>
         <style>
         </style>
     </head>
@@ -18,39 +18,52 @@
             </a><button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-                <a class="navbar-brand" href="#" style="color:white">Destinations & Offers </a>
-                    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="#" style="color:white">Plan and Book <span class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" style="color:white">Manage your booking</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" style="color:white">Travel information</a>
-                        </li>
-                    </ul>
-                <div class="d-flex justify-content-center h-100">
-                    <div class="searchbar">
-                      <input class="search_input" type="text" name="" placeholder="Search...">
-                      <a href="#" class="search_icon"><i class="fas fa-search"></i></a>
-                    </div>
-                </div>
-                <div class="top-right links">
-                @if(Auth::user())
-                <button class="btn btn-primary" onclick="location.href='/logout'" type="button">Log-out</button>                        
-                            <a href="/dashboard"> <img style="height: 50px;"src="{{ Auth::user()->avatar }}" alt="{{ Auth::user()->name }}" class="img-responsive img-thumbnail"></a>
-                @else
-                <button class="btn btn-primary" onclick="location.href='/login'" type="button">
-                 Login</button> 
-                <button class="btn btn-primary" onclick="location.href='/register'" type="button">
-                 Register</button>
-                @endif
-
-
-                </div>
+            <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2" id="navbarTogglerDemo01">
+                <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="#" style="color:white; "><h2>Check-in</h2> </a>
+            </li>
+           <li class="nav-item active">
+                <a class="nav-link" href="#" style="color:white">Plan and Book</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" style="color:white">Manage your booking</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" style="color:white">Travel information</a>
+            </li>
+            </ul>
             </div>
+
+
+               
+    
+            <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+                 <ul class="navbar-nav ml-auto">
+                    @if(Auth::user())
+                    <li class="nav-item"><button class="btn btn-primary" onclick="location.href='/logout'" type="button">Log-out</button>                        
+                            <a href="/dashboard"> <img style="height: 50px;"src="{{ Auth::user()->avatar }}" alt="{{ Auth::user()->name }}" class="img-responsive img-thumbnail"></a>
+                    </li>
+                    @else
+                    <li class="nav-item">
+                     
+                        <button class="btn btn-primary" style="margin-right: 5px;" onclick="location.href='/login'" type="button">
+                        Login</button>     
+                    </li>
+                    <li class="nav-item">
+                        <button class="btn btn-primary" onclick="location.href='/register'" type="button">
+                             Register
+                         </button>                    
+                     </li>
+                     @endif
+
+                </ul>
+
+                
+                
+                
+
+
             </nav>
         </div>
          @include('carousel.carousel')

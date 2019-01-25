@@ -13,6 +13,7 @@
 @endsection
 
 @section('content')
+<div style="padding-top: 100px"></div>
 @foreach ($datos_por_vuelo as $datos)
 
 <div class="ticket">
@@ -20,7 +21,6 @@
     <div class="top">
       <span class="admit">{{$datos->pasajero}}</span>
 
-      <span class="line"></span>
 
       <span class="num">Flight ID
         <span> 

@@ -21,6 +21,9 @@
 						Book a flight
 					<img src="//content.delta.com/content/www/lac/en/home.damAssetRender.20180417T1339174800400.html/content/dam/fresh-air/icons/shopping-band-right-arrow.svg" alt="">
 					</a>
+
+
+					
 				</div>
 				<div class="card-body">
 					<h4 class="card-title">Where do you want to go?</h4>

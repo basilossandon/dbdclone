@@ -21,48 +21,66 @@
     <div class="container">
                 <div class="row">
                     <div class="col-md-12" style="
-                    background: white;margin-top: 100px;">
+                    background: white;margin-top: 100px; border-radius: 15px;">
                         <nav>
                             <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-                                <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Flights</a>
-                                <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Hotels</a>
-                                <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Vehicles</a>
-                                <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Packages</a>
+                                <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Flights
+                                 <button type="button" style="margin-left: 30px; border-radius: 30px;" data-toggle="modal" data-target="#edit" data-uid="1" class="update btn btn-success btn-sm">                                        
+                                    <img src="/images/add.png">
+                                    </button>
+                                </a>
+                                <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Hotels
+                                 <button type="button" style="margin-left: 30px; border-radius: 30px;" data-toggle="modal" data-target="#edit" data-uid="1" class="update btn btn-success btn-sm">                                        
+                                            <img src="/images/add.png">
+                                    </button>
+                                </a>
+                                <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Vehicles
+                                 <button type="button" style="margin-left: 30px; border-radius: 30px;" data-toggle="modal" data-target="#edit" data-uid="1" class="update btn btn-success btn-sm">                                        
+                                        <img src="/images/add.png">
+                                    </button>
+                                </a>
+                                <a class="nav-item nav-link" id="nav-package-tab" data-toggle="tab" href="#nav-package" role="tab" aria-controls="nav-package" aria-selected="false">Packages
+                                    
+                                 <button type="button" style="margin-left: 30px; border-radius: 30px;" data-toggle="modal" data-target="#edit" data-uid="1" class="update btn btn-success btn-sm">                                        
+                                        <img src="/images/add.png">
+                                </button>
+                                </a>
                             </div>
                         </nav>
                         <div class="tab-content" id="nav-tabContent">
+
                             <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                                 <table class="table" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>Project Name</th>
-                                            <th>Employer</th>
-                                            <th>Awards</th>
+                                            <th>ID</th>
+                                            <th>Flight Code</th>
+                                            <th>Departure city</th>
+                                            <th>Arrival City</th>
+                                            <th>Departure time</th>
+                                            <th>Arrival time</th>
+                                            <th>Edit</th>
+                                            <th>Delete</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-
-
-
+                                        @foreach ($flights as $flight)
                                         <tr>
-                                            <td><a href="#">Work 1</a></td>
-                                            <td>Doe</td>
-                                            <td>john@example.com</td>
+                                            <td>{{$flight->id}}</td>
+                                            <td>{{$flight->flight_code}}</td>
+                                            <td>{{$flight->flight_departure}}</td>
+                                            <td>{{$flight->flight_arrival}}</td>
+                                            <td>{{$flight->departure_airport_id}}</td>
+                                            <td>{{$flight->arrival_airport_id}}</td>
+                                            <td><button type="button" data-toggle="modal" data-target="#edit" data-uid="1" class="update btn btn-warning btn-sm">
+                                            <img src="/images/edit.png">
+                                            </button></td>
+                                            <td><button type="button" data-toggle="modal" data-target="#delete" data-uid="1" class="delete btn btn-danger btn-sm">
+                                            <img src="/images/rubbish-bin.png">
+                                            </button></td>
+
                                         </tr>
-                                        <tr>
-                                            <td><a href="#">Work 2</a></td>
-                                            <td>Moe</td>
-                                            <td>mary@example.com</td>
-                                        </tr>
-                                        <tr>
-                                            <td><a href="#">Work 3</a></td>
-                                            <td>Dooley</td>
-                                            <td>july@example.com</td>
-                                        </tr>
-
-
-
-
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -71,76 +89,99 @@
                                     <thead>
                                         <tr>
                                             <th>ID</th>
-                                            <th>Employer</th>
-                                            <th>Time</th>
+                                            <th>Hotel Name</th>
+                                            <th>Address</th>
+                                            <th>Stars</th>
+                                            <th>City ID</th>
+                                            <th>Edit</th>
+                                            <th>Delete</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-
-
-
+                                        @foreach ($hotels as $hotel)
                                         <tr>
-                                            <td><a href="#">Work 1</a></td>
-                                            <td>Doe</td>
-                                            <td>john@example.com</td>
-                                        </tr>
-                                        <tr>
-                                            <td><a href="#">Work 2</a></td>
-                                            <td>Moe</td>
-                                            <td>mary@example.com</td>
-                                        </tr>
-                                        <tr>
-                                            <td><a href="#">Work 3</a></td>
-                                            <td>Dooley</td>
-                                            <td>july@example.com</td>
-                                        </tr>
-
-
-
-
+                                            <td>{{$hotel->id}}</td>
+                                            <td>{{$hotel->hotel_name}}</td>
+                                            <td>{{$hotel->hotel_address}}</td>
+                                            <td>{{$hotel->hotel_stars}}</td>
+                                            <td>{{$hotel->city_id}}</td>
+                                            <td><button type="button" data-toggle="modal" data-target="#edit" data-uid="1" class="update btn btn-warning btn-sm">
+                                            <img src="/images/edit.png">
+                                            </button></td>
+                                            <td><button type="button" data-toggle="modal" data-target="#delete" data-uid="1" class="delete btn btn-danger btn-sm">
+                                            <img src="/images/rubbish-bin.png">
+                                            </button></td>                                      </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
                             <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
                                 <table class="table" cellspacing="0">
                                     <thead>
-
-
-
                                         <tr>
-                                            <th>Contest Name</th>
-                                            <th>Date</th>
-                                            <th>Award Position</th>
+                                            <th>ID</th>
+                                            <th>License Plate</th>
+                                            <th>Vehicle Type</th>
+                                            <th>Vehicle Price</th>
+                                            <th>City ID</th>
+                                            <th>Edit</th>
+                                            <th>Delete</th>                                            
                                         </tr>
-
-
                                     </thead>
                                     <tbody>
-
-
+                                        @foreach ($vehicles as $vehicle)
                                         <tr>
-                                            <td><a href="#">Work 1</a></td>
-                                            <td>Doe</td>
-                                            <td>john@example.com</td>
-                                        </tr>
-                                        <tr>
-                                            <td><a href="#">Work 2</a></td>
-                                            <td>Moe</td>
-                                            <td>mary@example.com</td>
-                                        </tr>
-                                        <tr>
-                                            <td><a href="#">Work 3</a></td>
-                                            <td>Dooley</td>
-                                            <td>july@example.com</td>
-                                        </tr>
-
-
-
-
-
+                                            <td>{{$vehicle->id}}</td>
+                                            <td>{{$vehicle->vehicle_licence_plate}}</td>
+                                            <td>{{$vehicle->vehicle_type}}</td>
+                                            <td>{{$vehicle->vehicle_price}}</td>
+                                            <td>{{$vehicle->city_id}}</td>
+                                            <td><button type="button" data-toggle="modal" data-target="#edit" data-uid="1" class="update btn btn-warning btn-sm">
+                                            <img src="/images/edit.png">
+                                            </button></td>
+                                            <td><button type="button" data-toggle="modal" data-target="#delete" data-uid="1" class="delete btn btn-danger btn-sm">
+                                            <img src="/images/rubbish-bin.png">
+                                            </button></td>                                      </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
+
+                            <div class="tab-pane fade" id="nav-package" role="tabpanel" aria-labelledby="nav-package-tab">
+                                <table class="table" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Package Name</th>
+                                            <th>Type</th>
+                                            <th>Price</th>
+                                            <th>Stock</th>
+                                            <th>Vehicle in package</th>
+                                            <th>Edit</th>
+                                            <th>Delete</th>     
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($packages as $package)
+                                        <tr>
+                                            <td>{{$package->id}}</td>
+                                            <td>{{$package->package_name}}</td>
+                                            <td>{{$package->package_type}}</td>
+                                            <td>{{$package->package_price}}</td>
+                                            <td>{{$package->package_stock}}</td>
+                                            <td>{{$package->vehicle_id}}</td>
+                                            <td><button type="button" data-toggle="modal" data-target="#edit" data-uid="1" class="update btn btn-warning btn-sm">
+                                            <img src="/images/edit.png">
+                                            </button></td>
+                                            <td><button type="button" data-toggle="modal" data-target="#delete" data-uid="1" class="delete btn btn-danger btn-sm">
+                                            <img src="/images/rubbish-bin.png">
+                                            </button></td>                                     
+                                         </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+
                         </div>
                     </div>
                 </div>

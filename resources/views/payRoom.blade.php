@@ -15,10 +15,6 @@
             <div class="card-body">
                 <h3 class="text-center">Credit Card Payment</h3>
                 <hr>
-                <div class="alert alert-info p-2 pb-3">
-                    <a class="close font-weight-normal initialism" data-dismiss="alert" href="#"><samp>×</samp></a> 
-                    CVC code is required.
-                </div>
                 <form class="form" role="form" autocomplete="off" action="/reserve/rooms/store_payment" method="POST">
                     <div class="form-group">
                         <label for="cc_name">Card Holder's Name</label>
@@ -34,7 +30,7 @@
                     <div class="form-group row">
                         <label class="col-md-12">Card Exp. Date</label>
                         <div class="col-md-4">
-                            <select class="form-control" name="cc_exp_mo" size="0">
+                            <select class="form-control" style="background: #242A48;border-radius: 5px;" name="cc_exp_mo" size="0">
                                 <option value="01">01</option>
                                 <option value="02">02</option>
                                 <option value="03">03</option>
@@ -50,7 +46,7 @@
                             </select>
                         </div>
                         <div class="col-md-4">
-                            <select class="form-control" name="cc_exp_yr" size="0">
+                            <select class="form-control" style="background: #242A48;border-radius: 5px;" name="cc_exp_yr" size="0">
                                 <option>2018</option>
                                 <option>2019</option>
                                 <option>2020</option>
@@ -67,15 +63,15 @@
                     </div>
                     <div class="form-inline">
                         <div class="input-group">
-                            <div class="input-group-prepend"><span class="input-group-text"><h2>$</h2></span></div>
-                            <input disabled="disabled" type="text" class="form-control text-right" id="exampleInputAmount" placeholder="{{$total}}">
-                            <div class="input-group-append"><span class="input-group-text">.00</span></div>
+                            <div class="input-group-prepend"><span class="input-group-text" style="color:white"><h2>$</h2></span></div>
+                            <input disabled="disabled" type="text" style="border-radius: 5px;" class="form-control text-right" id="exampleInputAmount" placeholder="{{$total}}">
+                            <div class="input-group-append"><span class="input-group-text" style="color:white">.00</span></div>
                         </div>
                     </div>
                     <hr>
                     <div class="form-group row">
                         <div class="col-md-6">
-                            <button type="reset" class="btn btn-default btn-lg btn-block">Cancel</button>
+                            <button type="reset" style="color:white;" class="btn btn-danger rbtn-lg btn-block">Cancel</button>
                         </div>
                         <div class="col-md-6">
                             <button type="submit" class="btn btn-success btn-lg btn-block">Submit</button>
