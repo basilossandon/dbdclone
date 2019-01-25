@@ -18,7 +18,7 @@
 
 <div class="reservationFormWrapper">
 <div class="reserveForm">
-  <form action="/reserve/hotels" method="POST" >
+  <form action="/reserve/rooms/chooseRoom" method="POST" >
     <div class="rows">
     <div class="reserve-options">
       <div class="columns" style="margin-top: 5px">
@@ -44,7 +44,7 @@
         </div>
         <div class="column is-1">
           <label>Room type</label>
-          <select name="roomtypeselection" class="form-control select2">
+          <select name="room_type" class="form-control select2">
                  @foreach ($roomTypes as $roomType)
                  <option>{{$roomType}}</option>
                 @endforeach
@@ -53,7 +53,7 @@
 
         <div class="column is-2">
             <label>Check-in</label>
-            <input name="reservation_room_lease" id="datelease" class="form-control" data-date-container='#myModalId'/>
+            <input name="check_in" id="datelease" class="form-control" data-date-container='#myModalId'/>
               <script>
                 $('#datelease').datepicker({
                   uiLibrary: 'bootstrap4'});
@@ -62,7 +62,7 @@
         </div>
         <div class="column is-2">
           <label>Check-out</label>
-            <input name="reservation_room_return" id="datereturn" class="form-control" data-date-container='#myModalId'/>
+            <input name="check_out" id="datereturn" class="form-control" data-date-container='#myModalId'/>
             <script>
             $('#datereturn').datepicker({
             uiLibrary: 'bootstrap4'
