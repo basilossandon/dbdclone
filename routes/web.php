@@ -47,7 +47,7 @@ Route::post('/cities_post', 'CityController@storeOrUpdate');
 
 // Package routes
 Route::get('/packages/{packageId}/details', 'PackageController@showDetail');
-Route::post('/packagse_post', 'PackageController@storeOrUpdate');
+Route::post('/packages_post', 'PackageController@storeOrUpdate');
 
 // Users rotues
 Route::get('/users/{userId}/receipts/{receiptId}/payment_method', 'ReceiptController@showPaymentMethod');
@@ -85,3 +85,6 @@ Route::get('login/facebook/callback', 'Auth\LoginController@handleProviderCallba
 
 Route::get('/reserve/vehicles', 'VehicleController@searchVehicles');
 Route::get('/reserve/hotels', 'HotelController@searchHotels');
+
+// dashboard
+Route::get('/dashboard', 'DashboardController@index');
