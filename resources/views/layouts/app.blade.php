@@ -79,7 +79,7 @@
         </div>
 
         <div class="footer-items">    
-            <a  href="/reserve/hotels" style="color: white">
+            <a  href="/reserve/rooms" style="color: white">
             <img src="/images/hotel-icon.svg">
             Shop Hotels
             <img src="//content.delta.com/content/www/lac/en/home.damAssetRender.20180417T1339174800400.html/content/dam/fresh-air/icons/shopping-band-right-arrow.svg" alt="">
