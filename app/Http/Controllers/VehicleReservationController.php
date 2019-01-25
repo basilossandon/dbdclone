@@ -16,6 +16,9 @@ use App\PaymentMethod;
 class VehicleReservationController extends Controller
 {
     public function searchVehicles(){
+        if (!Auth::check()) {
+          return redirect('/login');
+        }
         $user_id = Auth::id();
         Cart::session($user_id);
         Cart::clear();

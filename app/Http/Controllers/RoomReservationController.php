@@ -18,10 +18,13 @@ use App\PaymentMethod;
 class RoomReservationController extends Controller
 {
     public function searchRooms() {
+        if (!Auth::check()) {
+          return redirect('/login');
+        }
         $user_id = Auth::id();
         Cart::session($user_id);
         Cart::clear();
-        
+
         $cities = City::all();
         $hotels = Hotel::all();
         $rooms = Room::all();
@@ -74,7 +77,7 @@ class RoomReservationController extends Controller
         $reservation->reservation_ip = "test";
         $reservation->reservation_date = date('Y-m-d H:i:s');
         $reservation->save();
-        
+
         // Create a receipt and link it with the logged user
         $receipt = new Receipt;
         $receipt->receipt_date = date('Y-m-d H:i:s');
