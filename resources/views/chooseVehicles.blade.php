@@ -4,7 +4,7 @@
 @section('content')
 
 <div class="welcomeCards">
-	<div class="columns">
+	<div class="columns">      
 
     @foreach ($available_vehicles as $vehicle)
     <div class="cardWrapperWelcome">
@@ -31,7 +31,6 @@
 		</div>
 
         @endforeach
-
 		</div>
 		</div>
 
