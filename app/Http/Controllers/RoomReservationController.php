@@ -11,10 +11,17 @@ use App\Hotel;
 use App\Room;
 use Cart;
 use App\Receipt;
+use App\Reservation;
+use Auth;
+use App\PaymentMethod;
 
 class RoomReservationController extends Controller
 {
     public function searchRooms() {
+        $user_id = Auth::id();
+        Cart::session($user_id);
+        Cart::clear();
+        
         $cities = City::all();
         $hotels = Hotel::all();
         $rooms = Room::all();
@@ -58,10 +65,8 @@ class RoomReservationController extends Controller
     public function storeRoomReservation($id){
         $user_id = Auth::id();
         Cart::session($user_id);
-
-        $check_in = Cart::get(0)->attributes['check_in'];
-        $check_out = Cart::get(0)->attributes['check_out'];
-
+        $check_in = Cart::get(0)->attributes[0]['check_in'];
+        $check_out = Cart::get(0)->attributes[0]['check_out'];
         $room_id = $id;
 
         // Create the reservation
@@ -82,23 +87,35 @@ class RoomReservationController extends Controller
         $reservation->rooms()->attach($room_id, ['reservation_room_lease' => $check_in,
                                                          'reservation_room_return' => $check_out]);
 
+        Cart::update(0, array(
+            'price' => $receipt->receipt_ammount,
+            'id' => $receipt->id
+        ));
         return redirect('/reserve/rooms/pay');
     }
 
 
     public function pay(){
+        $user_id = Auth::user()->id;; // the logged user
+        Cart::session($user_id);
+        $total = Cart::getContent()->first()->price;
+        return view('payRoom', compact('total'));
+    }
+
+    public function storePayment(Request $request){
         $user_id = Auth::user()->id;; // El usuario loggeado
         Cart::session($user_id);
-        $total = 0;
-        foreach (Cart::getContent() as $ticket){
-            if ($ticket->id != 0){
-                $total += $ticket->price;
-            }
-        }
-        // Asignar el total al recibo de esta compra
-        // $recibo = Receipt::find(Cart::get(0)->price);
-        // $recibo->receipt_ammount = $total;
-        // $recibo->save();
-        return view('pay', compact('total'));
+        $payment_method = new PaymentMethod();
+        $payment_method->card_owner = $request['cc_owner'];
+        $payment_method->card_number = $request['cc_number'];
+        $payment_method->card_expiration_date = $request['cc_exp_mo'].'-'.$request['cc_exp_yr'];
+        $payment_method->card_security_code = $request['cc_security_code'];
+        $payment_method->save();
+
+        // Asociar el medio de pago a la reserva
+        $receipt = Receipt::find(Cart::getContent()->first()->id);
+        $receipt->payment_method_id = $payment_method->id;
+        $receipt->save();
+        return redirect('/');
     }
 }

@@ -87,10 +87,13 @@ Route::get('login/facebook/callback', 'Auth\LoginController@handleProviderCallba
 // Vehicles routes
 Route::get('/reserve/vehicles', 'VehicleReservationController@searchVehicles');
 Route::post('/reserve/choose_car', 'VehicleReservationController@showAvailableVehicles');
-Route::get('/reserve/store_vehicle_reservation/', 'VehicleReservationController@storeVehicleReservation')
+Route::get('/reserve/store_vehicle_reservation/', 'VehicleReservationController@storeVehicleReservation');
 
 // Reserva de habitacion
 Route::get('/reserve/rooms', 'RoomReservationController@searchRooms');
 Route::post('/reserve/rooms/chooseRoom', 'RoomReservationController@chooseHotelRoom');
 Route::get('reserve/store_room_reservation/{id}', 'RoomReservationController@storeRoomReservation');
+Route::get('/reserve/rooms/pay', 'RoomReservationController@pay');
+Route::post('reserve/rooms/store_payment', 'RoomReservationController@storePayment');
+
 Route::get('/dashboard', 'DashboardController@index');
