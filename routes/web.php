@@ -84,3 +84,4 @@ Route::get('login/facebook', 'Auth\LoginController@redirectToProvider');
 Route::get('login/facebook/callback', 'Auth\LoginController@handleProviderCallback');
 
 Route::get('/reserve/vehicles', 'VehicleController@searchVehicles');
+Route::get('/reserve/hotels', 'HotelController@searchHotels');
