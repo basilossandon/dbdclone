@@ -14,7 +14,7 @@
 
 			  	<div class="card-header">
 					<a href="/reserve/store_room_reservation/{{$room->id}}/" style="color: white">
-					<img src="/images/car-icon.svg">
+					<img src="/images/hotel-icon.svg">
 					<a href="/reserve/store_room_reservation/{{$room->id}}/" style="color: white">
            			 {{$room->room_name}}
 					<img src="//content.delta.com/content/www/lac/en/home.damAssetRender.20180417T1339174800400.html/content/dam/fresh-air/icons/shopping-band-right-arrow.svg" alt="">

@@ -317,6 +317,16 @@ border-radius: 15px;
     box-shadow: 0 5px 5px -3px rgba(0,0,0,0.2), 0 8px 10px 1px rgba(0,0,0,0.14), 0 3px 14px 2px rgba(0,0,0,0.80);
 }
 
+.reserveForm2 {
+  margin:19%;
+    border-radius: 50px;
+    margin-top: 130px;
+    padding: 10px 32px 48px;
+    position: absolute;
+    z-index: initial;
+    background: #11172b; /* latam 1b0088 */
+    box-shadow: 0 5px 5px -3px rgba(0,0,0,0.2), 0 8px 10px 1px rgba(0,0,0,0.14), 0 3px 14px 2px rgba(0,0,0,0.80);
+}
 
 .buttonWrapper{
     align-items: center;
@@ -514,7 +524,10 @@ border-radius: 15px;
 .reservationFormWrapper{
   width: 100%;
 }
-
+.reservationFormWrapper2{
+  width: 100%;
+  padding-top: 150px;
+}
 #sticky {
   width:100%;
   padding: 20px;

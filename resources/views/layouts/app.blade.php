@@ -21,7 +21,7 @@
             <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2" id="navbarTogglerDemo01">
                 <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="#" style="color:white; "><h2>Check-in</h2> </a>
+                <a class="nav-link" href="/checkin" style="color:white; "><h2>Check-in</h2> </a>
             </li>
            <li class="nav-item active">
                 <a class="nav-link" href="#" style="color:white">Plan and Book</a>

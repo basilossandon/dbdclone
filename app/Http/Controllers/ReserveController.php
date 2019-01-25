@@ -407,7 +407,7 @@ class ReserveController extends Controller{
         $recibo = Receipt::find(Cart::get(0)->price);
         $recibo->payment_method_id = $payment_method->id;
         $recibo->save();
-        return redirect('/');
+        return view('/thanks', compact('user'));
     }
 
     /**

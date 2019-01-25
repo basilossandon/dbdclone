@@ -23,6 +23,12 @@ class LoginController extends Controller
     // redirect to homepage
     return redirect('/');
     }
+    
+    public function returnUserName()
+    {
+        $user = Auth::user();
+        return view('thanks', compact('user'));
+    }
 
     public function redirectToProvider()
     {

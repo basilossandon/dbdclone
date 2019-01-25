@@ -116,6 +116,6 @@ class RoomReservationController extends Controller
         $receipt = Receipt::find(Cart::getContent()->first()->id);
         $receipt->payment_method_id = $payment_method->id;
         $receipt->save();
-        return redirect('/');
+        return view('/thanks', compact('user'));
     }
 }
