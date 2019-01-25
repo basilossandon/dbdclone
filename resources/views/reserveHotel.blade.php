@@ -26,7 +26,6 @@
           <label>City</label>
 
          <select name="city" class="form-control select2">
-
            @foreach ($cities as $city)
              <option>{{$city->city_name}}</option>
            @endforeach
@@ -35,7 +34,7 @@
         </div>
         <div class="column is-1">
           <label>Stars</label>
-          <select name="destino" class="form-control select2">
+          <select name="stars" class="form-control select2">
                  <option>1</option>
                  <option>2</option>
                  <option>3</option>
@@ -45,7 +44,7 @@
         </div>
         <div class="column is-1">
           <label>Room type</label>
-          <select name="destino" class="form-control select2">
+          <select name="roomtypeselection" class="form-control select2">
                  @foreach ($roomTypes as $roomType)
                  <option>{{$roomType}}</option>
                 @endforeach
